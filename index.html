@@ -1578,64 +1578,129 @@
   </div>
 
   <!-- COMPARISON -->
-  <section class="section bg-white">
+  <section class="section bg-[#fbfbfd]">
     <div class="container">
 
       <div class="max-w-4xl reveal">
         <div class="eyebrow mb-5">Architectural Comparison</div>
         <h2 class="section-title">
           Why not just use
-          <span class="muted">Remote Desktop?</span>
+          <span class="text-gray-400 font-normal">Remote Desktop?</span>
         </h2>
       </div>
 
-      <div class="card comparison-table mt-14 overflow-x-auto reveal">
-        <div class="comparison-row font-semibold text-sm bg-[#fafafa]">
-          <div>Capability</div>
-          <div class="proposed text-blue-600">Async Gateway</div>
-          <div>Cloud IDE</div>
-          <div>Remote Desktop</div>
-        </div>
+      <div class="mt-14 overflow-hidden border border-blue-100/80 rounded-[32px] bg-white shadow-xl shadow-blue-500/5 reveal">
+        <div class="overflow-x-auto">
+          <div class="min-w-[760px]">
 
-        <div class="comparison-row text-sm">
-          <div class="font-medium">Mobile-first interaction</div>
-          <div class="proposed check">✓ Strong</div>
-          <div class="partial">~ Partial</div>
-          <div class="no">— Weak</div>
-        </div>
+            <!-- Header Row -->
+            <div class="grid grid-cols-12 text-sm font-bold border-b border-gray-100 bg-gray-50/80">
+              <div class="col-span-4 p-5 md:p-6 text-gray-500 uppercase tracking-wider text-xs flex items-center">
+                Capability Matrix
+              </div>
+              <div class="col-span-3 p-5 md:p-6 bg-blue-50/80 text-blue-600 border-x border-blue-100/80 flex items-center justify-between">
+                <span>Async Gateway</span>
+                <span class="text-[10px] font-extrabold bg-blue-600 text-white px-2 py-0.5 rounded-full">PROPOSED</span>
+              </div>
+              <div class="col-span-3 p-5 md:p-6 text-gray-700 flex items-center">
+                Cloud IDE
+              </div>
+              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center">
+                Remote Desktop
+              </div>
+            </div>
 
-        <div class="comparison-row text-sm">
-          <div class="font-medium">Connection-independent execution</div>
-          <div class="proposed check">✓ Yes</div>
-          <div class="partial">~ Varies</div>
-          <div class="no">— No</div>
-        </div>
+            <!-- Row 1 -->
+            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
+              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
+                Mobile-first interaction
+              </div>
+              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
+                Native Control
+              </div>
+              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
+                <span class="text-amber-500 font-bold">~</span> Partial / Heavy
+              </div>
+              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
+                <span class="text-gray-300">—</span> Touch Weak
+              </div>
+            </div>
 
-        <div class="comparison-row text-sm">
-          <div class="font-medium">Background long-running tasks</div>
-          <div class="proposed check">✓ Native</div>
-          <div class="partial">~ Supported</div>
-          <div class="no">— Session dependent</div>
-        </div>
+            <!-- Row 2 -->
+            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
+              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
+                Connection-independent execution
+              </div>
+              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
+                Persistent Jobs
+              </div>
+              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
+                <span class="text-amber-500 font-bold">~</span> Varies by host
+              </div>
+              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
+                <span class="text-gray-300">—</span> Requires Stream
+              </div>
+            </div>
 
-        <div class="comparison-row text-sm">
-          <div class="font-medium">AI-native orchestration</div>
-          <div class="proposed check">✓ Core design</div>
-          <div class="partial">~ Platform specific</div>
-          <div class="no">— External</div>
-        </div>
+            <!-- Row 3 -->
+            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
+              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
+                Background long-running tasks
+              </div>
+              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
+                Cloud Workers
+              </div>
+              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
+                <span class="text-amber-500 font-bold">~</span> Supported
+              </div>
+              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
+                <span class="text-gray-300">—</span> Session Locked
+              </div>
+            </div>
 
-        <div class="comparison-row text-sm">
-          <div class="font-medium">Repository automation</div>
-          <div class="proposed check">✓ Native</div>
-          <div class="check">✓ Available</div>
-          <div class="partial">~ Manual</div>
+            <!-- Row 4 -->
+            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
+              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
+                AI-native agent orchestration
+              </div>
+              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
+                Core Design
+              </div>
+              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
+                <span class="text-amber-500 font-bold">~</span> Plugin Based
+              </div>
+              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
+                <span class="text-gray-300">—</span> External Tool
+              </div>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="grid grid-cols-12 text-sm hover:bg-gray-50/50 transition">
+              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
+                Repository automation & push
+              </div>
+              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
+                Automated Git
+              </div>
+              <div class="col-span-3 p-5 md:p-6 text-emerald-600 font-semibold flex items-center gap-2">
+                <span class="text-emerald-500 font-bold">✓</span> Available
+              </div>
+              <div class="col-span-2 p-5 md:p-6 text-amber-600 flex items-center gap-2">
+                <span class="text-amber-500 font-bold">~</span> Manual Terminal
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <p class="text-xs muted mt-4">
-        Qualitative architecture comparison. Experimental validation will be
-        performed during project evaluation.
+      <p class="text-xs muted mt-5 text-center">
+        Qualitative architecture comparison. Experimental validation performed during baseline performance benchmarking.
       </p>
 
     </div>
@@ -2383,14 +2448,25 @@
       item.classList.remove("active");
     });
 
+    const navBar = document.getElementById("editorialNavBar");
     if (el) {
       el.classList.add("active");
-      el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      if (navBar) {
+        navBar.scrollTo({
+          left: el.offsetLeft - navBar.clientWidth / 2 + el.clientWidth / 2,
+          behavior: "smooth"
+        });
+      }
     } else {
       const items = document.querySelectorAll(".editorial-nav-item");
       if (items[stepNum - 1]) {
         items[stepNum - 1].classList.add("active");
-        items[stepNum - 1].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        if (navBar) {
+          navBar.scrollTo({
+            left: items[stepNum - 1].offsetLeft - navBar.clientWidth / 2 + items[stepNum - 1].clientWidth / 2,
+            behavior: "smooth"
+          });
+        }
       }
     }
 
