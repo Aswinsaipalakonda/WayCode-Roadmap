@@ -557,42 +557,74 @@
        Flow
     -------------------------------- */
 
-    .execution-flow {
-      display: flex;
-      overflow-x: auto;
-      padding-bottom: 14px;
-    }
+    /* --------------------------------
+       Execution Flow Timeline (Immersive 3D Interactive Design)
+    -------------------------------- */
 
-    .execution-step {
-      min-width: 155px;
-      flex: 1;
+    .execution-timeline-shell {
       position: relative;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.06), transparent 60%), #ffffff;
+      border: 1px solid rgba(0, 113, 227, 0.12);
+      border-radius: 36px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 60px -15px rgba(0, 113, 227, 0.12), 0 4px 16px rgba(0, 0, 0, 0.02);
+      overflow-x: auto;
     }
 
-    .execution-step:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      top: 17px;
-      left: 48px;
-      right: 10px;
-      height: 1px;
-      background: #d2d2d7;
+    .execution-flow-grid {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(130px, 1fr));
+      gap: 16px;
+      position: relative;
+      align-items: stretch;
+      min-width: 1100px;
     }
 
-    .execution-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
+    .execution-flow-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 113, 227, 0.14);
+      border-radius: 24px;
+      padding: 20px 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 113, 227, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .execution-flow-card:hover {
+      transform: translateY(-8px) scale(1.04);
+      border-color: rgba(0, 113, 227, 0.35);
+      box-shadow: 0 20px 45px -8px rgba(0, 113, 227, 0.2), 0 6px 16px rgba(0, 0, 0, 0.03);
+    }
+
+    .execution-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #f0f7ff;
+      color: var(--blue);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: white;
-      border: 1px solid #d2d2d7;
-      position: relative;
-      z-index: 2;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--blue);
+      font-weight: 800;
+      font-size: 12px;
+      font-mono;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 113, 227, 0.1);
+    }
+
+    .execution-connector-line {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background: linear-gradient(90deg, #0071e3, #00a896);
+      z-index: 1;
+      opacity: 0.3;
     }
 
     /* --------------------------------
@@ -1377,68 +1409,126 @@
 
       </div>
 
-      <!-- EXECUTION FLOW -->
-      <div class="mt-20 reveal">
-        <h3 class="text-3xl md:text-4xl font-semibold tracking-tight">
-          What actually happens?
-        </h3>
-
-        <div class="execution-flow mt-10">
-
-          <div class="execution-step">
-            <div class="execution-circle">01</div>
-            <div class="font-semibold text-sm mt-4">Intent</div>
-            <div class="text-xs muted mt-1">Mobile prompt</div>
+      <!-- EXECUTION FLOW TIMELINE -->
+      <div class="mt-24 reveal">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <div class="eyebrow mb-2">Sequential Execution Pipeline</div>
+            <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+              What actually happens?
+            </h3>
           </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">02</div>
-            <div class="font-semibold text-sm mt-4">Auth</div>
-            <div class="text-xs muted mt-1">Verify access</div>
+          <div class="text-xs font-semibold muted flex items-center gap-2 bg-blue-50 text-blue-600 px-3.5 py-1.5 rounded-full border border-blue-100 w-fit">
+            <span class="status-dot"></span>
+            9-Stage End-to-End Orchestration Loop
           </div>
+        </div>
 
-          <div class="execution-step">
-            <div class="execution-circle">03</div>
-            <div class="font-semibold text-sm mt-4">Queue</div>
-            <div class="text-xs muted mt-1">Persist task</div>
+        <div class="execution-timeline-shell">
+          <div class="execution-connector-line hidden md:block"></div>
+
+          <div class="execution-flow-grid">
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">01</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">01 · Intent</div>
+                <div class="text-[11px] muted mt-1 font-medium">Mobile prompt capture</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">02</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">02 · Auth</div>
+                <div class="text-[11px] muted mt-1 font-medium">Clerk PKCE OAuth</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">03</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">03 · Queue</div>
+                <div class="text-[11px] muted mt-1 font-medium">Redis job push</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">04</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">04 · Agent</div>
+                <div class="text-[11px] muted mt-1 font-medium">LLM architecture plan</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">05</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">05 · Sandbox</div>
+                <div class="text-[11px] muted mt-1 font-medium">Isolated Git repo edit</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">06</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">06 · Verify</div>
+                <div class="text-[11px] muted mt-1 font-medium">Build & syntax check</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">07</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">07 · Push</div>
+                <div class="text-[11px] muted mt-1 font-medium">Git commit & push</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">08</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">08 · Deploy</div>
+                <div class="text-[11px] muted mt-1 font-medium">Vercel webhook CI/CD</div>
+              </div>
+            </div>
+
+            <div class="execution-flow-card">
+              <div class="flex items-center justify-between">
+                <div class="execution-step-num">09</div>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              </div>
+              <div class="mt-6">
+                <div class="font-bold text-gray-900 text-sm">09 · Notify</div>
+                <div class="text-[11px] muted mt-1 font-medium">WhatsApp Cloud alert</div>
+              </div>
+            </div>
+
           </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">04</div>
-            <div class="font-semibold text-sm mt-4">Agent</div>
-            <div class="text-xs muted mt-1">Plan changes</div>
-          </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">05</div>
-            <div class="font-semibold text-sm mt-4">Sandbox</div>
-            <div class="text-xs muted mt-1">Modify repo</div>
-          </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">06</div>
-            <div class="font-semibold text-sm mt-4">Verify</div>
-            <div class="text-xs muted mt-1">Build & test</div>
-          </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">07</div>
-            <div class="font-semibold text-sm mt-4">Push</div>
-            <div class="text-xs muted mt-1">Git update</div>
-          </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">08</div>
-            <div class="font-semibold text-sm mt-4">Deploy</div>
-            <div class="text-xs muted mt-1">CI/CD</div>
-          </div>
-
-          <div class="execution-step">
-            <div class="execution-circle">09</div>
-            <div class="font-semibold text-sm mt-4">Notify</div>
-            <div class="text-xs muted mt-1">Mobile result</div>
-          </div>
-
         </div>
       </div>
 
