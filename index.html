@@ -1028,27 +1028,48 @@
         }
       }
 
+      @media (max-width: 768px) {
+        .hero {
+          padding-top: 100px !important;
+          padding-bottom: 50px !important;
+          min-height: auto !important;
+          background-size: cover !important;
+          background-position: center bottom !important;
+        }
+
+        h1 {
+          font-size: 3rem !important;
+          line-height: 1 !important;
+        }
+
+        .dark-section {
+          width: calc(100% - 16px) !important;
+          border-radius: 28px !important;
+          margin: 20px auto !important;
+        }
+      }
+
       @media (max-width: 640px) {
         .container {
-          width: min(100% - 28px, 1180px);
+          width: min(100% - 24px, 1180px);
         }
 
         .hero {
-          padding-top: 125px;
+          padding-top: 95px !important;
         }
 
         .hero-visual {
-          padding: 24px;
-          margin-top: 50px;
+          padding: 20px;
+          margin-top: 30px;
         }
 
         .card {
-          border-radius: 24px;
+          border-radius: 20px;
         }
 
         .dark-section,
         .scenario-shell {
-          border-radius: 28px;
+          border-radius: 24px;
         }
       }
 
@@ -1124,21 +1145,21 @@
                 <span class="font-mono">v2.4</span>
               </div>
 
-              <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-gray-950 leading-[0.92]">
+              <h1 class="text-4xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-gray-950 leading-[0.95]">
                 Build from<br />
                 <span class="text-blue-600">anywhere.</span>
               </h1>
 
-              <p class="text-gray-600 text-lg md:text-xl font-medium mt-6 max-w-lg leading-relaxed">
+              <p class="text-gray-600 text-base md:text-xl font-medium mt-4 md:mt-6 max-w-lg leading-relaxed">
                 An asynchronous mobile gateway that converts developer intent into production repository-level code commits using persistent cloud AI agents.
               </p>
 
-              <div class="mt-8 flex flex-wrap items-center gap-4">
-                <button class="px-8 py-4 rounded-full bg-black text-white font-bold text-sm hover:bg-gray-800 transition shadow-xl shadow-black/10 flex items-center gap-2" onclick="goTo('architecture')">
+              <div class="mt-6 md:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4">
+                <button class="px-6 py-3.5 rounded-full bg-black text-white font-bold text-sm hover:bg-gray-800 transition shadow-xl shadow-black/10 flex items-center justify-center gap-2" onclick="goTo('architecture')">
                   <span>Explore Architecture</span>
                   <span>↓</span>
                 </button>
-                <button class="px-7 py-4 rounded-full bg-white/90 backdrop-blur-md border border-gray-300 font-bold text-sm text-gray-800 hover:bg-white transition shadow-sm flex items-center gap-2" onclick="goTo('workflow')">
+                <button class="px-6 py-3.5 rounded-full bg-white/90 backdrop-blur-md border border-gray-300 font-bold text-sm text-gray-800 hover:bg-white transition shadow-sm flex items-center justify-center gap-2" onclick="goTo('workflow')">
                   <span>See How It Works</span>
                   <span>→</span>
                 </button>
