@@ -253,6 +253,10 @@
       padding-top: 150px;
       position: relative;
       overflow: hidden;
+      background-image: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.85), rgba(245, 245, 247, 0.95)), url('images/hero_bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .hero-orb {
@@ -1104,8 +1108,12 @@
 
       <div class="grid md:grid-cols-3 gap-5 mt-16">
 
-        <article class="card interactive-card p-8 reveal">
-          <div class="problem-number mb-16">01</div>
+        <article class="card interactive-card p-8 reveal group hover:border-blue-300 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
           <h3 class="text-2xl font-semibold tracking-tight mb-3">
             Desktop Dependency
           </h3>
@@ -1115,8 +1123,12 @@
           </p>
         </article>
 
-        <article class="card interactive-card p-8 reveal delay-1">
-          <div class="problem-number mb-16">02</div>
+        <article class="card interactive-card p-8 reveal delay-1 group hover:border-emerald-300 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
           <h3 class="text-2xl font-semibold tracking-tight mb-3">
             Mobile Constraints
           </h3>
@@ -1126,8 +1138,12 @@
           </p>
         </article>
 
-        <article class="card interactive-card p-8 reveal delay-2">
-          <div class="problem-number mb-16">03</div>
+        <article class="card interactive-card p-8 reveal delay-2 group hover:border-amber-300 transition-all duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728m-2.829-2.829a5 5 0 010-7.07m-4.243 4.243a1 1 0 11-1.414-1.414 1 1 0 011.414 1.414zM4.93 4.93a10 10 0 0114.14 0"></path>
+            </svg>
+          </div>
           <h3 class="text-2xl font-semibold tracking-tight mb-3">
             Network Instability
           </h3>
@@ -1265,7 +1281,14 @@
 
         <!-- Card 1: Asynchronous Execution -->
         <article class="bento-main bento-card p-8 md:p-10 reveal">
-          <div class="eyebrow">Core Capability</div>
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div class="eyebrow">Core Capability</div>
+          </div>
 
           <h3 class="text-4xl font-extrabold tracking-tight mt-4 text-gray-900">
             Asynchronous Execution
@@ -1317,7 +1340,14 @@
         <article class="bento-side bento-card p-8 reveal delay-1 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between">
-              <div class="eyebrow">Runtime</div>
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+                <div class="eyebrow">Runtime</div>
+              </div>
               <span class="flex items-center gap-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
                 <span class="status-dot"></span>
                 ONLINE
@@ -1346,7 +1376,14 @@
 
         <!-- Card 3: Repository Native -->
         <article class="bento-half bento-card p-8 reveal">
-          <div class="eyebrow">Repository Native</div>
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="eyebrow">Repository Native</div>
+          </div>
 
           <h3 class="text-3xl font-extrabold tracking-tight mt-4 text-gray-900">
             Work directly with Git.
@@ -1368,7 +1405,14 @@
 
         <!-- Card 4: Mobile First -->
         <article class="bento-half bento-card p-8 reveal delay-1">
-          <div class="eyebrow">Mobile First</div>
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="eyebrow">Mobile First</div>
+          </div>
 
           <h3 class="text-3xl font-extrabold tracking-tight mt-4 text-gray-900">
             Control plane, zero editing.
