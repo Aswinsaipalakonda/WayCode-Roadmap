@@ -2201,6 +2201,7 @@
   ----------------------------------- */
 
   let currentEditorialStep = 1;
+  let editorialAutoSlideTimer = null;
 
   const editorialSteps = {
     1: {
@@ -2277,7 +2278,7 @@
     }
   };
 
-  function switchEditorialStep(stepNum, el) {
+  function switchEditorialStep(stepNum, el, userAction = true) {
     currentEditorialStep = stepNum;
 
     document.querySelectorAll(".editorial-nav-item").forEach(item => {
@@ -2286,9 +2287,13 @@
 
     if (el) {
       el.classList.add("active");
+      el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     } else {
       const items = document.querySelectorAll(".editorial-nav-item");
-      if (items[stepNum - 1]) items[stepNum - 1].classList.add("active");
+      if (items[stepNum - 1]) {
+        items[stepNum - 1].classList.add("active");
+        items[stepNum - 1].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
     }
 
     const data = editorialSteps[stepNum];
@@ -2301,19 +2306,52 @@
     document.getElementById("editorialDesc").innerText = data.desc;
     document.getElementById("editorialPill1").innerText = data.pill1;
     document.getElementById("editorialPill2").innerText = data.pill2;
+
+    if (userAction) {
+      restartEditorialAutoSlide();
+    }
   }
 
   function prevEditorialStep() {
     let nextStep = currentEditorialStep - 1;
     if (nextStep < 1) nextStep = 9;
-    switchEditorialStep(nextStep, null);
+    switchEditorialStep(nextStep, null, true);
   }
 
   function nextEditorialStep() {
     let nextStep = currentEditorialStep + 1;
     if (nextStep > 9) nextStep = 1;
-    switchEditorialStep(nextStep, null);
+    switchEditorialStep(nextStep, null, false);
   }
+
+  function startEditorialAutoSlide() {
+    stopEditorialAutoSlide();
+    editorialAutoSlideTimer = setInterval(() => {
+      nextEditorialStep();
+    }, 4000);
+  }
+
+  function stopEditorialAutoSlide() {
+    if (editorialAutoSlideTimer) {
+      clearInterval(editorialAutoSlideTimer);
+      editorialAutoSlideTimer = null;
+    }
+  }
+
+  function restartEditorialAutoSlide() {
+    startEditorialAutoSlide();
+  }
+
+  // Start auto-sliding on load
+  document.addEventListener("DOMContentLoaded", () => {
+    startEditorialAutoSlide();
+
+    const container = document.querySelector(".editorial-container");
+    if (container) {
+      container.addEventListener("mouseenter", stopEditorialAutoSlide);
+      container.addEventListener("mouseleave", startEditorialAutoSlide);
+    }
+  });
 
   /* -----------------------------------
      Scenario
