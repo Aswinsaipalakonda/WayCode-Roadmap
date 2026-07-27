@@ -2799,53 +2799,54 @@
       </section>
 
       <!-- EVALUATION -->
-      <section class="section bg-white">
+      <section class="section bg-[#f5f5f7]">
         <div class="container">
           <div class="grid lg:grid-cols-2 gap-14 items-center">
             <div class="reveal">
-              <div class="eyebrow mb-5">Project Evaluation</div>
+              <div class="eyebrow mb-5 text-blue-600">Project Evaluation</div>
 
-              <h2 class="section-title">
-                How will we know
-                <span class="muted">it actually works?</span>
-              </h2>
+              <h1 class="text-5xl sm:text-6xl font-black text-gray-950 tracking-tight leading-[1.05]">
+                How will we know <span class="text-gray-400 font-bold">it actually works?</span>
+              </h1>
 
-              <p class="muted text-lg leading-relaxed mt-7">
-                The project should be evaluated using measurable system
-                outcomes, not only a successful demonstration.
+              <p class="text-gray-500 text-lg leading-relaxed mt-7 max-w-lg font-medium">
+                The project should be evaluated using measurable system outcomes, not only a successful demonstration.
               </p>
             </div>
 
+            <!-- Right Column: Dark Themed Metric Cards -->
             <div class="grid sm:grid-cols-2 gap-4 reveal delay-1">
-              <div class="card p-6">
-                <div class="text-3xl font-semibold text-blue-600">01</div>
-                <div class="font-semibold mt-8">Task Completion Rate</div>
+              
+              <div class="bg-[#0b0b0f] rounded-3xl p-7 border border-white/10 shadow-2xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 group">
+                <div class="text-3xl font-black text-blue-500 group-hover:scale-110 transition-transform inline-block">01</div>
+                <div class="font-extrabold text-white text-base mt-8 tracking-tight">Task Completion Rate</div>
               </div>
 
-              <div class="card p-6">
-                <div class="text-3xl font-semibold text-blue-600">02</div>
-                <div class="font-semibold mt-8">Queue Latency</div>
+              <div class="bg-[#0b0b0f] rounded-3xl p-7 border border-white/10 shadow-2xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 group">
+                <div class="text-3xl font-black text-blue-500 group-hover:scale-110 transition-transform inline-block">02</div>
+                <div class="font-extrabold text-white text-base mt-8 tracking-tight">Queue Latency</div>
               </div>
 
-              <div class="card p-6">
-                <div class="text-3xl font-semibold text-blue-600">03</div>
-                <div class="font-semibold mt-8">Build Success Rate</div>
+              <div class="bg-[#0b0b0f] rounded-3xl p-7 border border-white/10 shadow-2xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 group">
+                <div class="text-3xl font-black text-blue-500 group-hover:scale-110 transition-transform inline-block">03</div>
+                <div class="font-extrabold text-white text-base mt-8 tracking-tight">Build Success Rate</div>
               </div>
 
-              <div class="card p-6">
-                <div class="text-3xl font-semibold text-blue-600">04</div>
-                <div class="font-semibold mt-8">Reconnect Recovery</div>
+              <div class="bg-[#0b0b0f] rounded-3xl p-7 border border-white/10 shadow-2xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 group">
+                <div class="text-3xl font-black text-blue-500 group-hover:scale-110 transition-transform inline-block">04</div>
+                <div class="font-extrabold text-white text-base mt-8 tracking-tight">Reconnect Recovery</div>
               </div>
 
-              <div class="card p-6">
-                <div class="text-3xl font-semibold text-blue-600">05</div>
-                <div class="font-semibold mt-8">Execution Time</div>
+              <div class="bg-[#0b0b0f] rounded-3xl p-7 border border-white/10 shadow-2xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 group">
+                <div class="text-3xl font-black text-blue-500 group-hover:scale-110 transition-transform inline-block">05</div>
+                <div class="font-extrabold text-white text-base mt-8 tracking-tight">Execution Time</div>
               </div>
 
-              <div class="card p-6">
-                <div class="text-3xl font-semibold text-blue-600">06</div>
-                <div class="font-semibold mt-8">Change Accuracy</div>
+              <div class="bg-[#0b0b0f] rounded-3xl p-7 border border-white/10 shadow-2xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 group">
+                <div class="text-3xl font-black text-blue-500 group-hover:scale-110 transition-transform inline-block">06</div>
+                <div class="font-extrabold text-white text-base mt-8 tracking-tight">Change Accuracy</div>
               </div>
+
             </div>
           </div>
         </div>
@@ -3562,45 +3563,52 @@
           (paper) => filter === "all" || paper.category === filter,
         );
 
-        // Color theme mapping for domains
+        // Color theme mapping for domain cards matching user reference style
         const domainThemes = {
-          agent: { border: "border-blue-200/80 hover:border-blue-400", bg: "bg-blue-50/50", badge: "bg-blue-100 text-blue-700", accent: "text-blue-600", btn: "bg-blue-600 hover:bg-blue-700 text-white" },
-          multiagent: { border: "border-purple-200/80 hover:border-purple-400", bg: "bg-purple-50/50", badge: "bg-purple-100 text-purple-700", accent: "text-purple-600", btn: "bg-purple-600 hover:bg-purple-700 text-white" },
-          cloud: { border: "border-emerald-200/80 hover:border-emerald-400", bg: "bg-emerald-50/50", badge: "bg-emerald-100 text-emerald-700", accent: "text-emerald-600", btn: "bg-emerald-600 hover:bg-emerald-700 text-white" }
+          agent: { border: "border-emerald-200/80 hover:border-emerald-400", bg: "bg-emerald-50", badge: "bg-emerald-100 text-emerald-800", accent: "text-emerald-700", btn: "bg-emerald-600 hover:bg-emerald-700 text-white" },
+          multiagent: { border: "border-purple-200/80 hover:border-purple-400", bg: "bg-purple-50", badge: "bg-purple-100 text-purple-800", accent: "text-purple-700", btn: "bg-purple-600 hover:bg-purple-700 text-white" },
+          cloud: { border: "border-blue-200/80 hover:border-blue-400", bg: "bg-blue-50", badge: "bg-blue-100 text-blue-800", accent: "text-blue-700", btn: "bg-blue-600 hover:bg-blue-700 text-white" }
         };
 
         grid.innerHTML = items
           .map((paper) => {
             const theme = domainThemes[paper.category] || domainThemes.agent;
             return `
-      <article class="paper-card bg-white rounded-3xl p-7 border-2 ${theme.border} shadow-xl shadow-gray-200/40 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
+      <article class="paper-card bg-white rounded-[32px] p-8 border-2 ${theme.border} shadow-2xl shadow-gray-300/30 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group">
         <div>
-          <div class="flex items-center justify-between gap-2">
-            <span class="px-3 py-1 rounded-full ${theme.badge} text-[11px] font-bold uppercase tracking-wider">
+          <!-- Header Bar with Highlighted Domain Pill & Paper # Number -->
+          <div class="flex items-center justify-between gap-3">
+            <span class="px-4 py-1.5 rounded-full ${theme.badge} text-xs font-black uppercase tracking-wider shadow-sm">
               ${paper.domain}
             </span>
-            <span class="text-[11px] font-mono font-bold text-gray-400">Paper #${paper.id}</span>
+            <span class="text-xs font-mono font-extrabold text-gray-500 bg-gray-100/90 px-3 py-1 rounded-full border border-gray-200/60 shadow-sm">
+              Paper #${paper.id}
+            </span>
           </div>
 
-          <h3 class="text-lg font-black tracking-tight mt-5 text-gray-900 leading-snug group-hover:${theme.accent} transition-colors">
+          <!-- Paper Title -->
+          <h3 class="text-xl font-black tracking-tight mt-6 text-gray-950 leading-snug group-hover:${theme.accent} transition-colors">
             ${paper.title}
           </h3>
 
-          <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-lg ${theme.bg} ${theme.accent} text-xs font-bold">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+          <!-- Highlighted Source Author Badge -->
+          <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl ${theme.bg} ${theme.accent} text-xs font-black border border-gray-200/40 shadow-sm">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
             <span>${paper.authors}</span>
           </div>
 
-          <p class="text-xs text-gray-600 leading-relaxed mt-4 font-medium">
+          <!-- Abstract Description -->
+          <p class="text-xs text-gray-600 leading-relaxed mt-5 font-semibold">
             ${paper.desc}
           </p>
         </div>
 
-        <div class="pt-5 mt-6 border-t border-gray-100 flex items-center justify-between text-xs">
-          <span class="font-mono text-gray-400 font-bold bg-gray-100 px-2.5 py-1 rounded-md text-[11px]">${paper.citation}</span>
-          <a href="${paper.url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-full ${theme.btn} font-bold text-xs shadow-md transition flex items-center gap-1.5">
+        <!-- Footer Bar with Highlighted Source Citation Tag & Read Paper Button -->
+        <div class="pt-6 mt-8 border-t border-gray-100 flex items-center justify-between gap-3">
+          <span class="font-mono font-bold text-gray-500 text-xs bg-gray-100 px-3 py-1.5 rounded-xl border border-gray-200/70 shadow-inner">${paper.citation}</span>
+          <a href="${paper.url}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full ${theme.btn} font-extrabold text-xs shadow-lg transition-transform hover:scale-105 flex items-center gap-2">
             <span>Read Paper</span>
-            <span class="text-xs">↗</span>
+            <span class="text-sm">↗</span>
           </a>
         </div>
       </article>
