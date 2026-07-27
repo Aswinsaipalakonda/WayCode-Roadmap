@@ -1,5 +1,9 @@
-# ⚡ WayCode
+# <img src="images/logo.svg" width="40" height="40" alt="WayCode Logo" align="center" /> WayCode
 > **An Asynchronous Mobile Gateway for Autonomous Software Engineering Agents**
+
+<p align="center">
+  <img src="images/logo.svg" width="120" height="120" alt="WayCode Brand Logo" />
+</p>
 
 WayCode is a modern, high-performance web application and architectural roadmap designed to decouple **developer intent generation** on mobile devices from **heavy AI agent execution** in cloud environments.
 
@@ -23,13 +27,13 @@ Modern software development requires continuous engagement, but running AI softw
 
 ## 🛠️ Technology Stack
 
-| Layer | Technology |
-| :--- | :--- |
-| **Interface** | Next.js, Tailwind CSS, PWA App |
-| **Gateway** | Node.js, REST API, WebSocket (Socket.io) |
-| **Infrastructure** | Redis Queue, Nginx Proxy, PM2 / Docker |
-| **Intelligence** | LLM API, Agent Runtime (Wasm), Tool Execution (Linux) |
-| **DevOps** | Git SCM, GitHub, GitHub Actions (CI/CD) |
+| Category | Technology | Icon / Badge |
+| :--- | :--- | :---: |
+| **Interface** | Next.js, Tailwind CSS, PWA App | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" width="24" height="24" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="24" height="24" /> |
+| **Gateway** | Node.js, REST API (FastAPI), WebSocket | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" width="24" height="24" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" width="24" height="24" /> |
+| **Infrastructure** | Redis Queue, Nginx Proxy, Docker | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" width="24" height="24" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" width="24" height="24" /> |
+| **Intelligence** | Python LLM API, WebAssembly, Linux | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" width="24" height="24" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" width="24" height="24" /> |
+| **DevOps** | Git SCM, GitHub, GitHub Actions (CI/CD) | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" width="24" height="24" /> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" width="24" height="24" /> |
 
 ---
 
@@ -75,6 +79,6 @@ This project is developed as part of a **B.Tech Major Project** on Autonomous So
 
 ---
 
-<p center>
-  Designed & Built with ❤️ for Autonomous AI Engineering
+<p align="center">
+  <img src="images/logo.svg" width="24" height="24" align="center" /> Designed & Built with ❤️ for Autonomous AI Engineering
 </p>
