@@ -1793,79 +1793,82 @@
     </div>
   </section>
 
-  <!-- RELIABILITY -->
-  <section class="section">
+  <!-- RELIABILITY / FAULT TOLERANCE -->
+  <section class="section py-20 bg-gray-50">
     <div class="container">
+      <div class="dark-section p-8 md:p-14 lg:p-16 reveal">
 
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
 
-        <div class="reveal">
-          <div class="eyebrow mb-5">Fault Tolerance</div>
+          <div>
+            <div class="text-xs font-bold uppercase tracking-[.18em] text-[#2997ff] mb-5">
+              Fault Tolerance
+            </div>
 
-          <h2 class="section-title">
-            What happens when
-            <span class="muted">the phone disconnects?</span>
-          </h2>
+            <h2 class="section-title text-white">
+              What happens when <span class="text-gray-400 font-normal">the phone disconnects?</span>
+            </h2>
 
-          <p class="muted text-lg leading-relaxed mt-7 max-w-xl">
-            Nothing happens to the execution job. The phone acts as a control
-            interface, not the runtime. When connectivity returns, the client
-            retrieves the latest persisted task state.
-          </p>
+            <p class="text-gray-300 text-base md:text-lg leading-relaxed mt-6 max-w-xl">
+              Nothing happens to the execution job. The phone acts as a control
+              interface, not the runtime. When connectivity returns, the client
+              retrieves the latest persisted task state seamlessly.
+            </p>
+          </div>
+
+          <div class="dark-card rounded-3xl p-6 md:p-8 shadow-2xl border border-white/10">
+
+            <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-3">
+              <div>
+                <div class="font-bold text-white text-base">Mobile Client</div>
+                <div class="text-xs text-gray-400 mt-0.5">Network unavailable</div>
+              </div>
+
+              <span class="text-xs font-mono font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                OFFLINE
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-3">
+              <div>
+                <div class="font-bold text-white text-base">Gateway</div>
+                <div class="text-xs text-gray-400 mt-0.5">Task state persisted</div>
+              </div>
+
+              <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                ONLINE
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-3">
+              <div>
+                <div class="font-bold text-white text-base">AI Worker</div>
+                <div class="text-xs text-gray-400 mt-0.5">Processing TASK-4821</div>
+              </div>
+
+              <span class="text-xs font-mono font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                EXECUTING
+              </span>
+            </div>
+
+            <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5">
+              <div>
+                <div class="font-bold text-white text-base">Repository</div>
+                <div class="text-xs text-gray-400 mt-0.5">Workspace available</div>
+              </div>
+
+              <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                CONNECTED
+              </span>
+            </div>
+
+          </div>
+
         </div>
-
-        <div class="dark-card rounded-3xl p-6 md:p-8 reveal delay-1 shadow-2xl border border-white/10">
-
-          <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-3">
-            <div>
-              <div class="font-bold text-white text-base">Mobile Client</div>
-              <div class="text-xs text-gray-400 mt-0.5">Network unavailable</div>
-            </div>
-
-            <span class="text-xs font-mono font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              OFFLINE
-            </span>
-          </div>
-
-          <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-3">
-            <div>
-              <div class="font-bold text-white text-base">Gateway</div>
-              <div class="text-xs text-gray-400 mt-0.5">Task state persisted</div>
-            </div>
-
-            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              ONLINE
-            </span>
-          </div>
-
-          <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 mb-3">
-            <div>
-              <div class="font-bold text-white text-base">AI Worker</div>
-              <div class="text-xs text-gray-400 mt-0.5">Processing TASK-4821</div>
-            </div>
-
-            <span class="text-xs font-mono font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-              EXECUTING
-            </span>
-          </div>
-
-          <div class="flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5">
-            <div>
-              <div class="font-bold text-white text-base">Repository</div>
-              <div class="text-xs text-gray-400 mt-0.5">Workspace available</div>
-            </div>
-
-            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 rounded-full flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              CONNECTED
-            </span>
-          </div>
-
-        </div>
-
       </div>
     </div>
   </section>
@@ -2631,30 +2634,71 @@
     `
   };
 
-  function scenarioStep(step, button) {
-    document
-      .querySelectorAll(".scenario-tab")
-      .forEach(el => el.classList.remove("active"));
+  let currentScenarioStep = 1;
+  let scenarioAutoTimer = null;
 
-    button.classList.add("active");
+  function scenarioStep(step, button, userClick = true) {
+    currentScenarioStep = step;
+    const tabs = document.querySelectorAll(".scenario-tab");
+    tabs.forEach(el => el.classList.remove("active"));
 
-    document.getElementById("scenarioOutput").innerHTML = `
-      <div class="terminal">
-        <div class="terminal-top">
-          <span class="terminal-dot"></span>
-          <span class="terminal-dot"></span>
-          <span class="terminal-dot"></span>
-          <span class="text-[10px] text-gray-500 ml-2">
-            gateway.log
-          </span>
+    if (button) {
+      button.classList.add("active");
+    } else if (tabs[step - 1]) {
+      tabs[step - 1].classList.add("active");
+    }
+
+    const output = document.getElementById("scenarioOutput");
+    if (output) {
+      output.innerHTML = `
+        <div class="terminal">
+          <div class="terminal-top">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="text-[10px] text-gray-500 ml-2">gateway.log</span>
+          </div>
+
+          <div class="p-6 text-sm leading-8 text-gray-300">
+            ${scenarioData[step]}
+          </div>
         </div>
+      `;
+    }
 
-        <div class="p-6 text-sm leading-8 text-gray-300">
-          ${scenarioData[step]}
-        </div>
-      </div>
-    `;
+    if (userClick) {
+      restartScenarioAuto();
+    }
   }
+
+  function startScenarioAuto() {
+    stopScenarioAuto();
+    scenarioAutoTimer = setInterval(() => {
+      let next = currentScenarioStep + 1;
+      if (next > 6) next = 1;
+      scenarioStep(next, null, false);
+    }, 3500);
+  }
+
+  function stopScenarioAuto() {
+    if (scenarioAutoTimer) {
+      clearInterval(scenarioAutoTimer);
+      scenarioAutoTimer = null;
+    }
+  }
+
+  function restartScenarioAuto() {
+    startScenarioAuto();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    startScenarioAuto();
+    const scenarioShell = document.querySelector(".scenario-shell");
+    if (scenarioShell) {
+      scenarioShell.addEventListener("mouseenter", stopScenarioAuto);
+      scenarioShell.addEventListener("mouseleave", startScenarioAuto);
+    }
+  });
 
   /* -----------------------------------
      Research Foundation Papers (Complete 15 Matrix)
