@@ -444,13 +444,29 @@
     }
 
     /* --------------------------------
-       Bento
+       Bento Grid (Immersive Premium Styling)
     -------------------------------- */
 
     .bento {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 22px;
+      gap: 24px;
+    }
+
+    .bento-card {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 100% 0%, rgba(0, 113, 227, 0.04), transparent 50%), #ffffff;
+      border: 1px solid rgba(0, 113, 227, 0.12);
+      border-radius: 32px;
+      box-shadow: 0 16px 40px -10px rgba(0, 113, 227, 0.08), 0 4px 12px rgba(0, 0, 0, 0.02);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 113, 227, 0.3);
+      box-shadow: 0 25px 65px -10px rgba(0, 113, 227, 0.18), 0 8px 24px rgba(0, 0, 0, 0.04);
     }
 
     .bento-main {
@@ -467,11 +483,19 @@
     }
 
     .queue-item {
-      padding: 14px 16px;
-      border-radius: 14px;
-      background: #f5f5f7;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: rgba(245, 245, 247, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.04);
       font-size: 13px;
       font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .queue-item:hover {
+      background: #ffffff;
+      border-color: rgba(0, 113, 227, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.08);
     }
 
     /* --------------------------------
@@ -1120,96 +1144,144 @@
         <div class="eyebrow mb-5">Proposed Solution</div>
         <h2 class="section-title">
           One gateway.
-          <span class="muted">Four responsibilities.</span>
+          <span class="muted">Four core responsibilities.</span>
         </h2>
       </div>
 
       <div class="bento mt-14">
 
-        <article class="bento-main card interactive-card p-8 md:p-10 reveal">
+        <!-- Card 1: Asynchronous Execution -->
+        <article class="bento-main bento-card p-8 md:p-10 reveal">
           <div class="eyebrow">Core Capability</div>
 
-          <h3 class="text-4xl font-semibold tracking-tight mt-4">
+          <h3 class="text-4xl font-extrabold tracking-tight mt-4 text-gray-900">
             Asynchronous Execution
           </h3>
 
-          <p class="muted max-w-xl mt-4 leading-relaxed">
-            Requests become persistent jobs. The mobile browser does not need
-            to remain connected while an AI agent works.
+          <p class="muted max-w-xl mt-4 leading-relaxed text-sm md:text-base">
+            Requests become persistent Redis jobs. The mobile browser does not need
+            to remain connected while an AI agent works autonomously on the cloud host.
           </p>
 
-          <div class="mt-14 grid sm:grid-cols-4 gap-3">
-            <div class="queue-item">01 · REQUEST</div>
-            <div class="queue-item">02 · QUEUE</div>
-            <div class="queue-item">03 · EXECUTE</div>
-            <div class="queue-item">04 · REPORT</div>
+          <div class="mt-12 grid sm:grid-cols-4 gap-3">
+            <div class="queue-item flex items-center justify-between">
+              <span>01 · REQUEST</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            </div>
+            <div class="queue-item flex items-center justify-between">
+              <span>02 · QUEUE</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+            </div>
+            <div class="queue-item flex items-center justify-between">
+              <span>03 · EXECUTE</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            </div>
+            <div class="queue-item flex items-center justify-between">
+              <span>04 · REPORT</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            </div>
           </div>
 
-          <div class="mt-8 p-5 rounded-2xl bg-[#f5f5f7] flex items-center justify-between">
-            <div>
-              <div class="text-xs muted">TASK-4821</div>
-              <div class="font-semibold mt-1">Admin dashboard implementation</div>
+          <div class="mt-8 p-5 rounded-2xl bg-white border border-blue-100 shadow-lg flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs font-mono">
+                RUN
+              </div>
+              <div>
+                <div class="text-xs muted font-mono font-semibold">TASK-JOB-8942</div>
+                <div class="font-bold text-gray-900 text-sm mt-0.5">Admin Analytics Dashboard Hotfix</div>
+              </div>
             </div>
 
-            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-full">
-              RUNNING
-            </span>
-          </div>
-        </article>
-
-        <article class="bento-side card interactive-card p-8 reveal delay-1">
-          <div class="flex items-center justify-between">
-            <div class="eyebrow">Runtime</div>
-            <span class="flex items-center gap-2 text-xs font-semibold">
+            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3.5 py-1.5 rounded-full flex items-center gap-2">
               <span class="status-dot"></span>
-              ONLINE
+              ACTIVE WORKER
             </span>
-          </div>
-
-          <h3 class="text-3xl font-semibold tracking-tight mt-5">
-            Persistent AI Runtime
-          </h3>
-
-          <p class="muted mt-4 text-sm leading-relaxed">
-            The executor remains available independently of the developer's
-            personal laptop.
-          </p>
-
-          <div class="mt-14 text-6xl font-semibold tracking-[-.05em]">
-            24<span class="text-2xl muted">/7</span>
           </div>
         </article>
 
-        <article class="bento-half card interactive-card p-8 reveal">
+        <!-- Card 2: Persistent AI Runtime -->
+        <article class="bento-side bento-card p-8 reveal delay-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="eyebrow">Runtime</div>
+              <span class="flex items-center gap-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+                <span class="status-dot"></span>
+                ONLINE
+              </span>
+            </div>
+
+            <h3 class="text-3xl font-extrabold tracking-tight mt-5 text-gray-900">
+              Persistent AI Runtime
+            </h3>
+
+            <p class="muted mt-4 text-sm leading-relaxed">
+              The cloud executor remains available 24/7 independently of the developer's workstation or smartphone connection.
+            </p>
+          </div>
+
+          <div class="mt-10 pt-6 border-t border-gray-100 flex items-baseline justify-between">
+            <div class="text-6xl font-black tracking-[-.05em] text-gray-900">
+              24<span class="text-2xl text-blue-600 font-bold">/7</span>
+            </div>
+            <div class="text-xs font-mono muted text-right">
+              <div>PM2 Background Daemon</div>
+              <div class="text-emerald-600 font-bold mt-1">Uptime 99.9%</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Repository Native -->
+        <article class="bento-half bento-card p-8 reveal">
           <div class="eyebrow">Repository Native</div>
 
-          <h3 class="text-3xl font-semibold mt-4">
+          <h3 class="text-3xl font-extrabold tracking-tight mt-4 text-gray-900">
             Work directly with Git.
           </h3>
 
-          <div class="mt-8 flex flex-wrap gap-2">
-            <span class="tech-pill">Clone</span>
-            <span class="tech-pill">Branch</span>
-            <span class="tech-pill">Modify</span>
-            <span class="tech-pill">Build</span>
-            <span class="tech-pill">Test</span>
-            <span class="tech-pill">Commit</span>
-            <span class="tech-pill">Push</span>
+          <p class="muted mt-3 text-sm">
+            Native version control workflow without exposing local uncommitted state.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-2.5">
+            <span class="px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 font-mono text-xs font-semibold">Git Clone</span>
+            <span class="px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60 font-mono text-xs font-semibold">Checkout Branch</span>
+            <span class="px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60 font-mono text-xs font-semibold">LLM Code Edit</span>
+            <span class="px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60 font-mono text-xs font-semibold">Local Build</span>
+            <span class="px-3.5 py-1.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200/60 font-mono text-xs font-semibold">Test Check</span>
+            <span class="px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-mono text-xs font-bold">Git Push</span>
           </div>
         </article>
 
-        <article class="bento-half card interactive-card p-8 reveal delay-1">
+        <!-- Card 4: Mobile First -->
+        <article class="bento-half bento-card p-8 reveal delay-1">
           <div class="eyebrow">Mobile First</div>
 
-          <h3 class="text-3xl font-semibold mt-4">
-            Control, not code editing.
+          <h3 class="text-3xl font-extrabold tracking-tight mt-4 text-gray-900">
+            Control plane, zero editing.
           </h3>
 
-          <div class="mt-8 grid grid-cols-2 gap-3 text-sm font-semibold">
-            <div class="p-4 bg-[#f5f5f7] rounded-xl">Prompt</div>
-            <div class="p-4 bg-[#f5f5f7] rounded-xl">Approve</div>
-            <div class="p-4 bg-[#f5f5f7] rounded-xl">Monitor</div>
-            <div class="p-4 bg-[#f5f5f7] rounded-xl">Deploy</div>
+          <p class="muted mt-3 text-sm">
+            High-level intent inputs optimized for touch viewports.
+          </p>
+
+          <div class="mt-8 grid grid-cols-2 gap-3 text-xs font-bold">
+            <div class="p-3.5 bg-white border border-gray-200/80 rounded-xl shadow-sm flex items-center justify-between">
+              <span>Intent Prompting</span>
+              <span class="text-blue-600">✓</span>
+            </div>
+            <div class="p-3.5 bg-white border border-gray-200/80 rounded-xl shadow-sm flex items-center justify-between">
+              <span>Clerk OAuth Login</span>
+              <span class="text-blue-600">✓</span>
+            </div>
+            <div class="p-3.5 bg-white border border-gray-200/80 rounded-xl shadow-sm flex items-center justify-between">
+              <span>Live Terminal Logs</span>
+              <span class="text-blue-600">✓</span>
+            </div>
+            <div class="p-3.5 bg-white border border-gray-200/80 rounded-xl shadow-sm flex items-center justify-between">
+              <span>WhatsApp Alerts</span>
+              <span class="text-emerald-600 font-bold">✓</span>
+            </div>
           </div>
         </article>
 
