@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f5f5f7" />
-    <title>Asynchronous Mobile Gateway — B.Tech Major Project</title>
+    <title>WayCode — An Asynchronous Mobile Gateway for Autonomous Software Engineering Agents</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1073,11 +1073,14 @@
     <nav class="fixed top-5 left-0 right-0 z-50 px-4">
       <div class="max-w-4xl mx-auto h-14 rounded-full bg-white/95 backdrop-blur-2xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.08)] px-2.5 flex items-center justify-between">
         
-        <!-- Left Black Brand Icon Logo -->
-        <button onclick="goTo('overview')" class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-black text-sm tracking-tighter shadow-md hover:scale-105 transition-transform">
-          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2L2 19h20L12 2zm0 4.2L18.2 17H5.8L12 6.2z"/>
-          </svg>
+        <!-- Left Black Brand Icon Logo with WayCode Title -->
+        <button onclick="goTo('overview')" class="flex items-center gap-2.5 pl-1 pr-3 py-1 rounded-full hover:bg-gray-100/80 transition-all duration-300 group">
+          <div class="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center font-black text-xs shadow-md group-hover:scale-105 transition-transform">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L2 19h20L12 2zm0 4.2L18.2 17H5.8L12 6.2z"/>
+            </svg>
+          </div>
+          <span class="font-extrabold text-sm tracking-tight text-gray-950">WayCode</span>
         </button>
 
         <!-- Center Nav Navigation Items -->
@@ -2629,25 +2632,25 @@
             </div>
 
             <!-- Category 5: DevOps -->
-            <div class="bg-white/[0.05] rounded-3xl p-6 border border-white/10 hover:border-rose-500/50 backdrop-blur-xl shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
-              <div class="flex items-center gap-2.5 mb-6">
-                <div class="w-9 h-9 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            <div class="bg-white/[0.05] rounded-3xl p-5 border border-white/10 hover:border-rose-500/50 backdrop-blur-xl shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+              <div class="flex items-center gap-2 mb-6">
+                <div class="w-8 h-8 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                 </div>
                 <span class="text-xs font-black uppercase tracking-wider text-rose-400 truncate">DevOps</span>
               </div>
               <div class="space-y-3">
-                <div class="p-3 rounded-2xl bg-white/[0.04] border border-white/5 flex items-center gap-3 hover:bg-rose-500/10 hover:border-rose-500/30 transition">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" class="w-5 h-5 shrink-0" alt="Git SCM" />
-                  <span class="font-extrabold text-xs text-white truncate">Git SCM</span>
+                <div class="p-2.5 rounded-2xl bg-white/[0.04] border border-white/5 flex items-center gap-2.5 hover:bg-rose-500/10 hover:border-rose-500/30 transition">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" class="w-4 h-4 shrink-0" alt="Git SCM" />
+                  <span class="font-extrabold text-xs text-white whitespace-nowrap">Git SCM</span>
                 </div>
-                <div class="p-3 rounded-2xl bg-white/[0.04] border border-white/5 flex items-center gap-3 hover:bg-rose-50/10 hover:border-rose-500/30 transition">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" class="w-5 h-5 shrink-0 bg-white rounded-full p-0.5" alt="GitHub" />
-                  <span class="font-extrabold text-xs text-white truncate">GitHub</span>
+                <div class="p-2.5 rounded-2xl bg-white/[0.04] border border-white/5 flex items-center gap-2.5 hover:bg-rose-50/10 hover:border-rose-500/30 transition">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" class="w-4 h-4 shrink-0 bg-white rounded-full p-0.5" alt="GitHub" />
+                  <span class="font-extrabold text-xs text-white whitespace-nowrap">GitHub</span>
                 </div>
-                <div class="p-3 rounded-2xl bg-white/[0.04] border border-white/5 flex items-center gap-3 hover:bg-rose-500/10 hover:border-rose-500/30 transition">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" class="w-5 h-5 shrink-0" alt="CI/CD Actions" />
-                  <span class="font-extrabold text-xs text-white truncate">CI/CD Actions</span>
+                <div class="p-2.5 rounded-2xl bg-white/[0.04] border border-white/5 flex items-center gap-2 hover:bg-rose-500/10 hover:border-rose-500/30 transition">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" class="w-4 h-4 shrink-0" alt="CI/CD Actions" />
+                  <span class="font-extrabold text-[11px] text-white whitespace-nowrap leading-none">CI/CD Actions</span>
                 </div>
               </div>
             </div>
