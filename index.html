@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%23000000'/><path d='M22 32L38 70L50 42L62 70L78 32' stroke='%232997ff' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M30 46L18 50L30 54' stroke='%23ffffff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M70 46L82 50L70 54' stroke='%23ffffff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>" />
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1077,16 +1077,12 @@
     <nav class="fixed top-5 left-0 right-0 z-50 px-4">
       <div class="max-w-4xl mx-auto h-14 rounded-full bg-white/95 backdrop-blur-2xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.08)] px-2.5 flex items-center justify-between">
         
-        <!-- Left Black Brand Icon Logo with WayCode Title -->
+        <!-- Left Brand Icon Logo with WayCode Title -->
         <button onclick="goTo('overview')" class="flex items-center gap-2.5 pl-1 pr-3 py-1 rounded-full hover:bg-gray-100/80 transition-all duration-300 group">
-          <div class="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform p-1.5">
-            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 32L38 72L50 44L62 72L80 32" stroke="#2997ff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M26 46L14 50L26 54" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M74 46L86 50L74 54" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="w-11 h-11 rounded-2xl bg-black text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform p-1.5 shrink-0">
+            <img src="images/logo.svg" class="w-full h-full object-contain" alt="WayCode Logo" />
           </div>
-          <span class="font-extrabold text-sm tracking-tight text-gray-950">WayCode</span>
+          <span class="font-extrabold text-base tracking-tight text-gray-950">WayCode</span>
         </button>
 
         <!-- Center Nav Navigation Items -->
