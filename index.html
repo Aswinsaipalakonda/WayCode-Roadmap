@@ -600,12 +600,12 @@
 
     .editorial-stage {
       display: grid;
-      grid-template-columns: 180px 1fr 420px;
+      grid-template-columns: 140px 1fr 520px;
       min-height: 520px;
       position: relative;
     }
 
-    @media (max-width: 1120px) {
+    @media (max-width: 1200px) {
       .editorial-stage {
         grid-template-columns: 1fr;
       }
@@ -613,14 +613,14 @@
 
     .editorial-number-column {
       border-right: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 40px 24px;
+      padding: 32px 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
     .editorial-big-number {
-      font-size: clamp(70px, 9vw, 130px);
+      font-size: clamp(60px, 7vw, 110px);
       font-weight: 900;
       line-height: 0.85;
       letter-spacing: -0.07em;
@@ -629,7 +629,7 @@
     }
 
     .editorial-content-column {
-      padding: 48px 40px;
+      padding: 40px 32px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -640,7 +640,7 @@
 
     .editorial-image-column {
       border-left: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 24px;
+      padding: 16px;
       background: #f4f4f6;
       display: flex;
       align-items: center;
@@ -650,24 +650,31 @@
     .editorial-mockup-card {
       width: 100%;
       height: 100%;
-      min-height: 380px;
-      max-height: 440px;
+      min-height: 440px;
+      max-height: 500px;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       background: #ffffff;
-      padding: 12px;
+      padding: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .editorial-mockup-card:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 50px rgba(0, 113, 227, 0.15);
     }
 
     .editorial-mockup-img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      border-radius: 12px;
+      border-radius: 16px;
       transition: transform 0.4s ease;
     }
 
@@ -1551,7 +1558,7 @@
 
             <!-- Image Visual Column -->
             <div class="editorial-image-column hidden lg:flex">
-              <div class="editorial-mockup-card">
+              <div class="editorial-mockup-card" onclick="openImageModal(document.getElementById('editorialMockupImg').src)">
                 <img id="editorialMockupImg" src="" alt="Phase Architecture Visual" class="editorial-mockup-img" />
               </div>
             </div>
@@ -1561,6 +1568,14 @@
 
     </div>
   </section>
+
+  <!-- IMAGE LIGHTBOX MODAL -->
+  <div id="imageLightboxModal" class="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 sm:p-8 transition-opacity opacity-0" onclick="closeImageModal()">
+    <div class="relative max-w-5xl w-full bg-white rounded-3xl p-3 shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+      <button onclick="closeImageModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/70 text-white flex items-center justify-center font-bold text-lg hover:bg-black transition">✕</button>
+      <img id="lightboxModalImg" src="" alt="Enlarged Diagram View" class="w-full h-auto max-h-[85vh] object-contain rounded-2xl" />
+    </div>
+  </div>
 
   <!-- COMPARISON -->
   <section class="section bg-white">
@@ -2425,6 +2440,31 @@
     let nextStep = currentEditorialStep + 1;
     if (nextStep > 9) nextStep = 1;
     switchEditorialStep(nextStep, null, false);
+  }
+
+  function openImageModal(imgSrc) {
+    if (!imgSrc) return;
+    stopEditorialAutoSlide();
+    const modal = document.getElementById("imageLightboxModal");
+    const modalImg = document.getElementById("lightboxModalImg");
+    if (modal && modalImg) {
+      modalImg.src = imgSrc;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      setTimeout(() => modal.classList.remove("opacity-0"), 10);
+    }
+  }
+
+  function closeImageModal() {
+    const modal = document.getElementById("imageLightboxModal");
+    if (modal) {
+      modal.classList.add("opacity-0");
+      setTimeout(() => {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+        startEditorialAutoSlide();
+      }, 250);
+    }
   }
 
   function startEditorialAutoSlide() {
