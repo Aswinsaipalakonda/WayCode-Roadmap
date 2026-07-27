@@ -1,1606 +1,2016 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f5f7" />
-    <title>Asynchronous Mobile Gateway — B.Tech Major Project</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f5f7" />
+  <title>Asynchronous Mobile Gateway — B.Tech Major Project</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-      :root {
-        --bg: #f5f5f7;
-        --surface: #ffffff;
-        --surface-2: #fbfbfd;
-        --text: #1d1d1f;
-        --muted: #6e6e73;
-        --border: rgba(0, 0, 0, 0.08);
-        --blue: #0071e3;
-        --blue-2: #2997ff;
-        --purple: #5856d6;
-        --green: #34c759;
-        --dark: #0b0b0f;
-      }
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-2: #fbfbfd;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --border: rgba(0,0,0,.08);
+      --blue: #0071e3;
+      --blue-2: #2997ff;
+      --teal: #00a896;
+      --green: #34c759;
+      --dark: #0b0b0f;
+    }
 
-      * {
-        margin-left: 10px;
-        margin-right: 10px;
-        box-sizing: border-box;
-      }
+    * {
+      margin-left: 10px;
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
 
-      html {
-        scroll-behavior: smooth;
-      }
+    html {
+      scroll-behavior: smooth;
+    }
 
-      body {
-        margin: 0;
-        font-family:
-          Inter,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
-        background:
-          radial-gradient(
-            circle at 50% 0%,
-            rgba(0, 113, 227, 0.06),
-            transparent 35%
-          ),
-          var(--bg);
-        color: var(--text);
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(0,113,227,.08), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-      ::selection {
-        background: rgba(0, 113, 227, 0.18);
-      }
+    ::selection {
+      background: rgba(0,113,227,.18);
+    }
 
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
 
-      ::-webkit-scrollbar-track {
-        background: #f5f5f7;
-      }
+    ::-webkit-scrollbar-track {
+      background: #f5f5f7;
+    }
 
-      ::-webkit-scrollbar-thumb {
-        background: #c7c7cc;
-        border-radius: 999px;
-      }
+    ::-webkit-scrollbar-thumb {
+      background: #c7c7cc;
+      border-radius: 999px;
+    }
 
-      /* --------------------------------
+    /* --------------------------------
        Scroll progress
     -------------------------------- */
 
-      #scrollProgress {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 3px;
-        width: 0;
-        z-index: 9999;
-        background: linear-gradient(90deg, var(--blue), var(--purple));
-      }
+    #scrollProgress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 3px;
+      width: 0;
+      z-index: 9999;
+      background: linear-gradient(90deg, #0071e3, #00a896);
+    }
 
-      /* --------------------------------
+    /* --------------------------------
        Navigation
     -------------------------------- */
 
-      .nav-shell {
-        background: rgba(255, 255, 255, 0.82);
-        backdrop-filter: saturate(180%) blur(22px);
-        -webkit-backdrop-filter: saturate(180%) blur(22px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        box-shadow:
-          0 1px 0 rgba(0, 0, 0, 0.04),
-          0 10px 40px rgba(0, 0, 0, 0.04);
-      }
+    .nav-shell {
+      background: rgba(255,255,255,.74);
+      backdrop-filter: saturate(180%) blur(22px);
+      -webkit-backdrop-filter: saturate(180%) blur(22px);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow:
+        0 1px 0 rgba(0,0,0,.04),
+        0 10px 40px rgba(0,0,0,.04);
+    }
 
-      .nav-link {
-        color: #515154;
-        transition: color 0.25s ease;
-      }
+    .nav-link {
+      color: #515154;
+      transition: color .25s ease;
+    }
 
-      .nav-link:hover,
-      .nav-link.active {
-        color: var(--blue);
-      }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text);
+    }
 
-      /* --------------------------------
-       Shared Spacing & Container Margins
+    /* --------------------------------
+       Shared
     -------------------------------- */
 
-      .container {
-        width: min(1200px, calc(100% - 48px));
-        margin-inline: auto;
-      }
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
+    }
 
-      .section {
-        padding: 110px 0;
-        scroll-margin-top: 100px;
-      }
+    .section {
+      padding: 130px 0;
+      scroll-margin-top: 90px;
+    }
 
-      .eyebrow {
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--blue);
-      }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
 
-      .display {
-        font-size: clamp(44px, 6.5vw, 92px);
-        line-height: 1.02;
-        letter-spacing: -0.055em;
-        font-weight: 800;
-      }
+    .display {
+      font-size: clamp(48px, 7.4vw, 104px);
+      line-height: .96;
+      letter-spacing: -.065em;
+      font-weight: 700;
+    }
 
-      .section-title {
-        font-size: clamp(38px, 5vw, 68px);
-        line-height: 1.05;
-        letter-spacing: -0.045em;
-        font-weight: 800;
-      }
+    .section-title {
+      font-size: clamp(42px, 5.4vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+      font-weight: 700;
+    }
 
-      .gradient-text {
-        background: linear-gradient(
-          100deg,
-          #0071e3 5%,
-          #5856d6 48%,
-          #af52de 75%,
-          #0071e3 100%
-        );
-        background-size: 220% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: gradientMove 7s linear infinite;
-      }
+    .gradient-text {
+      color: #0071e3;
+    }
 
-      @keyframes gradientMove {
-        to {
-          background-position: 220% center;
-        }
+    @keyframes gradientMove {
+      to {
+        background-position: 220% center;
       }
+    }
 
-      .muted {
-        color: var(--muted);
-      }
+    .muted {
+      color: var(--muted);
+    }
 
-      .card {
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        border-radius: 28px;
-        box-shadow:
-          0 1px 3px rgba(0, 0, 0, 0.02),
-          0 16px 40px rgba(0, 0, 0, 0.04);
-      }
+    .card {
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(0,0,0,.055);
+      border-radius: 30px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,.02),
+        0 18px 50px rgba(0,0,0,.045);
+    }
 
-      .interactive-card {
-        transition:
-          transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-          box-shadow 0.35s ease,
-          border-color 0.35s ease;
-      }
+    .interactive-card {
+      transition:
+        transform .35s cubic-bezier(.2,.8,.2,1),
+        box-shadow .35s ease,
+        border-color .35s ease;
+    }
 
-      .interactive-card:hover {
-        transform: translateY(-6px);
-        border-color: rgba(0, 113, 227, 0.2);
-        box-shadow:
-          0 4px 10px rgba(0, 0, 0, 0.02),
-          0 24px 60px rgba(0, 113, 227, 0.08);
-      }
+    .interactive-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,113,227,.14);
+      box-shadow:
+        0 2px 5px rgba(0,0,0,.025),
+        0 28px 70px rgba(0,0,0,.08);
+    }
 
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 9px;
-        padding: 15px 28px;
-        border-radius: 999px;
-        background: var(--blue);
-        color: white;
-        font-weight: 600;
-        font-size: 15px;
-        transition: 0.25s ease;
-        box-shadow: 0 8px 25px rgba(0, 113, 227, 0.2);
-      }
+    .dark-card {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: inset 0 1px rgba(255,255,255,.06);
+    }
 
-      .btn-primary:hover {
-        transform: scale(1.025);
-        background: #0077ed;
-        box-shadow: 0 12px 35px rgba(0, 113, 227, 0.28);
-      }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-weight: 600;
+      transition: .25s ease;
+      box-shadow: 0 8px 25px rgba(0,113,227,.18);
+    }
 
-      .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 15px 28px;
-        border-radius: 999px;
-        background: white;
-        border: 1px solid var(--border);
-        font-weight: 600;
-        font-size: 15px;
-        transition: 0.25s ease;
-      }
+    .btn-primary:hover {
+      transform: scale(1.025);
+      background: #0077ed;
+      box-shadow: 0 12px 35px rgba(0,113,227,.24);
+    }
 
-      .btn-secondary:hover {
-        transform: scale(1.025);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-      }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      transition: .25s ease;
+    }
 
-      /* --------------------------------
+    .btn-secondary:hover {
+      transform: scale(1.025);
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+
+    /* --------------------------------
        Reveal animation
     -------------------------------- */
 
-      .reveal {
-        opacity: 0;
-        transform: translateY(28px);
-        transition:
-          opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1),
-          transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity .85s cubic-bezier(.2,.8,.2,1),
+        transform .85s cubic-bezier(.2,.8,.2,1);
+    }
 
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-      .delay-1 { transition-delay: 0.08s; }
-      .delay-2 { transition-delay: 0.16s; }
-      .delay-3 { transition-delay: 0.24s; }
-      .delay-4 { transition-delay: 0.32s; }
+    .delay-1 { transition-delay: .08s; }
+    .delay-2 { transition-delay: .16s; }
+    .delay-3 { transition-delay: .24s; }
+    .delay-4 { transition-delay: .32s; }
 
-      /* --------------------------------
-       Hero Padding Fix
+    /* --------------------------------
+       Hero
     -------------------------------- */
 
-      .hero {
-        padding-top: 170px;
-        padding-bottom: 90px;
-        position: relative;
-        overflow: hidden;
-      }
+    .hero {
+      min-height: 100vh;
+      padding-top: 150px;
+      position: relative;
+      overflow: hidden;
+    }
 
-      .hero-visual {
-        margin-top: 60px;
-        position: relative;
-        padding: 42px;
-        overflow: hidden;
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .hero-orb.one {
+      width: 420px;
+      height: 420px;
+      background: rgba(0,113,227,.12);
+      left: -180px;
+      top: 180px;
+    }
+
+    .hero-orb.two {
+      width: 460px;
+      height: 460px;
+      background: rgba(0,168,150,.08);
+      right: -180px;
+      top: 90px;
+    }
+
+    .hero-visual {
+      margin-top: 80px;
+      position: relative;
+      padding: 52px;
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(0,113,227,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,113,227,.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+      pointer-events: none;
+    }
+
+    .flow-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    .flow-node {
+      position: relative;
+      z-index: 2;
+      min-height: 150px;
+      padding: 22px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.055);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .node-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: #f2f7ff;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: #a0a0a5;
+      font-size: 24px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(52,199,89,.12);
+    }
+
+    /* --------------------------------
+       Problem
+    -------------------------------- */
+
+    .problem-number {
+      font-size: 12px;
+      font-weight: 700;
+      color: #86868b;
+      letter-spacing: .08em;
+    }
+
+    /* --------------------------------
+       Research gap
+    -------------------------------- */
+
+    .dark-section {
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(41,151,255,.17), transparent 32%),
+        #0b0b0f;
+      color: white;
+      border-radius: 46px;
+      overflow: hidden;
+    }
+
+    .dark-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: linear-gradient(to bottom, black, transparent);
+    }
+
+    .duality-line {
+      width: 1px;
+      background: linear-gradient(
+        transparent,
+        rgba(41,151,255,.8),
+        transparent
+      );
+    }
+
+    /* --------------------------------
+       Bento
+    -------------------------------- */
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 22px;
+    }
+
+    .bento-main {
+      grid-column: span 7;
+      min-height: 430px;
+    }
+
+    .bento-side {
+      grid-column: span 5;
+    }
+
+    .bento-half {
+      grid-column: span 6;
+    }
+
+    .queue-item {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #f5f5f7;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* --------------------------------
+       Architecture
+    -------------------------------- */
+
+    .architecture-stage {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(0,113,227,.055), transparent 30%),
+        white;
+    }
+
+    .architecture-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .architecture-layer {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid rgba(0,0,0,.07);
+      background: rgba(255,255,255,.95);
+      cursor: pointer;
+      transition: .3s ease;
+    }
+
+    .architecture-layer:hover,
+    .architecture-layer.active {
+      border-color: rgba(0,113,227,.35);
+      box-shadow: 0 18px 50px rgba(0,113,227,.08);
+      transform: translateY(-3px);
+    }
+
+    .architecture-layer.active {
+      background: #f7fbff;
+    }
+
+    .tech-pill {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #f5f5f7;
+      font-size: 11px;
+      font-weight: 600;
+      color: #515154;
+    }
+
+    .architecture-detail {
+      min-height: 165px;
+      transition: .3s ease;
+    }
+
+    /* --------------------------------
+       Flow
+    -------------------------------- */
+
+    .execution-flow {
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 14px;
+    }
+
+    .execution-step {
+      min-width: 155px;
+      flex: 1;
+      position: relative;
+    }
+
+    .execution-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 17px;
+      left: 48px;
+      right: 10px;
+      height: 1px;
+      background: #d2d2d7;
+    }
+
+    .execution-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1px solid #d2d2d7;
+      position: relative;
+      z-index: 2;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* --------------------------------
+       Comparison
+    -------------------------------- */
+
+    .comparison-table {
+      overflow: hidden;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      border-bottom: 1px solid #ececf0;
+    }
+
+    .comparison-row:last-child {
+      border-bottom: 0;
+    }
+
+    .comparison-row > div {
+      padding: 18px 20px;
+    }
+
+    .comparison-row .proposed {
+      background: rgba(0,113,227,.045);
+    }
+
+    .check {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .partial {
+      color: #ff9f0a;
+      font-weight: 800;
+    }
+
+    .no {
+      color: #aeaeb2;
+    }
+
+    /* --------------------------------
+       Scenario
+    -------------------------------- */
+
+    .scenario-shell {
+      background:
+        radial-gradient(circle at 80% 0%, rgba(88,86,214,.20), transparent 28%),
+        radial-gradient(circle at 20% 100%, rgba(0,113,227,.15), transparent 30%),
+        #0b0b0f;
+      border-radius: 42px;
+      color: white;
+      overflow: hidden;
+    }
+
+    .scenario-tab {
+      cursor: pointer;
+      transition: .25s ease;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.045);
+    }
+
+    .scenario-tab:hover,
+    .scenario-tab.active {
+      background: rgba(255,255,255,.10);
+      border-color: rgba(41,151,255,.4);
+    }
+
+    .terminal {
+      background: #111114;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 20px;
+      overflow: hidden;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .terminal-top {
+      height: 42px;
+      background: rgba(255,255,255,.045);
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      gap: 7px;
+    }
+
+    .terminal-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.25);
+    }
+
+    /* --------------------------------
+       Reliability
+    -------------------------------- */
+
+    .system-state {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+
+    .system-state:last-child {
+      border-bottom: 0;
+    }
+
+    /* --------------------------------
+       Research
+    -------------------------------- */
+
+    .filter-btn {
+      border: 1px solid #dedee3;
+      background: white;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #1d1d1f;
+      border-color: #1d1d1f;
+      color: white;
+    }
+
+    .paper-card {
+      min-height: 250px;
+    }
+
+    /* --------------------------------
+       Roadmap
+    -------------------------------- */
+
+    .roadmap-track {
+      position: relative;
+    }
+
+    .roadmap-track::before {
+      content: "";
+      position: absolute;
+      top: 24px;
+      left: 7%;
+      right: 7%;
+      height: 2px;
+      background: #dedee3;
+    }
+
+    .roadmap-phase {
+      position: relative;
+      z-index: 2;
+    }
+
+    .roadmap-marker {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #d2d2d7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .roadmap-phase.featured .roadmap-marker {
+      border-color: var(--blue);
+      color: var(--blue);
+      box-shadow: 0 0 0 8px rgba(0,113,227,.07);
+    }
+
+    /* --------------------------------
+       Responsive
+    -------------------------------- */
+
+    @media (max-width: 900px) {
+      .section {
+        padding: 90px 0;
       }
 
       .flow-grid {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 16px;
-        align-items: center;
-      }
-
-      .flow-node {
-        position: relative;
-        z-index: 2;
-        min-height: 140px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.95);
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        border-radius: 20px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .node-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        background: #f2f7ff;
-        color: var(--blue);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
+        grid-template-columns: 1fr;
       }
 
       .flow-arrow {
-        text-align: center;
-        color: #a0a0a5;
-        font-size: 20px;
+        transform: rotate(90deg);
       }
 
-      .status-dot {
-        width: 8px;
-        height: 8px;
-        background: var(--green);
-        border-radius: 50%;
-        box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.15);
-      }
-
-      /* --------------------------------
-       Research gap (Exact spec retained)
-    -------------------------------- */
-
-      .dark-section {
-        position: relative;
-        background:
-          radial-gradient(
-            circle at 50% 20%,
-            rgba(41, 151, 255, 0.17),
-            transparent 32%
-          ),
-          #0b0b0f;
-        color: white;
-        border-radius: 40px;
-        overflow: hidden;
-      }
-
-      .dark-card {
-        background: rgba(255, 255, 255, 0.07);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
-      }
-
-      .duality-line {
-        width: 1px;
-        background: linear-gradient(
-          transparent,
-          rgba(41, 151, 255, 0.8),
-          transparent
-        );
-      }
-
-      /* --------------------------------
-       Bento Grid
-    -------------------------------- */
-
-      .bento {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 20px;
-      }
-
-      .bento-main {
-        grid-column: span 7;
-        min-height: 400px;
-      }
-
-      .bento-side {
-        grid-column: span 5;
-      }
-
+      .bento-main,
+      .bento-side,
       .bento-half {
-        grid-column: span 6;
-      }
-
-      .queue-item {
-        padding: 12px 14px;
-        border-radius: 12px;
-        background: #f5f5f7;
-        font-size: 12px;
-        font-weight: 600;
-      }
-
-      /* --------------------------------
-       Architecture Layer Tabs
-    -------------------------------- */
-
-      .architecture-stage {
-        position: relative;
-        overflow: hidden;
-        background: white;
-        border-radius: 32px;
+        grid-column: span 12;
       }
 
       .architecture-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        position: relative;
-        z-index: 2;
-      }
-
-      .architecture-layer {
-        padding: 24px;
-        border-radius: 20px;
-        border: 1px solid rgba(0, 0, 0, 0.07);
-        background: rgba(255, 255, 255, 0.95);
-        cursor: pointer;
-        transition: 0.3s ease;
-      }
-
-      .architecture-layer:hover,
-      .architecture-layer.active {
-        border-color: rgba(0, 113, 227, 0.35);
-        box-shadow: 0 14px 40px rgba(0, 113, 227, 0.08);
-        transform: translateY(-3px);
-      }
-
-      .architecture-layer.active {
-        background: #f7fbff;
-      }
-
-      .tech-pill {
-        display: inline-flex;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: #f5f5f7;
-        font-size: 11px;
-        font-weight: 600;
-        color: #515154;
-      }
-
-      /* --------------------------------
-       Interactive Scenario (Exact spec retained)
-    -------------------------------- */
-
-      .scenario-shell {
-        background:
-          radial-gradient(
-            circle at 80% 0%,
-            rgba(88, 86, 214, 0.2),
-            transparent 28%
-          ),
-          radial-gradient(
-            circle at 20% 100%,
-            rgba(0, 113, 227, 0.15),
-            transparent 30%
-          ),
-          #0b0b0f;
-        border-radius: 40px;
-        color: white;
-        overflow: hidden;
-      }
-
-      .scenario-tab {
-        cursor: pointer;
-        transition: 0.25s ease;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.045);
-      }
-
-      .scenario-tab:hover,
-      .scenario-tab.active {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(41, 151, 255, 0.4);
-      }
-
-      .terminal {
-        background: #111114;
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 20px;
-        overflow: hidden;
-        font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      }
-
-      .terminal-top {
-        height: 40px;
-        background: rgba(255, 255, 255, 0.045);
-        display: flex;
-        align-items: center;
-        padding: 0 15px;
-        gap: 7px;
-      }
-
-      .terminal-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.25);
-      }
-
-      /* --------------------------------
-       Comparison Table
-    -------------------------------- */
-
-      .comparison-table {
-        overflow: hidden;
+        grid-template-columns: 1fr;
       }
 
       .comparison-row {
-        display: grid;
-        grid-template-columns: 1.5fr repeat(3, 1fr);
-        border-bottom: 1px solid #ececf0;
+        grid-template-columns: 1.2fr repeat(3, .8fr);
+        min-width: 760px;
       }
 
-      .comparison-row:last-child {
-        border-bottom: 0;
+      .roadmap-track::before {
+        display: none;
       }
 
-      .comparison-row > div {
-        padding: 16px 20px;
+      .roadmap-marker {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1180px);
       }
 
-      .comparison-row .proposed {
-        background: rgba(0, 113, 227, 0.045);
+      .hero {
+        padding-top: 125px;
       }
 
-      .check { color: var(--green); font-weight: 800; }
-      .partial { color: #ff9f0a; font-weight: 800; }
-      .no { color: #aeaeb2; }
-
-      /* --------------------------------
-       Filter Buttons & Literature Cards
-    -------------------------------- */
-
-      .filter-btn {
-        border: 1px solid #dedee3;
-        background: white;
-        padding: 9px 18px;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 600;
-        transition: 0.2s ease;
+      .hero-visual {
+        padding: 24px;
+        margin-top: 50px;
       }
 
-      .filter-btn:hover,
-      .filter-btn.active {
-        background: #1d1d1f;
-        border-color: #1d1d1f;
-        color: white;
+      .card {
+        border-radius: 24px;
       }
 
-      .paper-card {
-        min-height: 260px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      .dark-section,
+      .scenario-shell {
+        border-radius: 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
 
-      /* --------------------------------
-       Responsive Setup
-    -------------------------------- */
-
-      @media (max-width: 900px) {
-        .section { padding: 80px 0; }
-        .flow-grid { grid-template-columns: 1fr; }
-        .flow-arrow { transform: rotate(90deg); }
-        .bento-main, .bento-side, .bento-half { grid-column: span 12; }
-        .architecture-grid { grid-template-columns: 1fr; }
-        .comparison-row { grid-template-columns: 1.2fr repeat(3, 0.8fr); min-width: 760px; }
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
-    </style>
-  </head>
+    }
+  </style>
+</head>
 
-  <body>
-    <div id="scrollProgress"></div>
+<body>
 
-    <!-- NAV -->
-    <nav class="fixed top-4 left-0 right-0 z-50 px-4">
-      <div
-        class="nav-shell container max-w-6xl mx-auto h-14 rounded-2xl px-5 flex items-center justify-between"
-      >
-        <button onclick="goTo('overview')" class="flex items-center gap-3">
-          <div
-            class="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center font-bold text-xs"
-          >
-            AG
-          </div>
-          <span class="font-semibold text-sm hidden sm:block"
-            >Async Gateway</span
-          >
-        </button>
+<div id="scrollProgress"></div>
 
-        <div class="hidden lg:flex items-center gap-7 text-xs font-medium">
-          <button
-            class="nav-link"
-            data-section="problem"
-            onclick="goTo('problem')"
-          >
-            Problem
-          </button>
-          <button
-            class="nav-link"
-            data-section="architecture"
-            onclick="goTo('architecture')"
-          >
-            Architecture
-          </button>
-          <button
-            class="nav-link"
-            data-section="workflow"
-            onclick="goTo('workflow')"
-          >
-            Workflow
-          </button>
-          <button
-            class="nav-link"
-            data-section="research"
-            onclick="goTo('research')"
-          >
-            Research Matrix
-          </button>
-          <button
-            class="nav-link"
-            data-section="roadmap"
-            onclick="goTo('roadmap')"
-          >
-            Roadmap
-          </button>
+<!-- NAV -->
+<nav class="fixed top-4 left-0 right-0 z-50 px-4">
+  <div class="nav-shell max-w-6xl mx-auto h-14 rounded-2xl px-5 flex items-center justify-between">
+    <button onclick="goTo('overview')" class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center font-bold text-xs">
+        AG
+      </div>
+      <span class="font-semibold text-sm hidden sm:block">Async Gateway</span>
+    </button>
+
+    <div class="hidden lg:flex items-center gap-7 text-xs font-medium">
+      <button class="nav-link" data-section="problem" onclick="goTo('problem')">Problem</button>
+      <button class="nav-link" data-section="architecture" onclick="goTo('architecture')">Architecture</button>
+      <button class="nav-link" data-section="workflow" onclick="goTo('workflow')">Workflow</button>
+      <button class="nav-link" data-section="research" onclick="goTo('research')">Research</button>
+      <button class="nav-link" data-section="roadmap" onclick="goTo('roadmap')">Roadmap</button>
+    </div>
+
+    <div class="text-[10px] sm:text-xs font-semibold px-3.5 py-1.5 bg-blue-50 text-blue-600 border border-blue-100 rounded-full">
+      System Architecture & Reference Implementation
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="overview" class="hero">
+    <div class="hero-orb one"></div>
+    <div class="hero-orb two"></div>
+
+    <div class="container relative z-10">
+      <div class="text-center max-w-5xl mx-auto">
+        <div class="eyebrow mb-7 reveal">
+          Autonomous AI Software Engineering Agents · Reference Architecture
         </div>
 
-        <div
-          class="text-[10px] sm:text-xs font-semibold px-3 py-1.5 bg-[#f5f5f7] rounded-full"
-        >
-          Major Project · 2026
+        <h1 class="display reveal delay-1">
+          Build from anywhere.
+          <span class="block gradient-text mt-3">
+            Your laptop is no longer the runtime.
+          </span>
+        </h1>
+
+        <p class="text-lg md:text-xl muted max-w-3xl mx-auto mt-8 leading-relaxed reveal delay-2">
+          An asynchronous mobile gateway that converts developer intent into
+          repository-level software changes using persistent cloud AI agents.
+        </p>
+
+        <div class="mt-9 flex flex-wrap justify-center gap-3 reveal delay-3">
+          <button class="btn-primary" onclick="goTo('architecture')">
+            Explore Architecture
+            <span>↓</span>
+          </button>
+
+          <button class="btn-secondary" onclick="goTo('workflow')">
+            See How It Works
+            <span>→</span>
+          </button>
         </div>
       </div>
-    </nav>
 
-    <main>
-      <!-- HERO -->
-      <section id="overview" class="hero">
-        <div class="container relative z-10">
-          <div class="text-center max-w-5xl mx-auto">
-            <div class="eyebrow mb-6 reveal">
-              B.Tech Major Project · Autonomous AI Software Engineering Agents
-            </div>
+      <div class="hero-visual card reveal delay-4">
+        <div class="flow-grid">
 
-            <h1 class="display reveal delay-1">
-              Build from anywhere.
-              <span class="block gradient-text mt-3">
-                Your laptop is no longer the runtime.
-              </span>
-            </h1>
-
-            <p
-              class="text-lg md:text-xl muted max-w-3xl mx-auto mt-8 leading-relaxed reveal delay-2"
-            >
-              An asynchronous mobile gateway that converts developer intent into
-              repository-level software changes using persistent cloud AI
-              agents.
-            </p>
-
-            <div
-              class="mt-9 flex flex-wrap justify-center gap-3 reveal delay-3"
-            >
-              <button class="btn-primary" onclick="goTo('architecture')">
-                Explore Architecture
-                <span>↓</span>
-              </button>
-
-              <button class="btn-secondary" onclick="goTo('workflow')">
-                See How It Works
-                <span>→</span>
-              </button>
+          <div class="flow-node">
+            <div class="node-icon">01</div>
+            <div>
+              <div class="font-semibold">Mobile</div>
+              <div class="text-xs muted mt-1">Intent & Control</div>
             </div>
           </div>
 
-          <div class="hero-visual card reveal delay-4">
-            <div class="flow-grid">
-              <div class="flow-node">
-                <div class="node-icon">01</div>
-                <div>
-                  <div class="font-semibold">Mobile PWA</div>
-                  <div class="text-xs muted mt-1">Clerk OAuth & Intent</div>
-                </div>
-              </div>
+          <div class="flow-arrow">→</div>
 
-              <div class="flow-arrow">→</div>
-
-              <div class="flow-node">
-                <div class="flex justify-between">
-                  <div class="node-icon">02</div>
-                  <div class="status-dot mt-2"></div>
-                </div>
-                <div>
-                  <div class="font-semibold">VPS Gateway</div>
-                  <div class="text-xs muted mt-1">Nginx & Redis Queue</div>
-                </div>
-              </div>
-
-              <div class="flow-arrow">→</div>
-
-              <div class="flow-node">
-                <div class="flex justify-between">
-                  <div class="node-icon">03</div>
-                  <div class="status-dot mt-2"></div>
-                </div>
-                <div>
-                  <div class="font-semibold">Headless Daemon</div>
-                  <div class="text-xs muted mt-1">Gemini / Antigravity</div>
-                </div>
-              </div>
+          <div class="flow-node">
+            <div class="flex justify-between">
+              <div class="node-icon">02</div>
+              <div class="status-dot mt-2"></div>
             </div>
-
-            <div
-              class="mt-7 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold muted"
-            >
-              <span class="px-3 py-2 bg-[#f5f5f7] rounded-full"
-                >Git Repository</span
-              >
-              <span>→</span>
-              <span class="px-3 py-2 bg-[#f5f5f7] rounded-full">Vercel CI/CD</span>
-              <span>→</span>
-              <span class="px-3 py-2 bg-[#f5f5f7] rounded-full"
-                >Deployment</span
-              >
-              <span>→</span>
-              <span class="px-3 py-2 bg-[#f5f5f7] rounded-full text-green-600 font-bold"
-                >WhatsApp Alerts</span
-              >
+            <div>
+              <div class="font-semibold">Async Gateway</div>
+              <div class="text-xs muted mt-1">Queue & State</div>
             </div>
           </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node">
+            <div class="flex justify-between">
+              <div class="node-icon">03</div>
+              <div class="status-dot mt-2"></div>
+            </div>
+            <div>
+              <div class="font-semibold">AI Runtime</div>
+              <div class="text-xs muted mt-1">Execute & Verify</div>
+            </div>
+          </div>
+
         </div>
-      </section>
 
-      <!-- PROBLEM -->
-      <section id="problem" class="section">
-        <div class="container">
-          <div class="text-center max-w-4xl mx-auto reveal">
-            <div class="eyebrow mb-5">The Problem</div>
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3 text-xs font-semibold muted">
+          <span class="px-3 py-2 bg-[#f5f5f7] rounded-full">Git Repository</span>
+          <span>→</span>
+          <span class="px-3 py-2 bg-[#f5f5f7] rounded-full">CI/CD</span>
+          <span>→</span>
+          <span class="px-3 py-2 bg-[#f5f5f7] rounded-full">Deployment</span>
+          <span>→</span>
+          <span class="px-3 py-2 bg-[#f5f5f7] rounded-full">Mobile Notification</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem" class="section">
+    <div class="container">
+
+      <div class="text-center max-w-4xl mx-auto reveal">
+        <div class="eyebrow mb-5">The Problem</div>
+        <h2 class="section-title">
+          AI coding agents are powerful.
+          <span class="block muted">
+            Their interfaces are still desktop-first.
+          </span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mt-16">
+
+        <article class="card interactive-card p-8 reveal">
+          <div class="problem-number mb-16">01</div>
+          <h3 class="text-2xl font-semibold tracking-tight mb-3">
+            Desktop Dependency
+          </h3>
+          <p class="muted leading-relaxed text-sm">
+            Most agentic development workflows assume a persistent desktop,
+            terminal, IDE, and local development environment.
+          </p>
+        </article>
+
+        <article class="card interactive-card p-8 reveal delay-1">
+          <div class="problem-number mb-16">02</div>
+          <h3 class="text-2xl font-semibold tracking-tight mb-3">
+            Mobile Constraints
+          </h3>
+          <p class="muted leading-relaxed text-sm">
+            Traditional IDEs become difficult to operate on small,
+            touch-based mobile interfaces.
+          </p>
+        </article>
+
+        <article class="card interactive-card p-8 reveal delay-2">
+          <div class="problem-number mb-16">03</div>
+          <h3 class="text-2xl font-semibold tracking-tight mb-3">
+            Network Instability
+          </h3>
+          <p class="muted leading-relaxed text-sm">
+            Remote desktop and continuous browser sessions degrade when
+            mobile connectivity becomes unstable.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="text-center mt-28 reveal">
+        <p class="text-xl muted mb-4">The core limitation isn't compute.</p>
+        <h3 class="text-5xl md:text-7xl font-bold tracking-[-0.05em]">
+          It's <span class="gradient-text">access.</span>
+        </h3>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH GAP -->
+  <section class="pb-32">
+    <div class="container">
+      <div class="dark-section p-8 md:p-16 lg:p-20 reveal">
+
+        <div class="relative z-10">
+          <div class="text-center max-w-4xl mx-auto">
+            <div class="text-xs font-bold uppercase tracking-[.18em] text-[#2997ff] mb-5">
+              Research Gap
+            </div>
+
             <h2 class="section-title">
-              AI coding agents are powerful.
-              <span class="block muted">
-                Their interfaces are still desktop-first.
-              </span>
+              The Resource–Interface Duality
             </h2>
-          </div>
 
-          <div class="grid md:grid-cols-3 gap-5 mt-16">
-            <article class="card interactive-card p-8 reveal">
-              <div class="text-xs font-bold text-gray-400 mb-12">CHALLENGE 01</div>
-              <h3 class="text-2xl font-semibold tracking-tight mb-3">
-                Desktop Dependency
-              </h3>
-              <p class="muted leading-relaxed text-sm">
-                Autonomous LLM agents (SWE-agent, MetaGPT, OpenHands) assume a persistent desktop, terminal shell, and local development sandbox.
-              </p>
-            </article>
-
-            <article class="card interactive-card p-8 reveal delay-1">
-              <div class="text-xs font-bold text-gray-400 mb-12">CHALLENGE 02</div>
-              <h3 class="text-2xl font-semibold tracking-tight mb-3">
-                Mobile Constraints
-              </h3>
-              <p class="muted leading-relaxed text-sm">
-                Smartphone viewports, virtual keyboards, and touch dragging make running full desktop IDEs on mobile screens inefficient and frustrating.
-              </p>
-            </article>
-
-            <article class="card interactive-card p-8 reveal delay-2">
-              <div class="text-xs font-bold text-gray-400 mb-12">CHALLENGE 03</div>
-              <h3 class="text-2xl font-semibold tracking-tight mb-3">
-                Network Instability
-              </h3>
-              <p class="muted leading-relaxed text-sm">
-                Mobile connectivity drops during transit, and background process termination by mobile operating systems kills long-running agent tasks.
-              </p>
-            </article>
-          </div>
-
-          <div class="text-center mt-24 reveal">
-            <p class="text-xl muted mb-4">The core limitation isn't compute.</p>
-            <h3 class="text-5xl md:text-7xl font-bold tracking-[-0.05em]">
-              It's <span class="gradient-text">access.</span>
-            </h3>
-          </div>
-        </div>
-      </section>
-
-      <!-- RESEARCH GAP (EXACT UNALTERED SPECIFICATION) -->
-      <section class="pb-32">
-        <div class="container">
-          <div class="dark-section p-8 md:p-16 lg:p-20 reveal">
-            <div class="relative z-10">
-              <div class="text-center max-w-4xl mx-auto">
-                <div
-                  class="text-xs font-bold uppercase tracking-[.18em] text-[#2997ff] mb-5"
-                >
-                  Research Gap
-                </div>
-
-                <h2 class="section-title">The Resource–Interface Duality</h2>
-
-                <p class="text-gray-400 mt-6 text-lg max-w-2xl mx-auto">
-                  The best device for interacting with an AI agent is not
-                  necessarily the best device for executing its work.
-                </p>
-              </div>
-
-              <div class="grid md:grid-cols-[1fr_auto_1fr] gap-8 mt-16">
-                <div class="dark-card rounded-3xl p-8">
-                  <div
-                    class="text-xs text-gray-500 font-bold tracking-widest uppercase"
-                  >
-                    Interface Plane
-                  </div>
-
-                  <h3 class="text-3xl font-semibold mt-4">Mobile Device</h3>
-
-                  <div class="mt-8 space-y-4 text-sm">
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Intent generation</span>
-                      <span class="text-green-400">Excellent</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Approvals</span>
-                      <span class="text-green-400">Excellent</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Monitoring</span>
-                      <span class="text-green-400">Excellent</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Large IDE workloads</span>
-                      <span class="text-red-300">Limited</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="duality-line hidden md:block"></div>
-
-                <div class="dark-card rounded-3xl p-8">
-                  <div
-                    class="text-xs text-gray-500 font-bold tracking-widest uppercase"
-                  >
-                    Execution Plane
-                  </div>
-
-                  <h3 class="text-3xl font-semibold mt-4">Cloud Runtime</h3>
-
-                  <div class="mt-8 space-y-4 text-sm">
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Repository operations</span>
-                      <span class="text-green-400">Excellent</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">AI agents</span>
-                      <span class="text-green-400">Excellent</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Build & testing</span>
-                      <span class="text-green-400">Excellent</span>
-                    </div>
-
-                    <div class="flex justify-between">
-                      <span class="text-gray-400">Direct interaction</span>
-                      <span class="text-yellow-300">Indirect</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="mt-14 text-center">
-                <div class="text-gray-500 text-sm mb-3">Proposed principle</div>
-                <div class="text-3xl md:text-5xl font-semibold tracking-tight">
-                  Separate <span class="text-[#2997ff]">intent</span> from
-                  <span class="text-[#bf5af2]">execution.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SOLUTION BENTO -->
-      <section class="section pt-0">
-        <div class="container">
-          <div class="max-w-4xl reveal">
-            <div class="eyebrow mb-5">Proposed Solution</div>
-            <h2 class="section-title">
-              One gateway.
-              <span class="muted">Four responsibilities.</span>
-            </h2>
-          </div>
-
-          <div class="bento mt-14">
-            <article
-              class="bento-main card interactive-card p-8 md:p-10 reveal"
-            >
-              <div class="eyebrow">Core Capability</div>
-
-              <h3 class="text-4xl font-semibold tracking-tight mt-4">
-                Asynchronous Execution
-              </h3>
-
-              <p class="muted max-w-xl mt-4 leading-relaxed">
-                Requests become persistent Redis jobs. The mobile browser does not
-                need to remain connected while an AI agent works on Hostinger VPS.
-              </p>
-
-              <div class="mt-12 grid sm:grid-cols-4 gap-3">
-                <div class="queue-item">01 · PROMPT</div>
-                <div class="queue-item">02 · REDIS</div>
-                <div class="queue-item">03 · DAEMON</div>
-                <div class="queue-item">04 · WHATSAPP</div>
-              </div>
-
-              <div
-                class="mt-8 p-5 rounded-2xl bg-[#f5f5f7] flex items-center justify-between"
-              >
-                <div>
-                  <div class="text-xs muted">TASK-JOB-8942</div>
-                  <div class="font-semibold mt-1">
-                    Supabase Admin Analytics Dashboard
-                  </div>
-                </div>
-
-                <span
-                  class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-full"
-                >
-                  RUNNING
-                </span>
-              </div>
-            </article>
-
-            <article
-              class="bento-side card interactive-card p-8 reveal delay-1"
-            >
-              <div class="flex items-center justify-between">
-                <div class="eyebrow">Runtime</div>
-                <span class="flex items-center gap-2 text-xs font-semibold">
-                  <span class="status-dot"></span>
-                  ONLINE
-                </span>
-              </div>
-
-              <h3 class="text-3xl font-semibold tracking-tight mt-5">
-                Persistent AI Runtime
-              </h3>
-
-              <p class="muted mt-4 text-sm leading-relaxed">
-                Hostinger VPS background daemon running 24/7 via PM2, listening to Redis BLPOP queue.
-              </p>
-
-              <div class="mt-12 text-6xl font-semibold tracking-[-.05em]">
-                24<span class="text-2xl muted">/7</span>
-              </div>
-            </article>
-
-            <article class="bento-half card interactive-card p-8 reveal">
-              <div class="eyebrow">Repository Native</div>
-
-              <h3 class="text-3xl font-semibold mt-4">
-                Work directly with Git.
-              </h3>
-
-              <div class="mt-8 flex flex-wrap gap-2">
-                <span class="tech-pill">Clerk OAuth</span>
-                <span class="tech-pill">Git Clone</span>
-                <span class="tech-pill">Gemini Agent</span>
-                <span class="tech-pill">Build Check</span>
-                <span class="tech-pill">Git Push</span>
-                <span class="tech-pill">Vercel Webhook</span>
-              </div>
-            </article>
-
-            <article
-              class="bento-half card interactive-card p-8 reveal delay-1"
-            >
-              <div class="eyebrow">Mobile First</div>
-
-              <h3 class="text-3xl font-semibold mt-4">
-                Control, not code editing.
-              </h3>
-
-              <div class="mt-8 grid grid-cols-2 gap-3 text-sm font-semibold">
-                <div class="p-4 bg-[#f5f5f7] rounded-xl">Intent Prompt</div>
-                <div class="p-4 bg-[#f5f5f7] rounded-xl">OAuth Login</div>
-                <div class="p-4 bg-[#f5f5f7] rounded-xl">Terminal Stream</div>
-                <div class="p-4 bg-[#f5f5f7] rounded-xl">WhatsApp Alert</div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ARCHITECTURE LAYERS -->
-      <section id="architecture" class="section">
-        <div class="container">
-          <div class="text-center max-w-4xl mx-auto reveal">
-            <div class="eyebrow mb-5">System Architecture</div>
-
-            <h2 class="section-title">Three independent layers.</h2>
-
-            <p class="muted mt-6 text-lg">
-              Interaction, orchestration, and execution remain logically
-              separated.
+            <p class="text-gray-400 mt-6 text-lg max-w-2xl mx-auto">
+              The best device for interacting with an AI agent is not
+              necessarily the best device for executing its work.
             </p>
           </div>
 
-          <div class="architecture-stage card p-6 md:p-10 mt-14 reveal">
-            <div class="architecture-grid">
-              <div
-                class="architecture-layer active"
-                data-layer="mobile"
-                onclick="selectArchitecture('mobile', this)"
-              >
-                <div class="text-xs font-bold text-blue-600">LAYER 01</div>
-                <h3 class="text-2xl font-semibold mt-3">
-                  Mobile Client Layer
-                </h3>
+          <div class="grid md:grid-cols-[1fr_auto_1fr] gap-8 mt-16">
 
-                <div class="mt-7 flex flex-wrap gap-2">
-                  <span class="tech-pill">Next.js PWA</span>
-                  <span class="tech-pill">Clerk OAuth</span>
-                  <span class="tech-pill">HTTPS POST</span>
-                  <span class="tech-pill">WebSocket</span>
-                </div>
+            <div class="dark-card rounded-3xl p-8">
+              <div class="text-xs text-gray-500 font-bold tracking-widest uppercase">
+                Interface Plane
               </div>
 
-              <div
-                class="architecture-layer"
-                data-layer="gateway"
-                onclick="selectArchitecture('gateway', this)"
-              >
-                <div class="text-xs font-bold text-purple-600">LAYER 02</div>
-                <h3 class="text-2xl font-semibold mt-3">Middleware Gateway</h3>
+              <h3 class="text-3xl font-semibold mt-4">Mobile Device</h3>
 
-                <div class="mt-7 flex flex-wrap gap-2">
-                  <span class="tech-pill">Hostinger VPS</span>
-                  <span class="tech-pill">Nginx Proxy</span>
-                  <span class="tech-pill">Express API</span>
-                  <span class="tech-pill">Redis Queue</span>
+              <div class="mt-8 space-y-4 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Intent generation</span>
+                  <span class="text-green-400">Excellent</span>
                 </div>
-              </div>
 
-              <div
-                class="architecture-layer"
-                data-layer="daemon"
-                onclick="selectArchitecture('daemon', this)"
-              >
-                <div class="text-xs font-bold text-green-600">LAYER 03</div>
-                <h3 class="text-2xl font-semibold mt-3">Headless AI Daemon</h3>
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Approvals</span>
+                  <span class="text-green-400">Excellent</span>
+                </div>
 
-                <div class="mt-7 flex flex-wrap gap-2">
-                  <span class="tech-pill">Gemini / Antigravity</span>
-                  <span class="tech-pill">Git Engine</span>
-                  <span class="tech-pill">Vercel Webhook</span>
-                  <span class="tech-pill">WhatsApp API</span>
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Monitoring</span>
+                  <span class="text-green-400">Excellent</span>
+                </div>
+
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Large IDE workloads</span>
+                  <span class="text-red-300">Limited</span>
                 </div>
               </div>
             </div>
 
-            <div
-              id="architectureDetail"
-              class="architecture-detail mt-7 rounded-2xl bg-[#f5f5f7] p-7"
-            >
-              <div class="text-xs font-bold text-blue-600 tracking-wider">
-                MOBILE CLIENT LAYER
+            <div class="duality-line hidden md:block"></div>
+
+            <div class="dark-card rounded-3xl p-8">
+              <div class="text-xs text-gray-500 font-bold tracking-widest uppercase">
+                Execution Plane
               </div>
 
-              <h4 class="text-2xl font-semibold mt-2">
-                Developer interaction without a mobile IDE.
-              </h4>
+              <h3 class="text-3xl font-semibold mt-4">Cloud Runtime</h3>
 
-              <p class="muted mt-3 max-w-3xl leading-relaxed">
-                Responsive Next.js Progressive Web Application (PWA). Clerk GitHub OAuth 2.0 authenticates developer identity and requests scoped repository access. Developer selects target repo and submits intent prompts.
-              </p>
+              <div class="mt-8 space-y-4 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Repository operations</span>
+                  <span class="text-green-400">Excellent</span>
+                </div>
+
+                <div class="flex justify-between">
+                  <span class="text-gray-400">AI agents</span>
+                  <span class="text-green-400">Excellent</span>
+                </div>
+
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Build & testing</span>
+                  <span class="text-green-400">Excellent</span>
+                </div>
+
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Direct interaction</span>
+                  <span class="text-yellow-300">Indirect</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-14 text-center">
+            <div class="text-gray-500 text-sm mb-3">Proposed principle</div>
+            <div class="text-3xl md:text-5xl font-semibold tracking-tight">
+              Separate <span class="text-[#2997ff]">intent</span>
+              from <span class="text-[#bf5af2]">execution.</span>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- ARCHITECTURAL COMPARISON TABLE -->
-      <section class="section bg-white">
-        <div class="container">
-          <div class="max-w-4xl reveal">
-            <div class="eyebrow mb-5">Architectural Comparison</div>
-            <h2 class="section-title">
-              Why not just use
-              <span class="muted">Remote Desktop or Cloud IDEs?</span>
-            </h2>
-          </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="card comparison-table mt-14 overflow-x-auto reveal">
-            <div class="comparison-row font-semibold text-sm bg-[#fafafa]">
-              <div>Architectural Metric</div>
-              <div class="proposed text-blue-600">Proposed Mobile Gateway</div>
-              <div>Cloud IDEs (Codespaces)</div>
-              <div>Remote Desktop (Chrome RD)</div>
-            </div>
+  <!-- SOLUTION -->
+  <section class="section pt-0">
+    <div class="container">
 
-            <div class="comparison-row text-sm">
-              <div class="font-medium">Primary Interaction Model</div>
-              <div class="proposed check">✓ Intent Prompting (Zero-IDE)</div>
-              <div class="partial">~ Manual code editing</div>
-              <div class="no">— Screen touch mirroring</div>
-            </div>
+      <div class="max-w-4xl reveal">
+        <div class="eyebrow mb-5">Proposed Solution</div>
+        <h2 class="section-title">
+          One gateway.
+          <span class="muted">Four responsibilities.</span>
+        </h2>
+      </div>
 
-            <div class="comparison-row text-sm">
-              <div class="font-medium">Mobile Viewport Optimization</div>
-              <div class="proposed check">✓ Single-column responsive PWA</div>
-              <div class="partial">~ High text density</div>
-              <div class="no">— Forced 1080p layout</div>
-            </div>
+      <div class="bento mt-14">
 
-            <div class="comparison-row text-sm">
-              <div class="font-medium">Network Disconnection Resilience</div>
-              <div class="proposed check">✓ High (Redis job persistence)</div>
-              <div class="partial">~ Moderate (Halts commands)</div>
-              <div class="no">— Disconnects & halts</div>
-            </div>
+        <article class="bento-main card interactive-card p-8 md:p-10 reveal">
+          <div class="eyebrow">Core Capability</div>
 
-            <div class="comparison-row text-sm">
-              <div class="font-medium">Hardware Dependence</div>
-              <div class="proposed check">✓ Low (Persistent 24/7 VPS)</div>
-              <div class="check">✓ Low (Cloud VM)</div>
-              <div class="no">— High (Home PC must stay on)</div>
-            </div>
+          <h3 class="text-4xl font-semibold tracking-tight mt-4">
+            Asynchronous Execution
+          </h3>
 
-            <div class="comparison-row text-sm">
-              <div class="font-medium">Execution Autonomy</div>
-              <div class="proposed check">✓ Autonomous edit, build & push</div>
-              <div class="partial">~ Manual developer execution</div>
-              <div class="no">— 100% manual</div>
-            </div>
-
-            <div class="comparison-row text-sm">
-              <div class="font-medium">Notification Loop</div>
-              <div class="proposed check">✓ Out-of-band WhatsApp Alerts</div>
-              <div class="partial">~ Email on build failure</div>
-              <div class="no">— None</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- INTERACTIVE SCENARIO (EXACT UNALTERED SPECIFICATION) -->
-      <section id="workflow" class="section">
-        <div class="container">
-          <div class="scenario-shell p-7 md:p-12 lg:p-16 reveal">
-            <div class="max-w-4xl">
-              <div
-                class="text-xs font-bold uppercase tracking-[.18em] text-[#2997ff] mb-5"
-              >
-                Interactive Scenario
-              </div>
-
-              <h2 class="section-title">
-                From one mobile prompt
-                <span class="text-gray-500">to production.</span>
-              </h2>
-            </div>
-
-            <div class="mt-12 p-6 rounded-2xl dark-card">
-              <div class="text-xs text-gray-500 mb-3">DEVELOPER PROMPT (E-COMMERCE HOTFIX)</div>
-              <p class="text-lg md:text-xl font-mono text-blue-300">
-                “Construct a functional admin dashboard page utilizing Tailwind CSS that queries real-time order data from the Supabase orders table.”
-              </p>
-            </div>
-
-            <div
-              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-7"
-            >
-              <button
-                class="scenario-tab active rounded-xl p-4 text-left"
-                onclick="scenarioStep(1, this)"
-              >
-                <div class="text-[10px] text-gray-500">01</div>
-                <div class="font-semibold text-sm mt-1">Auth & Select</div>
-              </button>
-
-              <button
-                class="scenario-tab rounded-xl p-4 text-left"
-                onclick="scenarioStep(2, this)"
-              >
-                <div class="text-[10px] text-gray-500">02</div>
-                <div class="font-semibold text-sm mt-1">Intent Input</div>
-              </button>
-
-              <button
-                class="scenario-tab rounded-xl p-4 text-left"
-                onclick="scenarioStep(3, this)"
-              >
-                <div class="text-[10px] text-gray-500">03</div>
-                <div class="font-semibold text-sm mt-1">Redis Queue</div>
-              </button>
-
-              <button
-                class="scenario-tab rounded-xl p-4 text-left"
-                onclick="scenarioStep(4, this)"
-              >
-                <div class="text-[10px] text-gray-500">04</div>
-                <div class="font-semibold text-sm mt-1">VPS Daemon</div>
-              </button>
-
-              <button
-                class="scenario-tab rounded-xl p-4 text-left"
-                onclick="scenarioStep(5, this)"
-              >
-                <div class="text-[10px] text-gray-500">05</div>
-                <div class="font-semibold text-sm mt-1">Git & Vercel</div>
-              </button>
-
-              <button
-                class="scenario-tab rounded-xl p-4 text-left"
-                onclick="scenarioStep(6, this)"
-              >
-                <div class="text-[10px] text-gray-500">06</div>
-                <div class="font-semibold text-sm mt-1">WhatsApp</div>
-              </button>
-            </div>
-
-            <div id="scenarioOutput" class="mt-8">
-              <div class="terminal">
-                <div class="terminal-top">
-                  <span class="terminal-dot"></span>
-                  <span class="terminal-dot"></span>
-                  <span class="terminal-dot"></span>
-                  <span class="text-[10px] text-gray-500 ml-2"
-                    >gateway.log</span
-                  >
-                </div>
-
-                <div class="p-6 text-sm leading-8 text-gray-300">
-                  <div><span class="text-blue-400">[AUTH]</span> Clerk PKCE GitHub OAuth verified</div>
-                  <div><span class="text-blue-400">[SCOPES]</span> repo, workflow, user token granted</div>
-                  <div><span class="text-green-400">[TARGET]</span> nextjs-supabase-ecommerce selected</div>
-                  <div><span class="text-purple-400">[STATUS]</span> Ready for natural language intent prompt</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- LITERATURE REVIEW PAPER MATRIX (ALL 15 PAPERS WITH LIVE LINKS) -->
-      <section id="research" class="section bg-white">
-        <div class="container">
-          <div
-            class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal"
-          >
-            <div class="max-w-3xl">
-              <div class="eyebrow mb-5">Academic Literature Review</div>
-              <h2 class="section-title">Literature Review Paper Matrix</h2>
-            </div>
-
-            <div class="grid grid-cols-3 gap-6">
-              <div>
-                <div class="text-4xl font-semibold">
-                  15<span class="text-blue-600">+</span>
-                </div>
-                <div class="text-xs muted mt-2">Verified Papers</div>
-              </div>
-
-              <div>
-                <div class="text-4xl font-semibold">3</div>
-                <div class="text-xs muted mt-2">Core Domains</div>
-              </div>
-
-              <div>
-                <div class="text-4xl font-semibold">100%</div>
-                <div class="text-xs muted mt-2">Live References</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mt-12 reveal">
-            <button
-              class="filter-btn active"
-              onclick="filterResearch('all', this)"
-            >
-              All Papers (15)
-            </button>
-            <button class="filter-btn" onclick="filterResearch('agent', this)">
-              Agentic AI & ACIs
-            </button>
-            <button
-              class="filter-btn"
-              onclick="filterResearch('multiagent', this)"
-            >
-              Multi-Agent Systems
-            </button>
-            <button class="filter-btn" onclick="filterResearch('cloud', this)">
-              Cloud Architectures
-            </button>
-          </div>
-
-          <div
-            id="researchGrid"
-            class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-7"
-          ></div>
-        </div>
-      </section>
-
-      <!-- ROADMAP -->
-      <section id="roadmap" class="section">
-        <div class="container">
-          <div class="text-center max-w-4xl mx-auto reveal">
-            <div class="eyebrow mb-5">Implementation Strategy</div>
-
-            <h2 class="section-title">
-              Progressive 3-Month
-              <span class="muted">Implementation Strategy.</span>
-            </h2>
-          </div>
-
-          <div class="roadmap-track grid md:grid-cols-4 gap-7 mt-16">
-            <div class="roadmap-phase reveal">
-              <div class="card p-6">
-                <div class="text-xs font-bold text-blue-600 mb-1">PHASE 1 · WEEKS 01–03</div>
-                <h3 class="text-xl font-semibold mt-2">Infrastructure & Auth</h3>
-
-                <div class="text-sm muted mt-4 space-y-2">
-                  <div>Hostinger VPS setup</div>
-                  <div>PostgreSQL & Redis</div>
-                  <div>Clerk GitHub OAuth 2.0</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="roadmap-phase reveal delay-1">
-              <div class="card p-6">
-                <div class="text-xs font-bold text-purple-600 mb-1">PHASE 2 · WEEKS 04–06</div>
-                <h3 class="text-xl font-semibold mt-2">Gateway & Queues</h3>
-
-                <div class="text-sm muted mt-4 space-y-2">
-                  <div>Next.js Mobile PWA</div>
-                  <div>Nginx WSS Proxy</div>
-                  <div>Express & Redis Broker</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="roadmap-phase featured reveal delay-2">
-              <div class="card p-6">
-                <div class="text-xs font-bold text-emerald-600 mb-1">PHASE 3 · WEEKS 07–09</div>
-                <h3 class="text-xl font-semibold mt-2">AI Agent & Sandbox</h3>
-
-                <div class="text-sm muted mt-4 space-y-2">
-                  <div>Gemini API / Antigravity</div>
-                  <div>Git Worker Engine</div>
-                  <div>Sandboxed local builds</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="roadmap-phase reveal delay-3">
-              <div class="card p-6">
-                <div class="text-xs font-bold text-indigo-600 mb-1">PHASE 4 · WEEKS 10–12</div>
-                <h3 class="text-xl font-semibold mt-2">CI/CD & Defense</h3>
-
-                <div class="text-sm muted mt-4 space-y-2">
-                  <div>WhatsApp Cloud API</div>
-                  <div>Vercel Webhook Triggers</div>
-                  <div>Empirical Data & Paper</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ACADEMIC VIVA DEFENSE GUIDE -->
-      <section class="section bg-white">
-        <div class="container">
-          <div class="grid lg:grid-cols-2 gap-14 items-center">
-            <div class="reveal">
-              <div class="eyebrow mb-5">Academic Defense & Viva</div>
-
-              <h2 class="section-title">
-                Key Defense Arguments
-                <span class="muted">for Project Panels.</span>
-              </h2>
-
-              <p class="muted text-lg leading-relaxed mt-7">
-                Framing technical novelty, network fault-tolerance, and security for academic guides and department coordinators.
-              </p>
-            </div>
-
-            <div class="grid sm:grid-cols-1 gap-4 reveal delay-1">
-              <div class="card p-6">
-                <div class="text-xs font-bold text-blue-600 mb-1">ARGUMENT 01</div>
-                <div class="font-semibold text-lg text-gray-900">Why Not Existing Remote Desktop Tools?</div>
-                <p class="text-xs muted mt-2 leading-relaxed">
-                  Remote desktop tools mirror desktop layouts onto smartphones, causing severe ergonomic strain. Our system shifts interaction from Manual Code Editing to High-Level Intent Prompting.
-                </p>
-              </div>
-
-              <div class="card p-6">
-                <div class="text-xs font-bold text-purple-600 mb-1">ARGUMENT 02</div>
-                <div class="font-semibold text-lg text-gray-900">Network Instability & Mobile Disconnection</div>
-                <p class="text-xs muted mt-2 leading-relaxed">
-                  By placing an asynchronous Redis message queue between Nginx and the daemon, request state is completely decoupled from mobile socket persistence.
-                </p>
-              </div>
-
-              <div class="card p-6">
-                <div class="text-xs font-bold text-green-600 mb-1">ARGUMENT 03</div>
-                <div class="font-semibold text-lg text-gray-900">Security & Scoped OAuth Tokens</div>
-                <p class="text-xs muted mt-2 leading-relaxed">
-                  Tokens are stored securely in PostgreSQL on the VPS and accessed strictly by localhost backend processes—never exposed to the mobile client.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FINAL -->
-      <section class="section min-h-[70vh] flex items-center">
-        <div class="container text-center">
-          <div class="eyebrow mb-7 reveal">Asynchronous Mobile Gateway</div>
-
-          <h2 class="display max-w-5xl mx-auto reveal delay-1">
-            Development shouldn't stop
-            <span class="block gradient-text mt-3">
-              when the laptop closes.
-            </span>
-          </h2>
-
-          <p
-            class="muted text-lg md:text-xl max-w-2xl mx-auto mt-8 reveal delay-2"
-          >
-            A mobile-first control plane for persistent AI software engineering
-            agents.
+          <p class="muted max-w-xl mt-4 leading-relaxed">
+            Requests become persistent jobs. The mobile browser does not need
+            to remain connected while an AI agent works.
           </p>
 
-          <div class="flex flex-wrap justify-center gap-3 mt-9 reveal delay-3">
-            <button class="btn-primary" onclick="goTo('architecture')">
-              Architecture
-            </button>
-
-            <button class="btn-secondary" onclick="goTo('research')">
-              Literature Matrix
-            </button>
+          <div class="mt-14 grid sm:grid-cols-4 gap-3">
+            <div class="queue-item">01 · REQUEST</div>
+            <div class="queue-item">02 · QUEUE</div>
+            <div class="queue-item">03 · EXECUTE</div>
+            <div class="queue-item">04 · REPORT</div>
           </div>
+
+          <div class="mt-8 p-5 rounded-2xl bg-[#f5f5f7] flex items-center justify-between">
+            <div>
+              <div class="text-xs muted">TASK-4821</div>
+              <div class="font-semibold mt-1">Admin dashboard implementation</div>
+            </div>
+
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-full">
+              RUNNING
+            </span>
+          </div>
+        </article>
+
+        <article class="bento-side card interactive-card p-8 reveal delay-1">
+          <div class="flex items-center justify-between">
+            <div class="eyebrow">Runtime</div>
+            <span class="flex items-center gap-2 text-xs font-semibold">
+              <span class="status-dot"></span>
+              ONLINE
+            </span>
+          </div>
+
+          <h3 class="text-3xl font-semibold tracking-tight mt-5">
+            Persistent AI Runtime
+          </h3>
+
+          <p class="muted mt-4 text-sm leading-relaxed">
+            The executor remains available independently of the developer's
+            personal laptop.
+          </p>
+
+          <div class="mt-14 text-6xl font-semibold tracking-[-.05em]">
+            24<span class="text-2xl muted">/7</span>
+          </div>
+        </article>
+
+        <article class="bento-half card interactive-card p-8 reveal">
+          <div class="eyebrow">Repository Native</div>
+
+          <h3 class="text-3xl font-semibold mt-4">
+            Work directly with Git.
+          </h3>
+
+          <div class="mt-8 flex flex-wrap gap-2">
+            <span class="tech-pill">Clone</span>
+            <span class="tech-pill">Branch</span>
+            <span class="tech-pill">Modify</span>
+            <span class="tech-pill">Build</span>
+            <span class="tech-pill">Test</span>
+            <span class="tech-pill">Commit</span>
+            <span class="tech-pill">Push</span>
+          </div>
+        </article>
+
+        <article class="bento-half card interactive-card p-8 reveal delay-1">
+          <div class="eyebrow">Mobile First</div>
+
+          <h3 class="text-3xl font-semibold mt-4">
+            Control, not code editing.
+          </h3>
+
+          <div class="mt-8 grid grid-cols-2 gap-3 text-sm font-semibold">
+            <div class="p-4 bg-[#f5f5f7] rounded-xl">Prompt</div>
+            <div class="p-4 bg-[#f5f5f7] rounded-xl">Approve</div>
+            <div class="p-4 bg-[#f5f5f7] rounded-xl">Monitor</div>
+            <div class="p-4 bg-[#f5f5f7] rounded-xl">Deploy</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="architecture" class="section">
+    <div class="container">
+
+      <div class="text-center max-w-4xl mx-auto reveal">
+        <div class="eyebrow mb-5">System Architecture</div>
+
+        <h2 class="section-title">
+          Three independent layers.
+        </h2>
+
+        <p class="muted mt-6 text-lg">
+          Interaction, orchestration, and execution remain logically separated.
+        </p>
+      </div>
+
+      <div class="architecture-stage card p-6 md:p-10 mt-14 reveal">
+
+        <div class="architecture-grid">
+
+          <div
+            class="architecture-layer active"
+            data-layer="mobile"
+            onclick="selectArchitecture('mobile', this)"
+          >
+            <div class="text-xs font-bold text-blue-600">LAYER 01</div>
+            <h3 class="text-2xl font-semibold mt-3">Mobile Control Plane</h3>
+
+            <div class="mt-7 flex flex-wrap gap-2">
+              <span class="tech-pill">PWA</span>
+              <span class="tech-pill">OAuth</span>
+              <span class="tech-pill">HTTPS</span>
+              <span class="tech-pill">WebSocket</span>
+            </div>
+          </div>
+
+          <div
+            class="architecture-layer"
+            data-layer="gateway"
+            onclick="selectArchitecture('gateway', this)"
+          >
+            <div class="text-xs font-bold text-purple-600">LAYER 02</div>
+            <h3 class="text-2xl font-semibold mt-3">Async Gateway</h3>
+
+            <div class="mt-7 flex flex-wrap gap-2">
+              <span class="tech-pill">API</span>
+              <span class="tech-pill">Redis</span>
+              <span class="tech-pill">Job State</span>
+              <span class="tech-pill">WSS</span>
+            </div>
+          </div>
+
+          <div
+            class="architecture-layer"
+            data-layer="daemon"
+            onclick="selectArchitecture('daemon', this)"
+          >
+            <div class="text-xs font-bold text-green-600">LAYER 03</div>
+            <h3 class="text-2xl font-semibold mt-3">AI Execution Plane</h3>
+
+            <div class="mt-7 flex flex-wrap gap-2">
+              <span class="tech-pill">Agent</span>
+              <span class="tech-pill">Git</span>
+              <span class="tech-pill">Sandbox</span>
+              <span class="tech-pill">Build Runner</span>
+            </div>
+          </div>
+
         </div>
-      </section>
-    </main>
 
-    <footer class="border-t border-black/5 py-10">
-      <div
-        class="container flex flex-col md:flex-row justify-between items-center gap-5 text-xs muted"
-      >
-        <div>B.Tech Major Project · Software Engineering</div>
+        <div id="architectureDetail" class="architecture-detail mt-7 rounded-2xl bg-[#f5f5f7] p-7">
+          <div class="text-xs font-bold text-blue-600 tracking-wider">
+            MOBILE CONTROL PLANE
+          </div>
 
-        <div class="flex gap-5 font-mono text-[11px]">
-          <span>Next.js PWA</span>
-          <span>Node.js Gateway</span>
-          <span>Redis Queue</span>
-          <span>Gemini / Antigravity</span>
+          <h4 class="text-2xl font-semibold mt-2">
+            Developer interaction without a mobile IDE.
+          </h4>
+
+          <p class="muted mt-3 max-w-3xl leading-relaxed">
+            The mobile client focuses on repository selection, high-level
+            prompts, approvals, task monitoring, logs, and deployment state.
+            Heavy development operations never execute on the phone.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- EXECUTION FLOW -->
+      <div class="mt-20 reveal">
+        <h3 class="text-3xl md:text-4xl font-semibold tracking-tight">
+          What actually happens?
+        </h3>
+
+        <div class="execution-flow mt-10">
+
+          <div class="execution-step">
+            <div class="execution-circle">01</div>
+            <div class="font-semibold text-sm mt-4">Intent</div>
+            <div class="text-xs muted mt-1">Mobile prompt</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">02</div>
+            <div class="font-semibold text-sm mt-4">Auth</div>
+            <div class="text-xs muted mt-1">Verify access</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">03</div>
+            <div class="font-semibold text-sm mt-4">Queue</div>
+            <div class="text-xs muted mt-1">Persist task</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">04</div>
+            <div class="font-semibold text-sm mt-4">Agent</div>
+            <div class="text-xs muted mt-1">Plan changes</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">05</div>
+            <div class="font-semibold text-sm mt-4">Sandbox</div>
+            <div class="text-xs muted mt-1">Modify repo</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">06</div>
+            <div class="font-semibold text-sm mt-4">Verify</div>
+            <div class="text-xs muted mt-1">Build & test</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">07</div>
+            <div class="font-semibold text-sm mt-4">Push</div>
+            <div class="text-xs muted mt-1">Git update</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">08</div>
+            <div class="font-semibold text-sm mt-4">Deploy</div>
+            <div class="text-xs muted mt-1">CI/CD</div>
+          </div>
+
+          <div class="execution-step">
+            <div class="execution-circle">09</div>
+            <div class="font-semibold text-sm mt-4">Notify</div>
+            <div class="text-xs muted mt-1">Mobile result</div>
+          </div>
+
         </div>
       </div>
-    </footer>
 
-    <script>
-      /* -----------------------------------
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="section bg-white">
+    <div class="container">
+
+      <div class="max-w-4xl reveal">
+        <div class="eyebrow mb-5">Architectural Comparison</div>
+        <h2 class="section-title">
+          Why not just use
+          <span class="muted">Remote Desktop?</span>
+        </h2>
+      </div>
+
+      <div class="card comparison-table mt-14 overflow-x-auto reveal">
+        <div class="comparison-row font-semibold text-sm bg-[#fafafa]">
+          <div>Capability</div>
+          <div class="proposed text-blue-600">Async Gateway</div>
+          <div>Cloud IDE</div>
+          <div>Remote Desktop</div>
+        </div>
+
+        <div class="comparison-row text-sm">
+          <div class="font-medium">Mobile-first interaction</div>
+          <div class="proposed check">✓ Strong</div>
+          <div class="partial">~ Partial</div>
+          <div class="no">— Weak</div>
+        </div>
+
+        <div class="comparison-row text-sm">
+          <div class="font-medium">Connection-independent execution</div>
+          <div class="proposed check">✓ Yes</div>
+          <div class="partial">~ Varies</div>
+          <div class="no">— No</div>
+        </div>
+
+        <div class="comparison-row text-sm">
+          <div class="font-medium">Background long-running tasks</div>
+          <div class="proposed check">✓ Native</div>
+          <div class="partial">~ Supported</div>
+          <div class="no">— Session dependent</div>
+        </div>
+
+        <div class="comparison-row text-sm">
+          <div class="font-medium">AI-native orchestration</div>
+          <div class="proposed check">✓ Core design</div>
+          <div class="partial">~ Platform specific</div>
+          <div class="no">— External</div>
+        </div>
+
+        <div class="comparison-row text-sm">
+          <div class="font-medium">Repository automation</div>
+          <div class="proposed check">✓ Native</div>
+          <div class="check">✓ Available</div>
+          <div class="partial">~ Manual</div>
+        </div>
+      </div>
+
+      <p class="text-xs muted mt-4">
+        Qualitative architecture comparison. Experimental validation will be
+        performed during project evaluation.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- WORKFLOW / SCENARIO -->
+  <section id="workflow" class="section">
+    <div class="container">
+
+      <div class="scenario-shell p-7 md:p-12 lg:p-16 reveal">
+
+        <div class="max-w-4xl">
+          <div class="text-xs font-bold uppercase tracking-[.18em] text-[#2997ff] mb-5">
+            Interactive Scenario
+          </div>
+
+          <h2 class="section-title">
+            From one mobile prompt
+            <span class="text-gray-500">to production.</span>
+          </h2>
+        </div>
+
+        <div class="mt-12 p-6 rounded-2xl dark-card">
+          <div class="text-xs text-gray-500 mb-3">DEVELOPER PROMPT</div>
+          <p class="text-lg md:text-xl">
+            “Add an analytics dashboard to the admin panel using Tailwind
+            and the project's existing data hooks.”
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-7">
+
+          <button class="scenario-tab active rounded-xl p-4 text-left" onclick="scenarioStep(1,this)">
+            <div class="text-[10px] text-gray-500">01</div>
+            <div class="font-semibold text-sm mt-1">Submit</div>
+          </button>
+
+          <button class="scenario-tab rounded-xl p-4 text-left" onclick="scenarioStep(2,this)">
+            <div class="text-[10px] text-gray-500">02</div>
+            <div class="font-semibold text-sm mt-1">Queue</div>
+          </button>
+
+          <button class="scenario-tab rounded-xl p-4 text-left" onclick="scenarioStep(3,this)">
+            <div class="text-[10px] text-gray-500">03</div>
+            <div class="font-semibold text-sm mt-1">Execute</div>
+          </button>
+
+          <button class="scenario-tab rounded-xl p-4 text-left" onclick="scenarioStep(4,this)">
+            <div class="text-[10px] text-gray-500">04</div>
+            <div class="font-semibold text-sm mt-1">Verify</div>
+          </button>
+
+          <button class="scenario-tab rounded-xl p-4 text-left" onclick="scenarioStep(5,this)">
+            <div class="text-[10px] text-gray-500">05</div>
+            <div class="font-semibold text-sm mt-1">Deploy</div>
+          </button>
+
+          <button class="scenario-tab rounded-xl p-4 text-left" onclick="scenarioStep(6,this)">
+            <div class="text-[10px] text-gray-500">06</div>
+            <div class="font-semibold text-sm mt-1">Notify</div>
+          </button>
+
+        </div>
+
+        <div id="scenarioOutput" class="mt-8">
+          <div class="terminal">
+            <div class="terminal-top">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="text-[10px] text-gray-500 ml-2">gateway.log</span>
+            </div>
+
+            <div class="p-6 text-sm leading-8 text-gray-300">
+              <div><span class="text-gray-600">15:42:01</span> Request received</div>
+              <div><span class="text-gray-600">15:42:01</span> Repository access verified</div>
+              <div><span class="text-green-400">✓</span> Task created: TASK-4821</div>
+              <div><span class="text-blue-400">STATUS</span> QUEUED</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RELIABILITY -->
+  <section class="section">
+    <div class="container">
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <div class="reveal">
+          <div class="eyebrow mb-5">Fault Tolerance</div>
+
+          <h2 class="section-title">
+            What happens when
+            <span class="muted">the phone disconnects?</span>
+          </h2>
+
+          <p class="muted text-lg leading-relaxed mt-7 max-w-xl">
+            Nothing happens to the execution job. The phone acts as a control
+            interface, not the runtime. When connectivity returns, the client
+            retrieves the latest persisted task state.
+          </p>
+        </div>
+
+        <div class="card p-5 reveal delay-1">
+
+          <div class="system-state">
+            <div>
+              <div class="font-semibold">Mobile Client</div>
+              <div class="text-xs muted mt-1">Network unavailable</div>
+            </div>
+
+            <span class="text-xs font-bold text-red-500 bg-red-50 px-3 py-2 rounded-full">
+              OFFLINE
+            </span>
+          </div>
+
+          <div class="system-state">
+            <div>
+              <div class="font-semibold">Gateway</div>
+              <div class="text-xs muted mt-1">Task state persisted</div>
+            </div>
+
+            <span class="text-xs font-bold text-green-600 bg-green-50 px-3 py-2 rounded-full">
+              ONLINE
+            </span>
+          </div>
+
+          <div class="system-state">
+            <div>
+              <div class="font-semibold">AI Worker</div>
+              <div class="text-xs muted mt-1">Processing TASK-4821</div>
+            </div>
+
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-full">
+              EXECUTING
+            </span>
+          </div>
+
+          <div class="system-state">
+            <div>
+              <div class="font-semibold">Repository</div>
+              <div class="text-xs muted mt-1">Workspace available</div>
+            </div>
+
+            <span class="text-xs font-bold text-green-600 bg-green-50 px-3 py-2 rounded-full">
+              CONNECTED
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="section bg-white">
+    <div class="container">
+
+      <div class="text-center max-w-4xl mx-auto reveal">
+        <div class="eyebrow mb-5">Security Model</div>
+
+        <h2 class="section-title">
+          Automation without
+          <span class="muted">sacrificing control.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mt-14">
+
+        <div class="card interactive-card p-7 reveal">
+          <div class="node-icon mb-12">A</div>
+          <h3 class="text-xl font-semibold">OAuth Authentication</h3>
+          <p class="text-sm muted mt-3 leading-relaxed">
+            Repository access is linked to authenticated developer identities.
+          </p>
+        </div>
+
+        <div class="card interactive-card p-7 reveal delay-1">
+          <div class="node-icon mb-12">S</div>
+          <h3 class="text-xl font-semibold">Isolated Workspaces</h3>
+          <p class="text-sm muted mt-3 leading-relaxed">
+            Tasks execute inside controlled repository workspaces.
+          </p>
+        </div>
+
+        <div class="card interactive-card p-7 reveal delay-2">
+          <div class="node-icon mb-12">K</div>
+          <h3 class="text-xl font-semibold">Secret Management</h3>
+          <p class="text-sm muted mt-3 leading-relaxed">
+            Sensitive credentials remain server-side and outside the mobile client.
+          </p>
+        </div>
+
+        <div class="card interactive-card p-7 reveal delay-3">
+          <div class="node-icon mb-12">✓</div>
+          <h3 class="text-xl font-semibold">Approval Gates</h3>
+          <p class="text-sm muted mt-3 leading-relaxed">
+            Sensitive operations can require explicit developer confirmation.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section class="section">
+    <div class="container">
+
+      <div class="text-center max-w-3xl mx-auto reveal">
+        <div class="eyebrow mb-5">Technology</div>
+        <h2 class="section-title">Built as a system.</h2>
+      </div>
+
+      <div class="card mt-14 p-7 md:p-10 reveal">
+        <div class="grid md:grid-cols-5 gap-8">
+
+          <div>
+            <div class="text-xs font-bold muted uppercase tracking-wider">Interface</div>
+            <div class="mt-5 space-y-3 font-semibold text-sm">
+              <div>Next.js</div>
+              <div>Tailwind CSS</div>
+              <div>PWA</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-xs font-bold muted uppercase tracking-wider">Gateway</div>
+            <div class="mt-5 space-y-3 font-semibold text-sm">
+              <div>Node.js</div>
+              <div>REST API</div>
+              <div>WebSocket</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-xs font-bold muted uppercase tracking-wider">Infrastructure</div>
+            <div class="mt-5 space-y-3 font-semibold text-sm">
+              <div>Redis</div>
+              <div>Nginx</div>
+              <div>Process Manager</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-xs font-bold muted uppercase tracking-wider">Intelligence</div>
+            <div class="mt-5 space-y-3 font-semibold text-sm">
+              <div>LLM API</div>
+              <div>Agent Runtime</div>
+              <div>Tool Execution</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-xs font-bold muted uppercase tracking-wider">DevOps</div>
+            <div class="mt-5 space-y-3 font-semibold text-sm">
+              <div>Git</div>
+              <div>GitHub</div>
+              <div>CI/CD</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research" class="section bg-white">
+    <div class="container">
+
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 reveal">
+
+        <div class="max-w-3xl">
+          <div class="eyebrow mb-5">Literature Review</div>
+          <h2 class="section-title">
+            Research foundation.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+          <div>
+            <div class="text-4xl font-semibold">15<span class="text-blue-600">+</span></div>
+            <div class="text-xs muted mt-2">Papers targeted</div>
+          </div>
+
+          <div>
+            <div class="text-4xl font-semibold">5</div>
+            <div class="text-xs muted mt-2">Domains</div>
+          </div>
+
+          <div>
+            <div class="text-4xl font-semibold">3</div>
+            <div class="text-xs muted mt-2">Core layers</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-12 reveal">
+        <button class="filter-btn active" onclick="filterResearch('all',this)">All</button>
+        <button class="filter-btn" onclick="filterResearch('agent',this)">Agentic AI</button>
+        <button class="filter-btn" onclick="filterResearch('distributed',this)">Distributed Systems</button>
+        <button class="filter-btn" onclick="filterResearch('mobile',this)">Mobile Computing</button>
+        <button class="filter-btn" onclick="filterResearch('security',this)">Security</button>
+      </div>
+
+      <div id="researchGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-7"></div>
+
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="section">
+    <div class="container">
+
+      <div class="text-center max-w-4xl mx-auto reveal">
+        <div class="eyebrow mb-5">Implementation Strategy</div>
+
+        <h2 class="section-title">
+          12 weeks from
+          <span class="muted">concept to validation.</span>
+        </h2>
+      </div>
+
+      <div class="roadmap-track grid md:grid-cols-4 gap-7 mt-16">
+
+        <div class="roadmap-phase reveal">
+          <div class="roadmap-marker">01</div>
+
+          <div class="card p-6">
+            <div class="text-xs font-bold text-blue-600">WEEKS 01–03</div>
+            <h3 class="text-xl font-semibold mt-2">Foundation</h3>
+
+            <div class="text-sm muted mt-5 space-y-2">
+              <div>Authentication</div>
+              <div>Cloud infrastructure</div>
+              <div>Queue architecture</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-phase reveal delay-1">
+          <div class="roadmap-marker">02</div>
+
+          <div class="card p-6">
+            <div class="text-xs font-bold text-blue-600">WEEKS 04–06</div>
+            <h3 class="text-xl font-semibold mt-2">Communication</h3>
+
+            <div class="text-sm muted mt-5 space-y-2">
+              <div>WebSocket transport</div>
+              <div>Task state</div>
+              <div>Mobile PWA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-phase featured reveal delay-2">
+          <div class="roadmap-marker">03</div>
+
+          <div class="card p-6">
+            <div class="text-xs font-bold text-blue-600">WEEKS 07–09</div>
+            <h3 class="text-xl font-semibold mt-2">Intelligence</h3>
+
+            <div class="text-sm muted mt-5 space-y-2">
+              <div>Agent runtime</div>
+              <div>Git sandbox</div>
+              <div>Automated verification</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-phase reveal delay-3">
+          <div class="roadmap-marker">04</div>
+
+          <div class="card p-6">
+            <div class="text-xs font-bold text-blue-600">WEEKS 10–12</div>
+            <h3 class="text-xl font-semibold mt-2">Validation</h3>
+
+            <div class="text-sm muted mt-5 space-y-2">
+              <div>CI/CD</div>
+              <div>Security testing</div>
+              <div>Experiments & report</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section class="section bg-white">
+    <div class="container">
+
+      <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+        <div class="reveal">
+          <div class="eyebrow mb-5">Project Evaluation</div>
+
+          <h2 class="section-title">
+            How will we know
+            <span class="muted">it actually works?</span>
+          </h2>
+
+          <p class="muted text-lg leading-relaxed mt-7">
+            The project should be evaluated using measurable system outcomes,
+            not only a successful demonstration.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 reveal delay-1">
+
+          <div class="card p-6">
+            <div class="text-3xl font-semibold text-blue-600">01</div>
+            <div class="font-semibold mt-8">Task Completion Rate</div>
+          </div>
+
+          <div class="card p-6">
+            <div class="text-3xl font-semibold text-blue-600">02</div>
+            <div class="font-semibold mt-8">Queue Latency</div>
+          </div>
+
+          <div class="card p-6">
+            <div class="text-3xl font-semibold text-blue-600">03</div>
+            <div class="font-semibold mt-8">Build Success Rate</div>
+          </div>
+
+          <div class="card p-6">
+            <div class="text-3xl font-semibold text-blue-600">04</div>
+            <div class="font-semibold mt-8">Reconnect Recovery</div>
+          </div>
+
+          <div class="card p-6">
+            <div class="text-3xl font-semibold text-blue-600">05</div>
+            <div class="font-semibold mt-8">Execution Time</div>
+          </div>
+
+          <div class="card p-6">
+            <div class="text-3xl font-semibold text-blue-600">06</div>
+            <div class="font-semibold mt-8">Change Accuracy</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="section min-h-[80vh] flex items-center">
+    <div class="container text-center">
+
+      <div class="eyebrow mb-7 reveal">
+        Asynchronous Mobile Gateway
+      </div>
+
+      <h2 class="display max-w-5xl mx-auto reveal delay-1">
+        Development shouldn't stop
+        <span class="block gradient-text mt-3">
+          when the laptop closes.
+        </span>
+      </h2>
+
+      <p class="muted text-lg md:text-xl max-w-2xl mx-auto mt-8 reveal delay-2">
+        A mobile-first control plane for persistent AI software engineering agents.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-3 mt-9 reveal delay-3">
+        <button class="btn-primary" onclick="goTo('architecture')">
+          Architecture
+        </button>
+
+        <button class="btn-secondary" onclick="goTo('research')">
+          Research
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-black/5 py-10">
+  <div class="container flex flex-col md:flex-row justify-between items-center gap-5 text-xs muted">
+    <div>
+      System Concept & Stakeholder Communication Framework
+    </div>
+
+    <div class="flex gap-5">
+      <span>AI Systems</span>
+      <span>Distributed Computing</span>
+      <span>Software Engineering</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* -----------------------------------
      Navigation
   ----------------------------------- */
 
-      function goTo(id) {
-        document.getElementById(id)?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+  function goTo(id) {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
 
-      /* -----------------------------------
+  /* -----------------------------------
      Scroll progress
   ----------------------------------- */
 
-      function updateScrollProgress() {
-        const scrollTop = window.scrollY;
-        const documentHeight =
-          document.documentElement.scrollHeight - window.innerHeight;
+  function updateScrollProgress() {
+    const scrollTop = window.scrollY;
+    const documentHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
 
-        const progress =
-          documentHeight > 0 ? (scrollTop / documentHeight) * 100 : 0;
+    const progress =
+      documentHeight > 0 ? (scrollTop / documentHeight) * 100 : 0;
 
-        document.getElementById("scrollProgress").style.width = progress + "%";
-      }
+    document.getElementById("scrollProgress").style.width =
+      progress + "%";
+  }
 
-      window.addEventListener("scroll", updateScrollProgress, {
-        passive: true,
-      });
+  window.addEventListener("scroll", updateScrollProgress, {
+    passive: true
+  });
 
-      updateScrollProgress();
+  updateScrollProgress();
 
-      /* -----------------------------------
+  /* -----------------------------------
      Scroll reveal
   ----------------------------------- */
 
-      const revealObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.12,
-        },
-      );
-
-      document.querySelectorAll(".reveal").forEach((el) => {
-        revealObserver.observe(el);
+  const revealObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
       });
+    },
+    {
+      threshold: 0.12
+    }
+  );
 
-      /* -----------------------------------
+  document.querySelectorAll(".reveal").forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  /* -----------------------------------
      Active navigation
   ----------------------------------- */
 
-      const sections = [
-        "problem",
-        "architecture",
-        "workflow",
-        "research",
-        "roadmap",
-      ];
+  const sections = [
+    "problem",
+    "architecture",
+    "workflow",
+    "research",
+    "roadmap"
+  ];
 
-      const sectionObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
+  const sectionObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
 
-            document.querySelectorAll(".nav-link").forEach((link) => {
-              link.classList.toggle(
-                "active",
-                link.dataset.section === entry.target.id,
-              );
-            });
-          });
-        },
-        {
-          rootMargin: "-40% 0px -50% 0px",
-        },
-      );
-
-      sections.forEach((id) => {
-        const section = document.getElementById(id);
-        if (section) sectionObserver.observe(section);
+        document.querySelectorAll(".nav-link").forEach(link => {
+          link.classList.toggle(
+            "active",
+            link.dataset.section === entry.target.id
+          );
+        });
       });
+    },
+    {
+      rootMargin: "-40% 0px -50% 0px"
+    }
+  );
 
-      /* -----------------------------------
+  sections.forEach(id => {
+    const section = document.getElementById(id);
+    if (section) sectionObserver.observe(section);
+  });
+
+  /* -----------------------------------
      Architecture explorer
   ----------------------------------- */
 
-      const architectureData = {
-        mobile: {
-          label: "MOBILE CLIENT LAYER",
-          color: "text-blue-600",
-          title: "Responsive Next.js PWA & Clerk GitHub OAuth.",
-          description:
-            "The mobile client focuses on Clerk OAuth identity verification, repository selection, high-level prompts, task status monitoring, and receiving out-of-band WhatsApp alerts.",
-        },
+  const architectureData = {
+    mobile: {
+      label: "MOBILE CONTROL PLANE",
+      color: "text-blue-600",
+      title: "Developer interaction without a mobile IDE.",
+      description:
+        "The mobile client focuses on repository selection, high-level prompts, approvals, task monitoring, logs, and deployment state. Heavy development operations never execute on the phone."
+    },
 
-        gateway: {
-          label: "MIDDLEWARE GATEWAY LAYER",
-          color: "text-purple-600",
-          title: "Hostinger VPS with Nginx, Express & Redis Queue.",
-          description:
-            "Nginx handles SSL termination and upgrades to WebSockets. Express server enqueues incoming tasks into an in-memory Redis message queue (redis://127.0.0.1:6379), decoupling client state.",
-        },
+    gateway: {
+      label: "ASYNCHRONOUS GATEWAY",
+      color: "text-purple-600",
+      title: "Persistent state between the developer and executor.",
+      description:
+        "The gateway authenticates requests, creates persistent jobs, manages task state, queues execution, streams updates, and allows the mobile client to disconnect without cancelling the underlying work."
+    },
 
-        daemon: {
-          label: "HEADLESS AI DAEMON LAYER",
-          color: "text-green-600",
-          title: "Persistent VPS Daemon with Gemini API & Git Sandbox.",
-          description:
-            "A persistent worker managed by PM2 pulls tasks via Redis BLPOP, initializes an isolated directory, invokes the LLM agent (Google Gemini API / Antigravity SDK), executes local build checks, pushes commits, triggers Vercel CI/CD, and dispatches WhatsApp alerts.",
-        },
-      };
+    daemon: {
+      label: "AI EXECUTION PLANE",
+      color: "text-green-600",
+      title: "A persistent environment that performs the actual work.",
+      description:
+        "The execution plane prepares an isolated Git workspace, invokes the configured AI agent, applies repository changes, runs validation commands, records logs, and pushes approved changes back to the repository."
+    }
+  };
 
-      function selectArchitecture(key, element) {
-        document
-          .querySelectorAll(".architecture-layer")
-          .forEach((el) => el.classList.remove("active"));
+  function selectArchitecture(key, element) {
+    document
+      .querySelectorAll(".architecture-layer")
+      .forEach(el => el.classList.remove("active"));
 
-        element.classList.add("active");
+    element.classList.add("active");
 
-        const data = architectureData[key];
+    const data = architectureData[key];
 
-        document.getElementById("architectureDetail").innerHTML = `
+    document.getElementById("architectureDetail").innerHTML = `
       <div class="text-xs font-bold ${data.color} tracking-wider">
         ${data.label}
       </div>
@@ -1613,68 +2023,72 @@
         ${data.description}
       </p>
     `;
-      }
+  }
 
-      /* -----------------------------------
-     Scenario Steps
+  /* -----------------------------------
+     Scenario
   ----------------------------------- */
 
-      const scenarioData = {
-        1: `
-      <div><span class="text-blue-400">[AUTH]</span> Clerk PKCE GitHub OAuth verified</div>
-      <div><span class="text-blue-400">[SCOPES]</span> repo, workflow, user token granted</div>
-      <div><span class="text-green-400">[TARGET]</span> nextjs-supabase-ecommerce selected</div>
-      <div><span class="text-purple-400">[STATUS]</span> Ready for natural language intent prompt</div>
+  const scenarioData = {
+    1: `
+      <div><span class="text-gray-600">15:42:01</span> Request received</div>
+      <div><span class="text-gray-600">15:42:01</span> Repository access verified</div>
+      <div><span class="text-green-400">✓</span> Task created: TASK-4821</div>
+      <div><span class="text-blue-400">STATUS</span> QUEUED</div>
     `,
 
-        2: `
-      <div><span class="text-blue-400">[PROMPT]</span> Natural language payload captured</div>
-      <div><span class="text-gray-400">"Construct a functional admin dashboard page utilizing Tailwind CSS that queries real-time order data from the Supabase orders table."</span></div>
-      <div><span class="text-purple-400">[ENCRYPT]</span> Payload prepared for HTTPS POST transport</div>
+    2: `
+      <div><span class="text-gray-600">15:42:02</span> Persisting task state...</div>
+      <div><span class="text-gray-600">15:42:02</span> Adding TASK-4821 to execution queue</div>
+      <div><span class="text-green-400">✓</span> Job safely queued</div>
+      <div><span class="text-blue-400">CLIENT</span> May disconnect safely</div>
     `,
 
-        3: `
-      <div><span class="text-blue-400">[POST]</span> Payload delivered to Nginx Reverse Proxy</div>
-      <div><span class="text-green-400">[REDIS]</span> Task enqueued -> TASK-JOB-8942</div>
-      <div><span class="text-purple-400">[ACK]</span> Mobile client acknowledged. Phone may disconnect safely.</div>
+    3: `
+      <div><span class="text-gray-600">15:42:04</span> Worker claimed TASK-4821</div>
+      <div>$ git clone repository</div>
+      <div>$ git checkout -b agent/task-4821</div>
+      <div><span class="text-purple-400">AGENT</span> Analyzing project architecture...</div>
+      <div><span class="text-purple-400">AGENT</span> Implementing dashboard...</div>
     `,
 
-        4: `
-      <div><span class="text-blue-400">[WORKER]</span> BLPOP claimed TASK-JOB-8942 on Hostinger VPS</div>
-      <div><span class="text-green-400">[GIT]</span> Workspace initialized on local sandbox</div>
-      <div><span class="text-purple-400">[AGENT]</span> Gemini API generated app/admin/dashboard/page.jsx</div>
-      <div><span class="text-cyan-400">[VERIFY]</span> Syntax check & local build validation successful</div>
+    4: `
+      <div>$ npm run build</div>
+      <div><span class="text-gray-600">15:44:21</span> Running validation...</div>
+      <div><span class="text-green-400">✓</span> Build successful</div>
+      <div><span class="text-green-400">✓</span> Validation checks passed</div>
     `,
 
-        5: `
-      <div><span class="text-blue-400">[GIT]</span> git commit -m "feat: add Supabase admin dashboard"</div>
-      <div><span class="text-blue-400">[GIT]</span> git push origin main</div>
-      <div><span class="text-green-400">[WEBHOOK]</span> GitHub push webhook triggered Vercel deployment</div>
-      <div><span class="text-purple-400">[VERCEL]</span> Production build completed in 42s</div>
+    5: `
+      <div>$ git commit -m "feat: add admin analytics dashboard"</div>
+      <div>$ git push origin agent/task-4821</div>
+      <div><span class="text-blue-400">CI/CD</span> Deployment pipeline triggered</div>
+      <div><span class="text-green-400">✓</span> Deployment completed</div>
     `,
 
-        6: `
-      <div><span class="text-blue-400">[HOOK]</span> VPS daemon executed WhatsApp Cloud API HTTP POST</div>
-      <div><span class="text-green-400">[ALERT]</span> Message delivered to registered developer phone</div>
-      <div><span class="text-emerald-400">[BODY]</span> "Hotfix Deployed! Commit: 7f8a92b. URL: https://nextjs-ecommerce.vercel.app/admin/dashboard"</div>
-    `,
-      };
+    6: `
+      <div><span class="text-gray-600">15:46:10</span> Task state updated</div>
+      <div><span class="text-green-400">STATUS</span> COMPLETED</div>
+      <div><span class="text-blue-400">NOTIFY</span> Mobile notification dispatched</div>
+      <div><span class="text-green-400">✓</span> TASK-4821 complete</div>
+    `
+  };
 
-      function scenarioStep(step, button) {
-        document
-          .querySelectorAll(".scenario-tab")
-          .forEach((el) => el.classList.remove("active"));
+  function scenarioStep(step, button) {
+    document
+      .querySelectorAll(".scenario-tab")
+      .forEach(el => el.classList.remove("active"));
 
-        button.classList.add("active");
+    button.classList.add("active");
 
-        document.getElementById("scenarioOutput").innerHTML = `
+    document.getElementById("scenarioOutput").innerHTML = `
       <div class="terminal">
         <div class="terminal-top">
           <span class="terminal-dot"></span>
           <span class="terminal-dot"></span>
           <span class="terminal-dot"></span>
           <span class="text-[10px] text-gray-500 ml-2">
-            gateway-step-0${step}.log
+            gateway.log
           </span>
         </div>
 
@@ -1683,176 +2097,174 @@
         </div>
       </div>
     `;
-      }
+  }
 
-      /* -----------------------------------
-     Complete 15 Research Papers Array with Live Download Links
+  /* -----------------------------------
+     Research Foundation Papers (Complete 15 Matrix)
   ----------------------------------- */
 
-      const researchPapers = [
-        {
-          id: 1,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
-          authors: "John Yang et al. (NeurIPS / arXiv)",
-          citation: "arXiv:2405.15793",
-          url: "https://arxiv.org/abs/2405.15793",
-          desc: "Introduces ACIs tailored for LLM agents, proving simple, compact commands outperform raw shell environments for software tasks.",
-        },
-        {
-          id: 2,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
-          authors: "Carlos E. Jimenez et al. (ICLR / arXiv)",
-          citation: "arXiv:2310.06770",
-          url: "https://arxiv.org/abs/2310.06770",
-          desc: "Defines the benchmark suite for repository-level issue resolution using real GitHub pull requests.",
-        },
-        {
-          id: 3,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "OpenHands: An Open Platform for AI Software Developers as Generalist Agents",
-          authors: "Xingyao Wang et al. (ICLR / arXiv)",
-          citation: "arXiv:2407.16741",
-          url: "https://arxiv.org/abs/2407.16741",
-          desc: "Proposes an open generalist platform for software agents interacting with sandboxed environments.",
-        },
-        {
-          id: 4,
-          category: "multiagent",
-          domain: "Multi-Agent Systems",
-          title: "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework",
-          authors: "Sirui Hong et al. (NeurIPS / arXiv)",
-          citation: "arXiv:2308.00352",
-          url: "https://arxiv.org/abs/2308.00352",
-          desc: "Encodes Standard Operating Procedures (SOPs) into multi-agent prompts to generate structured software artifacts.",
-        },
-        {
-          id: 5,
-          category: "multiagent",
-          domain: "Multi-Agent Systems",
-          title: "ChatDev: Communicative Agents for Software Development",
-          authors: "Chen Qian et al. (arXiv)",
-          citation: "arXiv:2307.07924",
-          url: "https://arxiv.org/abs/2307.07924",
-          desc: "Demonstrates multi-agent chat chains for communicative software design, coding, and debugging.",
-        },
-        {
-          id: 6,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "SWE-World: Docker-Free Execution Environments for Agent Evaluation",
-          authors: "Yuxiang Wei et al. (arXiv)",
-          citation: "arXiv:2602.03419",
-          url: "https://arxiv.org/pdf/2602.03419",
-          desc: "Develops learned surrogate models for agent feedback, reducing container overhead in evaluation loops.",
-        },
-        {
-          id: 7,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "SWE-Adept: Agentic Traversal and Structured Resolution for Repository Issues",
-          authors: "Anonymous Authors (arXiv)",
-          citation: "arXiv:2603.01327",
-          url: "https://arxiv.org/html/2603.01327v1",
-          desc: "Proposes depth-first dependency traversal and shared memory checkpoints for precise issue localization.",
-        },
-        {
-          id: 8,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "Open-SWE-Traces: Advancing Dual-Mode Distillation for Software Agents",
-          authors: "Wasi Uddin Ahmad et al. (arXiv)",
-          citation: "arXiv:2606.16038",
-          url: "https://arxiv.org/abs/2606.16038",
-          desc: "Releases expansive multi-language agentic trajectory datasets for fine-tuning long-horizon software reasoning.",
-        },
-        {
-          id: 9,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "SWE-EVO: Benchmarking Autonomous Software Evolution",
-          authors: "Anonymous Authors (arXiv)",
-          citation: "arXiv:2512.18470",
-          url: "https://arxiv.org/html/2512.18470v6",
-          desc: "Evaluates multi-step release-sized software modifications across large versioned Python codebases.",
-        },
-        {
-          id: 10,
-          category: "agent",
-          domain: "Agentic AI",
-          title: "RepoAudit: Autonomous LLM-Agent for Repository-Level Code Auditing",
-          authors: "Anonymous Authors (ICML)",
-          citation: "arXiv:2508.17343",
-          url: "https://arxiv.org/html/2508.17343v3",
-          desc: "Explores autonomous code auditing, static analysis, and bug detection in large repository structures.",
-        },
-        {
-          id: 11,
-          category: "cloud",
-          domain: "Cloud Systems",
-          title: "Microservices-Based Scalable Architectures for AI-Driven Systems in Cloud",
-          authors: "Researchgate Publication",
-          citation: "ResearchGate-404321670",
-          url: "https://www.researchgate.net/publication/404321670_Microservices-Based_Scalable_Architectures_for_AI-_Driven_NLP_Systems_in_the_Cloud",
-          desc: "Establishes design patterns for decoupling AI inference services using microservices and Redis caching.",
-        },
-        {
-          id: 12,
-          category: "cloud",
-          domain: "Mobile Cloud",
-          title: "Lightweight Mobile Cloud Computing Environment for Mobile Applications",
-          authors: "Sarvesh Rai et al. (ResearchGate)",
-          citation: "ResearchGate-339723782",
-          url: "https://www.researchgate.net/publication/339723782_LIGHT_WEIGHT_MOBILE_CLOUD_COMPUTING_ENVIRONMENT_FOR_MOBILE_APPLICATIONS",
-          desc: "Investigates resource offloading frameworks from mobile terminals to cloud-assisted backend gateways.",
-        },
-        {
-          id: 13,
-          category: "cloud",
-          domain: "Cloud Scheduling",
-          title: "Workflow Management and Scheduling in a Cloud Computing Context",
-          authors: "Zacharie Brodard (KTH / DiVA)",
-          citation: "DiVA-2:1305761",
-          url: "https://www.diva-portal.org/smash/get/diva2:1305761/FULLTEXT01.pdf",
-          desc: "Evaluates asynchronous message queues and elastic computing for workflow scheduling and batch processing.",
-        },
-        {
-          id: 14,
-          category: "cloud",
-          domain: "Real-Time Protocols",
-          title: "Real-Time Collaboration Architecture via WebSocket Protocols",
-          authors: "IJERT Publication",
-          citation: "IJERT-Whiteboard",
-          url: "https://www.ijert.org/real-time-collaboration-whiteboard",
-          desc: "Details persistent, low-latency WebSocket connection handling for real-time bidirectional data exchange.",
-        },
-        {
-          id: 15,
-          category: "cloud",
-          domain: "Async Messaging",
-          title: "Microservices Best Practices and Asynchronous Communication",
-          authors: "Microservice Study Group (arXiv)",
-          citation: "arXiv:2212.11758",
-          url: "https://arxiv.org/pdf/2212.11758",
-          desc: "Compares synchronous HTTP REST vs. asynchronous message queue protocols in distributed cloud gateways.",
-        }
-      ];
+  const researchPapers = [
+    {
+      id: 1,
+      category: "agent",
+      domain: "Agentic AI & ACIs",
+      title: "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+      authors: "John Yang et al. (NeurIPS / arXiv)",
+      citation: "arXiv:2405.15793",
+      url: "https://arxiv.org/abs/2405.15793",
+      desc: "Introduces Agent-Computer Interfaces (ACIs) tailored for LLMs, demonstrating that simplified commands outperform raw terminal shell access."
+    },
+    {
+      id: 2,
+      category: "agent",
+      domain: "Software Benchmarks",
+      title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+      authors: "Carlos E. Jimenez et al. (ICLR / arXiv)",
+      citation: "arXiv:2310.06770",
+      url: "https://arxiv.org/abs/2310.06770",
+      desc: "Defines the standard benchmark suite for evaluating repository-level issue resolution using real GitHub pull requests."
+    },
+    {
+      id: 3,
+      category: "agent",
+      domain: "Agent Platforms",
+      title: "OpenHands: An Open Platform for AI Software Developers as Generalist Agents",
+      authors: "Xingyao Wang et al. (ICLR / arXiv)",
+      citation: "arXiv:2407.16741",
+      url: "https://arxiv.org/abs/2407.16741",
+      desc: "Proposes an open platform for autonomous software agents executing inside sandboxed container runtimes."
+    },
+    {
+      id: 4,
+      category: "multiagent",
+      domain: "Multi-Agent Systems",
+      title: "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework",
+      authors: "Sirui Hong et al. (NeurIPS / arXiv)",
+      citation: "arXiv:2308.00352",
+      url: "https://arxiv.org/abs/2308.00352",
+      desc: "Encodes Standard Operating Procedures (SOPs) into multi-agent prompt flows to generate structured code outputs."
+    },
+    {
+      id: 5,
+      category: "multiagent",
+      domain: "Communicative Agents",
+      title: "ChatDev: Communicative Agents for Software Development",
+      authors: "Chen Qian et al. (arXiv)",
+      citation: "arXiv:2307.07924",
+      url: "https://arxiv.org/abs/2307.07924",
+      desc: "Demonstrates multi-agent chat chains for collaborative software design, coding, and automated debugging."
+    },
+    {
+      id: 6,
+      category: "agent",
+      domain: "Agent Runtimes",
+      title: "SWE-World: Docker-Free Execution Environments for Agent Evaluation",
+      authors: "Yuxiang Wei et al. (arXiv)",
+      citation: "arXiv:2602.03419",
+      url: "https://arxiv.org/pdf/2602.03419",
+      desc: "Develops surrogate execution feedback models to eliminate container instantiation overhead during evaluation loops."
+    },
+    {
+      id: 7,
+      category: "agent",
+      domain: "Issue Resolution",
+      title: "SWE-Adept: Agentic Traversal and Structured Resolution for Repository Issues",
+      authors: "Anonymous Authors (arXiv)",
+      citation: "arXiv:2603.01327",
+      url: "https://arxiv.org/html/2603.01327v1",
+      desc: "Proposes depth-first dependency traversal and shared memory checkpoints for precise issue localization."
+    },
+    {
+      id: 8,
+      category: "agent",
+      domain: "Trajectory Distillation",
+      title: "Open-SWE-Traces: Advancing Dual-Mode Distillation for Software Agents",
+      authors: "Wasi Uddin Ahmad et al. (arXiv)",
+      citation: "arXiv:2606.16038",
+      url: "https://arxiv.org/abs/2606.16038",
+      desc: "Releases expansive multi-language agentic trajectory datasets for fine-tuning long-horizon software reasoning."
+    },
+    {
+      id: 9,
+      category: "agent",
+      domain: "Software Evolution",
+      title: "SWE-EVO: Benchmarking Autonomous Software Evolution",
+      authors: "Anonymous Authors (arXiv)",
+      citation: "arXiv:2512.18470",
+      url: "https://arxiv.org/html/2512.18470v6",
+      desc: "Evaluates multi-step release-sized software modifications across large versioned Python codebases."
+    },
+    {
+      id: 10,
+      category: "agent",
+      domain: "Code Auditing",
+      title: "RepoAudit: Autonomous LLM-Agent for Repository-Level Code Auditing",
+      authors: "Anonymous Authors (ICML)",
+      citation: "arXiv:2508.17343",
+      url: "https://arxiv.org/html/2508.17343v3",
+      desc: "Explores autonomous code auditing, static analysis, and bug detection in large repository structures."
+    },
+    {
+      id: 11,
+      category: "cloud",
+      domain: "Cloud Architecture",
+      title: "Microservices-Based Scalable Architectures for AI-Driven Systems in Cloud",
+      authors: "Researchgate Publication",
+      citation: "ResearchGate-404321670",
+      url: "https://www.researchgate.net/publication/404321670_Microservices-Based_Scalable_Architectures_for_AI-_Driven_NLP_Systems_in_the_Cloud",
+      desc: "Establishes design patterns for decoupling AI inference services using microservices and Redis caching."
+    },
+    {
+      id: 12,
+      category: "cloud",
+      domain: "Mobile Cloud",
+      title: "Lightweight Mobile Cloud Computing Environment for Mobile Applications",
+      authors: "Sarvesh Rai et al. (ResearchGate)",
+      citation: "ResearchGate-339723782",
+      url: "https://www.researchgate.net/publication/339723782_LIGHT_WEIGHT_MOBILE_CLOUD_COMPUTING_ENVIRONMENT_FOR_MOBILE_APPLICATIONS",
+      desc: "Investigates resource offloading frameworks from mobile terminals to cloud-assisted backend gateways."
+    },
+    {
+      id: 13,
+      category: "cloud",
+      domain: "Cloud Scheduling",
+      title: "Workflow Management and Scheduling in a Cloud Computing Context",
+      authors: "Zacharie Brodard (KTH / DiVA)",
+      citation: "DiVA-2:1305761",
+      url: "https://www.diva-portal.org/smash/get/diva2:1305761/FULLTEXT01.pdf",
+      desc: "Evaluates asynchronous message queues and elastic computing for workflow scheduling and batch processing."
+    },
+    {
+      id: 14,
+      category: "cloud",
+      domain: "Real-Time Protocols",
+      title: "Real-Time Collaboration Architecture via WebSocket Protocols",
+      authors: "IJERT Publication",
+      citation: "IJERT-Whiteboard",
+      url: "https://www.ijert.org/real-time-collaboration-whiteboard",
+      desc: "Details persistent, low-latency WebSocket connection handling for real-time bidirectional data exchange."
+    },
+    {
+      id: 15,
+      category: "cloud",
+      domain: "Async Messaging",
+      title: "Microservices Best Practices and Asynchronous Communication",
+      authors: "Microservice Study Group (arXiv)",
+      citation: "arXiv:2212.11758",
+      url: "https://arxiv.org/pdf/2212.11758",
+      desc: "Compares synchronous HTTP REST vs. asynchronous message queue protocols in distributed cloud gateways."
+    }
+  ];
 
-      function renderResearch(filter = "all") {
-        const grid = document.getElementById("researchGrid");
+  function renderResearch(filter = "all") {
+    const grid = document.getElementById("researchGrid");
 
-        const items = researchPapers.filter(
-          (paper) => filter === "all" || paper.category === filter,
-        );
+    const items = researchPapers.filter(
+      paper => filter === "all" || paper.category === filter
+    );
 
-        grid.innerHTML = items
-          .map(
-            (paper) => `
-      <article class="paper-card card interactive-card p-7">
+    grid.innerHTML = items.map(paper => `
+      <article class="paper-card card interactive-card p-7 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between">
             <span class="text-[10px] font-bold uppercase tracking-[.14em] text-blue-600">
@@ -1861,7 +2273,7 @@
             <span class="text-[10px] text-gray-400 font-mono">Paper #${paper.id}</span>
           </div>
 
-          <h3 class="text-xl font-semibold tracking-tight mt-4">
+          <h3 class="text-lg font-bold tracking-tight mt-4 text-gray-900 leading-snug">
             ${paper.title}
           </h3>
 
@@ -1882,51 +2294,52 @@
           </a>
         </div>
       </article>
-    `,
-          )
-          .join("");
-      }
+    `).join("");
+  }
 
-      function filterResearch(filter, button) {
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach((el) => el.classList.remove("active"));
+  function filterResearch(filter, button) {
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(el => el.classList.remove("active"));
 
-        button.classList.add("active");
-        renderResearch(filter);
-      }
+    button.classList.add("active");
+    renderResearch(filter);
+  }
 
-      renderResearch();
+  renderResearch();
 
-      /* -----------------------------------
+  /* -----------------------------------
      Subtle pointer interaction
   ----------------------------------- */
 
-      if (
-        window.matchMedia("(pointer: fine)").matches &&
-        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
-        document.querySelectorAll(".interactive-card").forEach((card) => {
-          card.addEventListener("mousemove", (event) => {
-            const rect = card.getBoundingClientRect();
+  if (
+    window.matchMedia("(pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    document.querySelectorAll(".interactive-card").forEach(card => {
+      card.addEventListener("mousemove", event => {
+        const rect = card.getBoundingClientRect();
 
-            const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const x =
+          (event.clientX - rect.left) / rect.width - 0.5;
 
-            const y = (event.clientY - rect.top) / rect.height - 0.5;
+        const y =
+          (event.clientY - rect.top) / rect.height - 0.5;
 
-            card.style.transform = `
+        card.style.transform = `
           perspective(900px)
           rotateX(${y * -2}deg)
           rotateY(${x * 2}deg)
           translateY(-4px)
         `;
-          });
+      });
 
-          card.addEventListener("mouseleave", () => {
-            card.style.transform = "";
-          });
-        });
-      }
-    </script>
-  </body>
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+</script>
+
+</body>
 </html>
