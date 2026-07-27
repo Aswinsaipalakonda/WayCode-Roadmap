@@ -1133,12 +1133,77 @@
               </div>
             </div>
 
-            <!-- Right Visual Column: Vector Hand Holding Smartphone Illustration -->
+            <!-- Right Visual Column: Text-Free Vector Hand Holding Smartphone Illustration -->
             <div class="lg:col-span-6 flex justify-center lg:justify-end reveal delay-2">
-              <div class="relative w-full max-w-xl">
-                <!-- Main Clean Illustration Image -->
-                <div class="relative cursor-pointer overflow-hidden transform hover:scale-[1.02] transition-transform duration-500" onclick="openImageModal('images/hero_reference_vector.png')">
-                  <img src="images/hero_reference_vector.png" alt="Hand Holding Smartphone AI Gateway Line Art Illustration" class="w-full h-auto object-contain drop-shadow-2xl mix-blend-multiply" />
+              <div class="relative w-full max-w-lg">
+
+                <!-- Subtle Flying Airplane Flight Path Detail -->
+                <div class="absolute -top-12 right-6 z-20 pointer-events-none">
+                  <svg class="w-28 h-28 text-gray-400 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 100 100">
+                    <!-- Dotted Flight Arc -->
+                    <path d="M10 80 Q 50 10 90 20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" fill="none" />
+                    <!-- Minimalist Vector Airplane -->
+                    <path d="M85 15 L95 18 L88 28 L82 23 L75 25 L80 18 Z" fill="currentColor" stroke="none" />
+                  </svg>
+                </div>
+
+                <!-- Pure Line-Art Hand + Smartphone SVG Container -->
+                <div class="relative bg-[#f7f7f9] p-4 rounded-[40px] transform hover:scale-[1.02] transition-transform duration-500">
+                  
+                  <svg class="w-full h-auto max-h-[500px]" viewBox="0 0 450 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hand Line Art & Black Sleeve -->
+                    <g id="hand-lineart">
+                      <!-- Black Sleeve Cuff -->
+                      <path d="M 310 360 C 350 420, 390 460, 450 480 L 450 500 L 280 500 C 290 440, 300 400, 310 360 Z" fill="#111114" />
+                      <!-- Hand Outline -->
+                      <path d="M 230 250 C 270 260, 340 310, 345 370 C 320 380, 270 340, 240 320" stroke="#111114" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                      <!-- Fingers wrapping around phone -->
+                      <path d="M 210 180 C 190 190, 185 215, 205 230 C 220 235, 240 230, 255 220" stroke="#111114" stroke-width="3" fill="white" />
+                      <path d="M 220 220 C 200 230, 195 255, 215 270 C 230 275, 250 270, 265 260" stroke="#111114" stroke-width="3" fill="white" />
+                      <path d="M 230 260 C 210 270, 205 295, 225 310 C 240 315, 260 310, 275 300" stroke="#111114" stroke-width="3" fill="white" />
+                      <path d="M 245 300 C 230 310, 225 330, 245 340 C 260 345, 280 335, 290 325" stroke="#111114" stroke-width="3" fill="white" />
+                      <!-- Thumb -->
+                      <path d="M 260 140 C 240 120, 210 120, 195 145 C 190 155, 200 175, 215 170" stroke="#111114" stroke-width="3" fill="white" />
+                    </g>
+
+                    <!-- Smartphone Device Body (Angled 3D Isometric View) -->
+                    <g id="smartphone-device" transform="rotate(-12 220 220)">
+                      <!-- Phone Outer Frame -->
+                      <rect x="110" y="40" width="180" height="340" rx="32" fill="#ffffff" stroke="#111114" stroke-width="4.5" />
+                      <!-- Inner Screen Area -->
+                      <rect x="120" y="52" width="160" height="316" rx="24" fill="#fafafa" stroke="#e5e7eb" stroke-width="2" />
+                      
+                      <!-- Top Speaker Notch -->
+                      <rect x="175" y="60" width="50" height="6" rx="3" fill="#111114" />
+                      <circle cx="160" cy="63" r="3" fill="#111114" />
+
+                      <!-- UI Components (No Text, Pure Minimal Geometry & Purple/Green Accents) -->
+                      <!-- Header Icon Bar -->
+                      <circle cx="140" cy="85" r="7" fill="#111114" />
+                      <rect x="245" y="80" width="20" height="10" rx="5" fill="#e5e7eb" />
+
+                      <!-- Dashboard Card 1 -->
+                      <rect x="132" y="105" width="136" height="60" rx="14" fill="#ffffff" stroke="#f0f0f4" stroke-width="2" />
+                      <!-- Line skeleton representations without text -->
+                      <rect x="142" y="117" width="55" height="6" rx="3" fill="#e2e8f0" />
+                      <rect x="142" y="129" width="85" height="5" rx="2.5" fill="#f1f5f9" />
+                      <!-- Subtle Purple Pill Accent -->
+                      <rect x="222" y="117" width="36" height="14" rx="7" fill="#c084fc" opacity="0.4" />
+
+                      <!-- Dashboard Card 2 (Graphs with Green & Purple Wave Curves) -->
+                      <rect x="132" y="175" width="136" height="110" rx="16" fill="#ffffff" stroke="#f0f0f4" stroke-width="2" />
+                      <!-- Green Circle Badge Accent -->
+                      <circle cx="245" cy="195" r="10" fill="#22c55e" />
+                      <!-- Wave Graph Curves (Green & Purple) -->
+                      <path d="M 142 250 Q 170 210, 195 240 T 258 210" stroke="#a855f7" stroke-width="3" fill="none" stroke-linecap="round" />
+                      <path d="M 142 265 Q 170 230, 200 250 T 258 225" stroke="#22c55e" stroke-width="3" fill="none" stroke-linecap="round" />
+
+                      <!-- Bottom Dashboard Bar (Black & Green Accent Blocks) -->
+                      <rect x="132" y="295" width="60" height="50" rx="10" fill="#111114" />
+                      <rect x="200" y="295" width="68" height="50" rx="10" fill="#4ade80" />
+                    </g>
+                  </svg>
+
                 </div>
               </div>
             </div>
