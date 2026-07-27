@@ -1578,131 +1578,137 @@
   </div>
 
   <!-- COMPARISON -->
-  <section class="section bg-[#fbfbfd]">
+  <section class="section py-20 bg-gray-50">
     <div class="container">
+      <div class="dark-section p-8 md:p-14 lg:p-16 reveal">
 
-      <div class="max-w-4xl reveal">
-        <div class="eyebrow mb-5">Architectural Comparison</div>
-        <h2 class="section-title">
-          Why not just use
-          <span class="text-gray-400 font-normal">Remote Desktop?</span>
-        </h2>
-      </div>
-
-      <div class="mt-14 overflow-hidden border border-blue-100/80 rounded-[32px] bg-white shadow-xl shadow-blue-500/5 reveal">
-        <div class="overflow-x-auto">
-          <div class="min-w-[760px]">
-
-            <!-- Header Row -->
-            <div class="grid grid-cols-12 text-sm font-bold border-b border-gray-100 bg-gray-50/80">
-              <div class="col-span-4 p-5 md:p-6 text-gray-500 uppercase tracking-wider text-xs flex items-center">
-                Capability Matrix
-              </div>
-              <div class="col-span-3 p-5 md:p-6 bg-blue-50/80 text-blue-600 border-x border-blue-100/80 flex items-center justify-between">
-                <span>Async Gateway</span>
-                <span class="text-[10px] font-extrabold bg-blue-600 text-white px-2 py-0.5 rounded-full">PROPOSED</span>
-              </div>
-              <div class="col-span-3 p-5 md:p-6 text-gray-700 flex items-center">
-                Cloud IDE
-              </div>
-              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center">
-                Remote Desktop
-              </div>
+        <div class="relative z-10">
+          <div class="text-center max-w-4xl mx-auto">
+            <div class="text-xs font-bold uppercase tracking-[.18em] text-[#2997ff] mb-5">
+              Architectural Comparison
             </div>
 
-            <!-- Row 1 -->
-            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
-              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
-                Mobile-first interaction
-              </div>
-              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
-                Native Control
-              </div>
-              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
-                <span class="text-amber-500 font-bold">~</span> Partial / Heavy
-              </div>
-              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
-                <span class="text-gray-300">—</span> Touch Weak
-              </div>
-            </div>
-
-            <!-- Row 2 -->
-            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
-              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
-                Connection-independent execution
-              </div>
-              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
-                Persistent Jobs
-              </div>
-              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
-                <span class="text-amber-500 font-bold">~</span> Varies by host
-              </div>
-              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
-                <span class="text-gray-300">—</span> Requires Stream
-              </div>
-            </div>
-
-            <!-- Row 3 -->
-            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
-              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
-                Background long-running tasks
-              </div>
-              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
-                Cloud Workers
-              </div>
-              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
-                <span class="text-amber-500 font-bold">~</span> Supported
-              </div>
-              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
-                <span class="text-gray-300">—</span> Session Locked
-              </div>
-            </div>
-
-            <!-- Row 4 -->
-            <div class="grid grid-cols-12 text-sm border-b border-gray-100/80 hover:bg-gray-50/50 transition">
-              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
-                AI-native agent orchestration
-              </div>
-              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
-                Core Design
-              </div>
-              <div class="col-span-3 p-5 md:p-6 text-amber-600 font-semibold flex items-center gap-2">
-                <span class="text-amber-500 font-bold">~</span> Plugin Based
-              </div>
-              <div class="col-span-2 p-5 md:p-6 text-gray-400 flex items-center gap-2">
-                <span class="text-gray-300">—</span> External Tool
-              </div>
-            </div>
-
-            <!-- Row 5 -->
-            <div class="grid grid-cols-12 text-sm hover:bg-gray-50/50 transition">
-              <div class="col-span-4 p-5 md:p-6 font-bold text-gray-800 flex items-center">
-                Repository automation & push
-              </div>
-              <div class="col-span-3 p-5 md:p-6 bg-blue-50/40 border-x border-blue-100/60 font-bold text-emerald-600 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold">✓</span>
-                Automated Git
-              </div>
-              <div class="col-span-3 p-5 md:p-6 text-emerald-600 font-semibold flex items-center gap-2">
-                <span class="text-emerald-500 font-bold">✓</span> Available
-              </div>
-              <div class="col-span-2 p-5 md:p-6 text-amber-600 flex items-center gap-2">
-                <span class="text-amber-500 font-bold">~</span> Manual Terminal
-              </div>
-            </div>
-
+            <h2 class="section-title text-white">
+              Why not just use <span class="text-gray-400 font-normal">Remote Desktop?</span>
+            </h2>
           </div>
+
+          <div class="mt-14 overflow-hidden border border-white/10 rounded-[32px] bg-white/[0.04] backdrop-blur-xl shadow-2xl">
+            <div class="overflow-x-auto">
+              <div class="min-w-[760px]">
+
+                <!-- Header Row -->
+                <div class="grid grid-cols-12 text-sm font-bold border-b border-white/10 bg-white/[0.03]">
+                  <div class="col-span-4 p-5 md:p-6 text-gray-400 uppercase tracking-wider text-xs flex items-center">
+                    Capability Matrix
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 bg-blue-500/20 text-blue-400 border-x border-white/10 flex items-center justify-between">
+                    <span>Async Gateway</span>
+                    <span class="text-[10px] font-extrabold bg-blue-500 text-white px-2 py-0.5 rounded-full">PROPOSED</span>
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 text-gray-300 flex items-center">
+                    Cloud IDE
+                  </div>
+                  <div class="col-span-2 p-5 md:p-6 text-gray-500 flex items-center">
+                    Remote Desktop
+                  </div>
+                </div>
+
+                <!-- Row 1 -->
+                <div class="grid grid-cols-12 text-sm border-b border-white/5 hover:bg-white/[0.02] transition">
+                  <div class="col-span-4 p-5 md:p-6 font-bold text-gray-200 flex items-center">
+                    Mobile-first interaction
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 bg-blue-500/10 border-x border-white/10 font-bold text-emerald-400 flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">✓</span>
+                    Native Control
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 text-amber-400 font-semibold flex items-center gap-2">
+                    <span class="text-amber-400 font-bold">~</span> Partial / Heavy
+                  </div>
+                  <div class="col-span-2 p-5 md:p-6 text-gray-500 flex items-center gap-2">
+                    <span class="text-gray-600">—</span> Touch Weak
+                  </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="grid grid-cols-12 text-sm border-b border-white/5 hover:bg-white/[0.02] transition">
+                  <div class="col-span-4 p-5 md:p-6 font-bold text-gray-200 flex items-center">
+                    Connection-independent execution
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 bg-blue-500/10 border-x border-white/10 font-bold text-emerald-400 flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">✓</span>
+                    Persistent Jobs
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 text-amber-400 font-semibold flex items-center gap-2">
+                    <span class="text-amber-400 font-bold">~</span> Varies by host
+                  </div>
+                  <div class="col-span-2 p-5 md:p-6 text-gray-500 flex items-center gap-2">
+                    <span class="text-gray-600">—</span> Requires Stream
+                  </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="grid grid-cols-12 text-sm border-b border-white/5 hover:bg-white/[0.02] transition">
+                  <div class="col-span-4 p-5 md:p-6 font-bold text-gray-200 flex items-center">
+                    Background long-running tasks
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 bg-blue-500/10 border-x border-white/10 font-bold text-emerald-400 flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">✓</span>
+                    Cloud Workers
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 text-amber-400 font-semibold flex items-center gap-2">
+                    <span class="text-amber-400 font-bold">~</span> Supported
+                  </div>
+                  <div class="col-span-2 p-5 md:p-6 text-gray-500 flex items-center gap-2">
+                    <span class="text-gray-600">—</span> Session Locked
+                  </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="grid grid-cols-12 text-sm border-b border-white/5 hover:bg-white/[0.02] transition">
+                  <div class="col-span-4 p-5 md:p-6 font-bold text-gray-200 flex items-center">
+                    AI-native agent orchestration
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 bg-blue-500/10 border-x border-white/10 font-bold text-emerald-400 flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">✓</span>
+                    Core Design
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 text-amber-400 font-semibold flex items-center gap-2">
+                    <span class="text-amber-400 font-bold">~</span> Plugin Based
+                  </div>
+                  <div class="col-span-2 p-5 md:p-6 text-gray-500 flex items-center gap-2">
+                    <span class="text-gray-600">—</span> External Tool
+                  </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="grid grid-cols-12 text-sm hover:bg-white/[0.02] transition">
+                  <div class="col-span-4 p-5 md:p-6 font-bold text-gray-200 flex items-center">
+                    Repository automation & push
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 bg-blue-500/10 border-x border-white/10 font-bold text-emerald-400 flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">✓</span>
+                    Automated Git
+                  </div>
+                  <div class="col-span-3 p-5 md:p-6 text-emerald-400 font-semibold flex items-center gap-2">
+                    <span class="text-emerald-400 font-bold">✓</span> Available
+                  </div>
+                  <div class="col-span-2 p-5 md:p-6 text-amber-400 flex items-center gap-2">
+                    <span class="text-amber-400 font-bold">~</span> Manual Terminal
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-400 mt-6 text-center">
+            Qualitative architecture comparison. Experimental validation performed during baseline performance benchmarking.
+          </p>
+
         </div>
       </div>
-
-      <p class="text-xs muted mt-5 text-center">
-        Qualitative architecture comparison. Experimental validation performed during baseline performance benchmarking.
-      </p>
-
     </div>
   </section>
 
