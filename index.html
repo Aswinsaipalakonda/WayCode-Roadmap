@@ -558,73 +558,80 @@
     -------------------------------- */
 
     /* --------------------------------
-       Execution Flow Timeline (Immersive 3D Interactive Design)
+       Editorial Minimal Step Flow (Pinterest Reference Layout)
     -------------------------------- */
 
-    .execution-timeline-shell {
-      position: relative;
-      background: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.06), transparent 60%), #ffffff;
-      border: 1px solid rgba(0, 113, 227, 0.12);
+    .editorial-container {
+      background: #efeff1;
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 36px;
-      padding: 40px 32px;
-      box-shadow: 0 20px 60px -15px rgba(0, 113, 227, 0.12), 0 4px 16px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.06);
+    }
+
+    .editorial-nav-bar {
+      display: flex;
+      align-items: center;
       overflow-x: auto;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: #f8f8f9;
+      padding: 0 16px;
     }
 
-    .execution-flow-grid {
+    .editorial-nav-item {
+      padding: 16px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #6e6e73;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .editorial-nav-item:hover,
+    .editorial-nav-item.active {
+      color: #1d1d1f;
+      border-bottom-color: #1d1d1f;
+    }
+
+    .editorial-stage {
       display: grid;
-      grid-template-columns: repeat(9, minmax(130px, 1fr));
-      gap: 16px;
-      position: relative;
-      align-items: stretch;
-      min-width: 1100px;
+      grid-template-columns: 240px 1fr;
+      min-height: 480px;
     }
 
-    .execution-flow-card {
-      position: relative;
-      z-index: 2;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 113, 227, 0.14);
-      border-radius: 24px;
-      padding: 20px 16px;
-      box-shadow: 0 10px 25px -5px rgba(0, 113, 227, 0.06), 0 2px 6px rgba(0, 0, 0, 0.02);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    @media (max-width: 900px) {
+      .editorial-stage {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .editorial-number-column {
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 48px 36px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      cursor: pointer;
     }
 
-    .execution-flow-card:hover {
-      transform: translateY(-8px) scale(1.04);
-      border-color: rgba(0, 113, 227, 0.35);
-      box-shadow: 0 20px 45px -8px rgba(0, 113, 227, 0.2), 0 6px 16px rgba(0, 0, 0, 0.03);
+    .editorial-big-number {
+      font-size: clamp(90px, 12vw, 160px);
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -0.07em;
+      color: #1d1d1f;
     }
 
-    .execution-step-num {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: #f0f7ff;
-      color: var(--blue);
+    .editorial-content-column {
+      padding: 56px 48px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 12px;
-      font-mono;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 113, 227, 0.1);
-    }
-
-    .execution-connector-line {
-      position: absolute;
-      top: 50%;
-      left: 30px;
-      right: 30px;
-      height: 2px;
-      background: linear-gradient(90deg, #0071e3, #00a896);
-      z-index: 1;
-      opacity: 0.3;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #efeff1;
     }
 
     /* --------------------------------
@@ -1409,125 +1416,71 @@
 
       </div>
 
-      <!-- EXECUTION FLOW TIMELINE -->
+      <!-- EXECUTION FLOW TIMELINE (PINTEREST MINIMAL EDITORIAL DESIGN) -->
       <div class="mt-24 reveal">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
-            <div class="eyebrow mb-2">Sequential Execution Pipeline</div>
-            <h3 class="text-3xl md:text-4xl font-extrabold tracking-tight text-gray-900">
+            <div class="eyebrow mb-2">From Start To Finish</div>
+            <h3 class="text-3xl md:text-5xl font-extrabold tracking-tight text-gray-900">
               What actually happens?
             </h3>
           </div>
-          <div class="text-xs font-semibold muted flex items-center gap-2 bg-blue-50 text-blue-600 px-3.5 py-1.5 rounded-full border border-blue-100 w-fit">
+          <div class="text-xs font-semibold muted flex items-center gap-2 bg-gray-100 text-gray-700 px-3.5 py-1.5 rounded-full border border-gray-200/80 w-fit">
             <span class="status-dot"></span>
-            9-Stage End-to-End Orchestration Loop
+            9-Stage Interactive Workflow
           </div>
         </div>
 
-        <div class="execution-timeline-shell">
-          <div class="execution-connector-line hidden md:block"></div>
+        <div class="editorial-container">
+          <!-- Top Horizontal Step Navigation Bar -->
+          <div class="editorial-nav-bar" id="editorialNavBar">
+            <button class="editorial-nav-item active" onclick="switchEditorialStep(1, this)">01. Intent</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(2, this)">02. Auth</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(3, this)">03. Queue</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(4, this)">04. Agent</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(5, this)">05. Sandbox</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(6, this)">06. Verify</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(7, this)">07. Push</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(8, this)">08. Deploy</button>
+            <button class="editorial-nav-item" onclick="switchEditorialStep(9, this)">09. Notify</button>
+          </div>
 
-          <div class="execution-flow-grid">
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">01</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">01 · Intent</div>
-                <div class="text-[11px] muted mt-1 font-medium">Mobile prompt capture</div>
-              </div>
+          <!-- Main Stage Body -->
+          <div class="editorial-stage">
+            <div class="editorial-number-column">
+              <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Phase Index</div>
+              <div class="editorial-big-number" id="editorialBigNumber">01</div>
+              <div class="text-xs font-semibold text-gray-500" id="editorialStepCount">Step 1 of 9</div>
             </div>
 
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">02</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            <div class="editorial-content-column" id="editorialContentColumn">
+              <div>
+                <div class="border-t-2 border-black pt-4 max-w-xl">
+                  <h4 class="text-2xl md:text-3xl font-bold text-gray-900" id="editorialTitle">
+                    Mobile Prompt Capture & Intent Parsing
+                  </h4>
+                  <div class="text-sm font-semibold text-blue-600 mt-1" id="editorialSubtitle">
+                    Client Interaction Layer
+                  </div>
+                </div>
+
+                <p class="text-gray-600 text-sm md:text-base leading-relaxed mt-6 max-w-2xl" id="editorialDesc">
+                  The developer submits a high-level intent prompt from any mobile browser. The request is structured into a normalized JSON payload containing repository target, branch name, prompt directives, and authorization signatures without triggering local compilation.
+                </p>
               </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">02 · Auth</div>
-                <div class="text-[11px] muted mt-1 font-medium">Clerk PKCE OAuth</div>
+
+              <div class="mt-10 pt-6 border-t border-gray-200/80 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <span class="px-3 py-1 bg-white border border-gray-200 text-gray-700 text-xs font-mono font-semibold rounded-md" id="editorialPill1">Mobile Web UI</span>
+                  <span class="px-3 py-1 bg-white border border-gray-200 text-gray-700 text-xs font-mono font-semibold rounded-md" id="editorialPill2">HTTPS Post</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button onclick="prevEditorialStep()" class="w-10 h-10 rounded-full border border-gray-300 bg-white flex items-center justify-center font-bold text-sm hover:bg-gray-50 transition">←</button>
+                  <button onclick="nextEditorialStep()" class="w-10 h-10 rounded-full border border-black bg-black text-white flex items-center justify-center font-bold text-sm hover:bg-gray-800 transition">→</button>
+                </div>
               </div>
             </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">03</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">03 · Queue</div>
-                <div class="text-[11px] muted mt-1 font-medium">Redis job push</div>
-              </div>
-            </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">04</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">04 · Agent</div>
-                <div class="text-[11px] muted mt-1 font-medium">LLM architecture plan</div>
-              </div>
-            </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">05</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">05 · Sandbox</div>
-                <div class="text-[11px] muted mt-1 font-medium">Isolated Git repo edit</div>
-              </div>
-            </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">06</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">06 · Verify</div>
-                <div class="text-[11px] muted mt-1 font-medium">Build & syntax check</div>
-              </div>
-            </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">07</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">07 · Push</div>
-                <div class="text-[11px] muted mt-1 font-medium">Git commit & push</div>
-              </div>
-            </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">08</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">08 · Deploy</div>
-                <div class="text-[11px] muted mt-1 font-medium">Vercel webhook CI/CD</div>
-              </div>
-            </div>
-
-            <div class="execution-flow-card">
-              <div class="flex items-center justify-between">
-                <div class="execution-step-num">09</div>
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              </div>
-              <div class="mt-6">
-                <div class="font-bold text-gray-900 text-sm">09 · Notify</div>
-                <div class="text-[11px] muted mt-1 font-medium">WhatsApp Cloud alert</div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -2241,6 +2194,125 @@
         ${data.description}
       </p>
     `;
+  }
+
+  /* -----------------------------------
+     Editorial Step Stage (Pinterest Style)
+  ----------------------------------- */
+
+  let currentEditorialStep = 1;
+
+  const editorialSteps = {
+    1: {
+      number: "01",
+      title: "Mobile Prompt Capture & Intent Parsing",
+      subtitle: "Client Interaction Layer",
+      desc: "The developer submits a high-level intent prompt from any mobile browser. The request is structured into a normalized JSON payload containing repository target, branch name, prompt directives, and authorization signatures without triggering local compilation.",
+      pill1: "Mobile Web UI",
+      pill2: "HTTPS Post"
+    },
+    2: {
+      number: "02",
+      title: "Clerk PKCE OAuth & Scope Verification",
+      subtitle: "Security & Authentication",
+      desc: "The API Gateway validates JWT credentials and tenant permissions via Clerk PKCE authentication. It verifies repository write access and limits execution scope before allowing job creation.",
+      pill1: "Clerk OAuth",
+      pill2: "JWT Bearer"
+    },
+    3: {
+      number: "03",
+      title: "Asynchronous Redis Job Persistence",
+      subtitle: "Gateway Queue Manager",
+      desc: "Upon authentication, the request is written to a persistent Redis task queue. The gateway responds with a unique task ID, allowing the smartphone browser to disconnect safely while execution proceeds asynchronously.",
+      pill1: "Redis Engine",
+      pill2: "Job Queue"
+    },
+    4: {
+      number: "04",
+      title: "LLM Agentic Planning & Context Analysis",
+      subtitle: "AI Execution Plane",
+      desc: "A background cloud worker claims the queued task and invokes the LLM agent (e.g., SWE-agent/OpenHands). The agent parses the target codebase, builds a dependency graph, and formulates a step-by-step modification plan.",
+      pill1: "LLM Agent",
+      pill2: "AST Parser"
+    },
+    5: {
+      number: "05",
+      title: "Isolated Git Sandbox Workspace Modification",
+      subtitle: "Code Execution Environment",
+      desc: "The agent clones the repository into an isolated Docker container, creates a dedicated feature branch, and applies repository-level code edits to source files, dependencies, and configurations.",
+      pill1: "Docker Sandbox",
+      pill2: "Git Workspace"
+    },
+    6: {
+      number: "06",
+      title: "Automated Local Build & Verification Checks",
+      subtitle: "Quality Assurance Layer",
+      desc: "Before committing changes, the execution plane runs local build tools, static linters, and unit test suites inside the sandbox container to guarantee code correctness and prevent syntax regression.",
+      pill1: "NPM / Cargo",
+      pill2: "Unit Tests"
+    },
+    7: {
+      number: "07",
+      title: "Git Commit & Remote Branch Push",
+      subtitle: "Version Control Integration",
+      desc: "Once verification passes, the executor creates a signed Git commit with detailed change summaries and pushes the new branch directly to the upstream remote repository (GitHub/GitLab).",
+      pill1: "Git Push",
+      pill2: "SSH Signature"
+    },
+    8: {
+      number: "08",
+      title: "CI/CD Webhook & Cloud Deployment Trigger",
+      subtitle: "Deployment Automation",
+      desc: "The remote push fires automated webhooks into the CI/CD pipeline (Vercel/GitHub Actions), building preview deployments and generating live preview URLs for instant verification.",
+      pill1: "Vercel Webhook",
+      pill2: "Preview Build"
+    },
+    9: {
+      number: "09",
+      title: "WhatsApp Cloud Alert & Real-time Mobile Notification",
+      subtitle: "Notification Dispatcher",
+      desc: "The gateway dispatches a push alert and WhatsApp message to the developer's mobile device containing task completion status, summary diffs, and live deployment links.",
+      pill1: "WhatsApp API",
+      pill2: "Mobile Alert"
+    }
+  };
+
+  function switchEditorialStep(stepNum, el) {
+    currentEditorialStep = stepNum;
+
+    document.querySelectorAll(".editorial-nav-item").forEach(item => {
+      item.classList.remove("active");
+    });
+
+    if (el) {
+      el.classList.add("active");
+    } else {
+      const items = document.querySelectorAll(".editorial-nav-item");
+      if (items[stepNum - 1]) items[stepNum - 1].classList.add("active");
+    }
+
+    const data = editorialSteps[stepNum];
+    if (!data) return;
+
+    document.getElementById("editorialBigNumber").innerText = data.number;
+    document.getElementById("editorialStepCount").innerText = `Step ${stepNum} of 9`;
+    document.getElementById("editorialTitle").innerText = data.title;
+    document.getElementById("editorialSubtitle").innerText = data.subtitle;
+    document.getElementById("editorialDesc").innerText = data.desc;
+    document.getElementById("editorialPill1").innerText = data.pill1;
+    document.getElementById("editorialPill2").innerText = data.pill2;
+  }
+
+  function prevEditorialStep() {
+    let nextStep = currentEditorialStep - 1;
+    if (nextStep < 1) nextStep = 9;
+    switchEditorialStep(nextStep, null);
+  }
+
+  function nextEditorialStep() {
+    let nextStep = currentEditorialStep + 1;
+    if (nextStep > 9) nextStep = 1;
+    switchEditorialStep(nextStep, null);
   }
 
   /* -----------------------------------
