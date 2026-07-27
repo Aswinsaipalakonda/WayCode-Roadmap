@@ -253,7 +253,7 @@
       padding-top: 150px;
       position: relative;
       overflow: hidden;
-      background-image: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.85), rgba(245, 245, 247, 0.95)), url('images/hero_bg.png');
+      background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(248, 248, 250, 0.8) 100%), url('images/hero_bg.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -1002,6 +1002,10 @@
 
   <!-- HERO -->
   <section id="overview" class="hero">
+    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-20 pointer-events-none">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-code-41487-large.mp4" type="video/mp4">
+    </video>
+
     <div class="hero-orb one"></div>
     <div class="hero-orb two"></div>
 
