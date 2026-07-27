@@ -1080,53 +1080,132 @@
     </nav>
 
     <main>
-      <!-- HERO (Reference Illustration Style) -->
-      <section id="overview" class="hero pt-32 pb-20 min-h-[90vh] flex items-center bg-[#f7f7f9] relative overflow-hidden">
-        <div class="container relative z-10">
-          <div class="grid lg:grid-cols-12 gap-8 items-center">
+      <!-- HERO (Reference Layout with Native Hand & Smartphone Mockup UI) -->
+      <section id="overview" class="hero pt-32 pb-20 min-h-[92vh] flex items-center bg-[#f7f7f9] relative overflow-hidden">
 
-            <!-- Left Headline Column -->
+        <!-- Background vector grid plane -->
+        <div class="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none"></div>
+
+        <div class="container relative z-10">
+          <div class="grid lg:grid-cols-12 gap-10 items-center">
+
+            <!-- Left Headline Column with Original WayCode Content -->
             <div class="lg:col-span-6 reveal">
-              <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">
-                Asynchronous Mobile Gateway · B.Tech Major Project
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold mb-6">
+                <span>Autonomous AI Software Engineering Agents</span>
+                <span>·</span>
+                <span class="font-mono">v2.4</span>
               </div>
 
               <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-gray-950 leading-[0.92]">
-                Optimize,<br />
-                Outperform
+                Build from<br />
+                <span class="text-blue-600">anywhere.</span>
               </h1>
 
-              <p class="text-gray-500 text-lg md:text-xl font-medium mt-6 max-w-md leading-relaxed">
-                Convert mobile intent into production repository commits using autonomous, persistent cloud AI agents.
+              <p class="text-gray-600 text-lg md:text-xl font-medium mt-6 max-w-lg leading-relaxed">
+                An asynchronous mobile gateway that converts developer intent into production repository-level code commits using persistent cloud AI agents.
               </p>
 
-              <div class="mt-8 flex items-center gap-4">
-                <button class="px-8 py-4 rounded-full bg-black text-white font-bold text-sm hover:bg-gray-800 transition shadow-lg shadow-black/10" onclick="goTo('workflow')">
-                  Explore Architecture →
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <button class="px-8 py-4 rounded-full bg-black text-white font-bold text-sm hover:bg-gray-800 transition shadow-xl shadow-black/10 flex items-center gap-2" onclick="goTo('architecture')">
+                  <span>Explore Architecture</span>
+                  <span>↓</span>
                 </button>
-                <button class="px-6 py-4 rounded-full bg-white border border-gray-300 font-bold text-sm text-gray-800 hover:bg-gray-50 transition" onclick="openImageModal('images/hero_reference_vector.png')">
-                  View Diagram 🔍
+                <button class="px-7 py-4 rounded-full bg-white border border-gray-300 font-bold text-sm text-gray-800 hover:bg-gray-50 transition shadow-sm flex items-center gap-2" onclick="goTo('workflow')">
+                  <span>See How It Works</span>
+                  <span>→</span>
                 </button>
+              </div>
+
+              <div class="mt-10 pt-6 border-t border-gray-200/80 flex items-center gap-6 text-xs font-semibold text-gray-500">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Connection Independent</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                  <span>Redis Queue</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                  <span>Docker Sandbox</span>
+                </div>
               </div>
             </div>
 
-            <!-- Right Hand-Holding-Smartphone Vector Visual Column -->
+            <!-- Right Visual Column: Custom Vector Hand Holding Smartphone Interface -->
             <div class="lg:col-span-6 flex justify-center lg:justify-end reveal delay-2">
-              <div class="relative max-w-lg w-full">
-                <!-- Decorative subtle vector plane background -->
-                <div class="absolute -top-10 -right-6 opacity-30 pointer-events-none">
-                  <svg class="w-32 h-32 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+              <div class="relative w-full max-w-md">
+
+                <!-- Decorative Flying Airplane Path Accent -->
+                <div class="absolute -top-8 right-4 z-20 pointer-events-none">
+                  <svg class="w-24 h-24 text-gray-400 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                   </svg>
                 </div>
 
-                <!-- Main Reference Illustration Card -->
-                <div class="relative bg-white/70 backdrop-blur-md rounded-[40px] p-4 border border-gray-200/80 shadow-2xl shadow-gray-400/10 cursor-pointer overflow-hidden group" onclick="openImageModal('images/hero_reference_vector.png')">
-                  <img src="images/hero_reference_vector.png" alt="Hand Holding Smartphone AI Gateway Mockup" class="w-full h-auto object-contain rounded-[32px] group-hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute bottom-6 right-6 bg-black/80 backdrop-blur-md text-white text-xs font-bold px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                    Click to Enlarge 🔍
+                <!-- Custom Vector Hand & Smartphone Card Container -->
+                <div class="relative bg-white rounded-[44px] p-6 border-2 border-gray-200/90 shadow-2xl shadow-gray-400/20 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+                  
+                  <!-- Vector Hand Contour (SVG Background Sleeve & Fingers) -->
+                  <svg class="absolute -bottom-10 -right-10 w-96 h-96 text-gray-900 opacity-90 pointer-events-none z-10" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3">
+                    <!-- Cuff / Wrist -->
+                    <path d="M120 200 C 130 160, 160 140, 200 130 L 200 200 Z" fill="#111114" stroke="none" />
+                    <!-- Hand Outline & Fingers -->
+                    <path d="M110 160 Q 130 120 150 110 Q 160 120 140 150" stroke="#111114" stroke-width="4" stroke-linecap="round" />
+                    <path d="M100 170 Q 120 130 140 120" stroke="#111114" stroke-width="4" stroke-linecap="round" />
+                  </svg>
+
+                  <!-- Smartphone Device Frame -->
+                  <div class="relative z-20 bg-gray-950 rounded-[36px] p-3 shadow-2xl border-4 border-gray-800">
+                    <!-- Screen Glass -->
+                    <div class="bg-gray-50 rounded-[28px] overflow-hidden p-4 border border-gray-200">
+
+                      <!-- Smartphone Header Notch Bar -->
+                      <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-200">
+                        <div class="flex items-center gap-1.5">
+                          <div class="w-2.5 h-2.5 rounded-full bg-black"></div>
+                          <span class="text-[11px] font-bold text-gray-800 font-mono">WayCode Gateway</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[9px] font-bold">ONLINE</span>
+                      </div>
+
+                      <!-- Mobile Prompt Input Mockup -->
+                      <div class="bg-white rounded-2xl p-3.5 border border-gray-200 shadow-sm mb-3">
+                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Intent Prompt</div>
+                        <p class="text-xs font-semibold text-gray-900 leading-snug">
+                          “Add analytics dashboard to admin panel with live data hooks”
+                        </p>
+                      </div>
+
+                      <!-- Dynamic Task Queue State Pills -->
+                      <div class="space-y-2 mb-3">
+                        <div class="p-2.5 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-between">
+                          <span class="text-[11px] font-bold text-blue-700">01. Intent Captured</span>
+                          <span class="text-[10px] font-bold bg-blue-600 text-white px-2 py-0.5 rounded-md">VERIFIED</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-between">
+                          <span class="text-[11px] font-bold text-purple-700">02. Redis Job Enqueued</span>
+                          <span class="text-[10px] font-mono font-bold text-purple-600">TASK-JOB-8942</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-between">
+                          <span class="text-[11px] font-bold text-emerald-700">03. Cloud Sandbox Worker</span>
+                          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        </div>
+                      </div>
+
+                      <!-- Live Dispatch Button Mockup -->
+                      <div class="w-full py-2.5 rounded-xl bg-black text-white text-center font-bold text-xs shadow-md">
+                        Dispatch Intent →
+                      </div>
+
+                    </div>
                   </div>
+
                 </div>
+
               </div>
             </div>
 
