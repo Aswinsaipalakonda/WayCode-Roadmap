@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
-import { LandingHeader } from "@/components/landing/LandingHeader";
-import { HeroSection } from "@/components/landing/HeroSection";
+import { TailarkHeroSection } from "@/components/landing/TailarkHeroSection";
 import { LogoTicker } from "@/components/landing/LogoTicker";
 import { StatsSection } from "@/components/landing/StatsSection";
 import { ProblemSolutionSection } from "@/components/landing/ProblemSolutionSection";
@@ -23,12 +22,16 @@ export default function Home() {
 
   useEffect(() => {
     async function getUser() {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setUser(user);
     }
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
@@ -36,9 +39,8 @@ export default function Home() {
   }, [supabase]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-primary/20">
-      <LandingHeader user={user} />
-      <HeroSection />
+    <div className="min-h-screen bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-[#0066FF]/20">
+      <TailarkHeroSection user={user} />
       <LogoTicker />
       <StatsSection />
       <ProblemSolutionSection />
