@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const workflowSteps = [
@@ -161,8 +162,17 @@ export function WorkflowSection() {
               ))}
             </div>
 
+            {/* Live Gateway Log Card */}
+            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 text-white font-mono text-xs shadow-lg space-y-2">
+              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Gateway Stream Log</div>
+              <div className="text-emerald-400 font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>{active.log}</span>
+              </div>
+            </div>
+
             {/* Navigation Controls */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-4 pt-2">
               <button
                 onClick={prevStep}
                 className="p-3 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white dark:hover:bg-primary transition shadow-sm"
@@ -183,26 +193,16 @@ export function WorkflowSection() {
             </div>
           </div>
 
-          {/* Right Column Terminal Mockup */}
-          <div className="lg:col-span-5">
-            <div className="rounded-2xl bg-slate-950 border border-slate-800 text-white p-5 font-mono text-xs shadow-2xl space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400 text-[11px]">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 font-bold">gateway.log</span>
-                </div>
-                <span>TASK-4821</span>
-              </div>
-
-              <div className="space-y-2 text-slate-300 leading-relaxed py-2">
-                <div className="text-slate-500">15:42:01 Pipeline step initiated...</div>
-                <div className="text-emerald-400 font-bold flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" /> {active.log}
-                </div>
-                <div className="text-blue-400 font-medium">$ executing stage {active.step} checks</div>
-              </div>
+          {/* Right Column High-Res Product Image Render */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <div className="relative w-full max-w-[320px] rounded-[36px] overflow-hidden border-4 border-white/80 dark:border-slate-800/80 shadow-2xl">
+              <Image
+                src="/images/feature-phone-mockup.png"
+                alt="WayCode Feature Showcase"
+                width={500}
+                height={800}
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
 
