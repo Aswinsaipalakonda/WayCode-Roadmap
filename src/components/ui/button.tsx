@@ -4,22 +4,28 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
+  "group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full text-sm font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97] [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-way-md shadow-primary/20",
-        destructive: "bg-danger text-danger-foreground hover:bg-danger/90 shadow-way-sm",
-        outline: "border border-input bg-background hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800",
-        link: "text-primary underline-offset-4 hover:underline",
+        default:
+          "bg-primary text-white hover:bg-primary/95 shadow-lg shadow-primary/25 border border-primary-light/30 hover:shadow-xl hover:shadow-primary/35",
+        brand:
+          "bg-[#0073E6] text-white hover:bg-[#0062C4] border border-white/20 shadow-md shadow-blue-500/20 hover:border-white/40",
+        pillBrown:
+          "bg-[#5C3317] text-white hover:bg-[#4A2812] border border-white/20 shadow-md hover:border-white/40",
+        outline:
+          "border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm",
+        ghost:
+          "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white",
+        link:
+          "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-11 px-5 py-2.5",
-        sm: "h-9 rounded-full px-3.5 text-xs",
-        lg: "h-13 rounded-full px-7 text-base",
-        icon: "h-10 w-10 rounded-full",
+        default: "h-12 px-6 py-3 text-sm",
+        sm: "h-9 px-4 text-xs font-semibold",
+        lg: "h-14 px-8 text-base",
+        icon: "h-11 w-11 p-0 rounded-full",
       },
     },
     defaultVariants: {
