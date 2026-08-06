@@ -1,123 +1,55 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { ArrowRight, ShieldCheck, Cpu, GitBranch, Zap, Github, Loader2 } from "lucide-react";
-import { signInWithGitHub } from "@/lib/supabase/auth";
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
+import { LandingHeader } from "@/components/landing/LandingHeader";
+import { HeroSection } from "@/components/landing/HeroSection";
+import { LogoTicker } from "@/components/landing/LogoTicker";
+import { StatsSection } from "@/components/landing/StatsSection";
+import { ProblemSolutionSection } from "@/components/landing/ProblemSolutionSection";
+import { BentoGridSection } from "@/components/landing/BentoGridSection";
+import { WorkflowSection } from "@/components/landing/WorkflowSection";
+import { ComparisonSection } from "@/components/landing/ComparisonSection";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
+import { PricingSection } from "@/components/landing/PricingSection";
+import { FaqSection } from "@/components/landing/FaqSection";
+import { FinalCtaSection } from "@/components/landing/FinalCtaSection";
+import { LandingFooter } from "@/components/landing/LandingFooter";
 
 export default function Home() {
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
 
-  const handleGitHubSignIn = async () => {
-    try {
-      setLoading(true);
-      setErrorMsg(null);
-      await signInWithGitHub();
-    } catch (err: unknown) {
-      console.error(err);
-      const message = err instanceof Error ? err.message : "Failed to initiate GitHub Sign In";
-      setErrorMsg(message);
-      setLoading(false);
+  useEffect(() => {
+    async function getUser() {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
     }
-  };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase]);
 
   return (
-    <main className="min-h-screen bg-[#0F172A] text-white flex flex-col justify-between relative overflow-hidden px-4 py-8">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-accent/15 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Top Brand Bar */}
-      <header className="relative z-10 flex items-center justify-between max-w-md mx-auto w-full pt-4">
-        <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-full bg-black/60 border border-white/10 p-2 flex items-center justify-center shadow-lg">
-            <Image src="/images/logo.svg" alt="WayCode Logo" width={28} height={28} priority />
-          </div>
-          <span className="font-extrabold text-xl tracking-tight text-white">WayCode</span>
-        </div>
-        <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/10 border border-white/10 text-primary-light font-medium">
-          v1.0.0
-        </span>
-      </header>
-
-      {/* Hero Welcome Container */}
-      <section className="relative z-10 max-w-md mx-auto w-full text-center my-auto py-8 flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary-light text-xs font-semibold mb-6 animate-pulse">
-          <Zap className="w-3.5 h-3.5 text-primary" />
-          <span>Asynchronous Mobile Gateway</span>
-        </div>
-
-        <h1 className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.08] text-white">
-          Build from <br />
-          <span className="bg-gradient-to-r from-primary via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-            anywhere.
-          </span>
-        </h1>
-
-        <p className="text-slate-400 text-base mt-4 max-w-xs mx-auto leading-relaxed">
-          Decouple mobile intent generation from cloud AI agent execution. Prompt, monitor, and deploy code from your phone.
-        </p>
-
-        {errorMsg && (
-          <div className="mt-4 p-3 rounded-2xl bg-danger/10 border border-danger/30 text-danger text-xs font-semibold w-full max-w-xs">
-            {errorMsg}
-          </div>
-        )}
-
-        {/* Auth Buttons */}
-        <div className="mt-8 w-full max-w-xs space-y-3">
-          <button
-            onClick={handleGitHubSignIn}
-            disabled={loading}
-            className="w-full h-13 rounded-full bg-white text-neutral-950 font-bold text-base hover:bg-neutral-100 shadow-xl shadow-white/10 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2.5 px-6 py-3.5 disabled:opacity-50"
-          >
-            {loading ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
-              <>
-                <Github className="w-5 h-5 fill-current" />
-                <span>Sign in with GitHub</span>
-              </>
-            )}
-          </button>
-
-          <Link
-            href="/chat"
-            className="w-full h-11 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 px-6 py-2.5"
-          >
-            <span>Explore Demo Gateway</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* Feature Badges */}
-        <div className="grid grid-cols-3 gap-2 mt-10 w-full text-left">
-          <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <Cpu className="w-4 h-4 text-primary mb-1.5" />
-            <div className="text-xs font-bold text-white">24/7 Agent</div>
-            <div className="text-[10px] text-slate-400 leading-tight">Persistent Cloud</div>
-          </div>
-          <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <GitBranch className="w-4 h-4 text-emerald-400 mb-1.5" />
-            <div className="text-xs font-bold text-white">Git Native</div>
-            <div className="text-[10px] text-slate-400 leading-tight">Auto Commits</div>
-          </div>
-          <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md">
-            <ShieldCheck className="w-4 h-4 text-purple-400 mb-1.5" />
-            <div className="text-xs font-bold text-white">Isolated</div>
-            <div className="text-[10px] text-slate-400 leading-tight">Docker Sandbox</div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Signals Footer */}
-      <footer className="relative z-10 max-w-md mx-auto w-full text-center pb-4">
-        <p className="text-xs font-medium text-slate-500 flex items-center justify-center gap-2">
-          <span>Secure</span> • <span>Private</span> • <span>Developer First</span>
-        </p>
-      </footer>
-    </main>
+    <div className="min-h-screen bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-primary/20">
+      <LandingHeader user={user} />
+      <HeroSection />
+      <LogoTicker />
+      <StatsSection />
+      <ProblemSolutionSection />
+      <BentoGridSection />
+      <WorkflowSection />
+      <ComparisonSection />
+      <TestimonialsSection />
+      <PricingSection />
+      <FaqSection />
+      <FinalCtaSection />
+      <LandingFooter />
+    </div>
   );
 }
