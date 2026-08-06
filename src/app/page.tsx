@@ -1,8 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Cpu, GitBranch, Zap } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, ShieldCheck, Cpu, GitBranch, Zap, Github, Loader2 } from "lucide-react";
+import { signInWithGitHub } from "@/lib/supabase/auth";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleGitHubSignIn = async () => {
+    try {
+      setLoading(true);
+      setErrorMsg(null);
+      await signInWithGitHub();
+    } catch (err: unknown) {
+      console.error(err);
+      const message = err instanceof Error ? err.message : "Failed to initiate GitHub Sign In";
+      setErrorMsg(message);
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#0F172A] text-white flex flex-col justify-between relative overflow-hidden px-4 py-8">
       {/* Ambient background glows */}
@@ -40,14 +60,35 @@ export default function Home() {
           Decouple mobile intent generation from cloud AI agent execution. Prompt, monitor, and deploy code from your phone.
         </p>
 
-        {/* Action Button */}
+        {errorMsg && (
+          <div className="mt-4 p-3 rounded-2xl bg-danger/10 border border-danger/30 text-danger text-xs font-semibold w-full max-w-xs">
+            {errorMsg}
+          </div>
+        )}
+
+        {/* Auth Buttons */}
         <div className="mt-8 w-full max-w-xs space-y-3">
+          <button
+            onClick={handleGitHubSignIn}
+            disabled={loading}
+            className="w-full h-13 rounded-full bg-white text-neutral-950 font-bold text-base hover:bg-neutral-100 shadow-xl shadow-white/10 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2.5 px-6 py-3.5 disabled:opacity-50"
+          >
+            {loading ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <>
+                <Github className="w-5 h-5 fill-current" />
+                <span>Sign in with GitHub</span>
+              </>
+            )}
+          </button>
+
           <Link
             href="/chat"
-            className="w-full h-13 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg shadow-primary/30 transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2 px-6 py-3.5"
+            className="w-full h-11 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 px-6 py-2.5"
           >
-            <span>Open Mobile Gateway</span>
-            <ArrowRight className="w-5 h-5" />
+            <span>Explore Demo Gateway</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 

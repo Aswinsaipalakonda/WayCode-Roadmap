@@ -1,16 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Sparkles, ArrowUpRight, CheckCircle2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { createClient } from "@/lib/supabase/client";
 
 export default function ChatPage() {
+  const [userName, setUserName] = useState("Developer");
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function fetchUser() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const name = user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split("@")[0] || "Developer";
+        setUserName(name.split(" ")[0]);
+      }
+    }
+    fetchUser();
+  }, [supabase]);
+
   return (
     <div className="space-y-6 max-w-md mx-auto pb-20">
       {/* Greeting */}
       <div>
         <h1 className="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
-          Hi Aswin! 👋
+          Hi {userName}! 👋
         </h1>
         <p className="text-sm text-neutral-500 font-medium mt-1">
           What would you like to build today?
