@@ -14,16 +14,16 @@ export function LandingFooter() {
           {/* Brand Col (Span 2) */}
           <div className="col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-2xl bg-black border border-white/20 p-2 flex items-center justify-center">
-                <Image src="/images/logo.svg" alt="WayCode Logo" width={20} height={20} />
+              <div className="w-9 h-9 rounded-xl bg-black border border-white/20 p-1.5 flex items-center justify-center">
+                <Image src="/images/logo.png" alt="WayCode Logo" width={22} height={22} />
               </div>
-              <span className="font-extrabold text-xl tracking-tight text-white">WayCode</span>
+              <span className="font-black text-xl tracking-tight text-white">WayCode</span>
             </div>
             <p className="text-xs text-slate-400 font-medium max-w-sm leading-relaxed">
               An Asynchronous Mobile Gateway for Autonomous Software Engineering Agents. Decoupling mobile intent from cloud execution.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <a href="https://github.com/Aswinsaipalakonda/WayCode-Roadmap" target="_blank" rel="noopener noreferrer" className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition">
+              <a href="https://github.com/Aswinsaipalakonda/WayCode" target="_blank" rel="noopener noreferrer" className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition">
                 <Github className="w-4 h-4" />
               </a>
               <a href="#" className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition">
@@ -51,7 +51,7 @@ export function LandingFooter() {
             <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">Resources</h4>
             <ul className="space-y-2 text-xs font-semibold text-slate-400">
               <li><Link href="/prd.md" className="hover:text-white transition">PRD Document</Link></li>
-              <li><a href="https://github.com/Aswinsaipalakonda/WayCode-Roadmap" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">GitHub Repo</a></li>
+              <li><a href="https://github.com/Aswinsaipalakonda/WayCode" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">GitHub Repo</a></li>
               <li><a href="#faq" className="hover:text-white transition">FAQ</a></li>
             </ul>
           </div>

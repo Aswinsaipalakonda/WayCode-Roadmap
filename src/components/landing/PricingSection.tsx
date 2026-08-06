@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Github, Loader2 } from "lucide-react";
+import { Check, Github, ArrowRight, Loader2 } from "lucide-react";
 import { signInWithGitHub } from "@/lib/supabase/auth";
 
 const plans = [
@@ -75,7 +75,7 @@ export function PricingSection() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary bg-primary/10 px-3.5 py-1.5 rounded-full border border-primary/20">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#0066FF] bg-blue-100 px-3.5 py-1.5 rounded-full border border-blue-200">
             Simple Pricing
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-950 dark:text-white tracking-tight">
@@ -93,12 +93,12 @@ export function PricingSection() {
               key={plan.name}
               className={`p-8 rounded-3xl flex flex-col justify-between transition-all ${
                 plan.popular
-                  ? "bg-slate-900 text-white border-2 border-primary shadow-2xl relative scale-105"
+                  ? "bg-slate-900 text-white border-2 border-[#0066FF] shadow-2xl relative scale-105"
                   : "bg-white dark:bg-slate-900 text-slate-950 dark:text-white border border-slate-200/80 dark:border-slate-800 shadow-xl"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-white text-[11px] font-extrabold px-4 py-1 rounded-full uppercase tracking-wider shadow-md">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#0066FF] text-white text-[11px] font-extrabold px-4 py-1 rounded-full uppercase tracking-wider shadow-md">
                   Most Popular
                 </div>
               )}
@@ -122,7 +122,7 @@ export function PricingSection() {
                   {plan.features.map((feat) => (
                     <div key={feat} className="flex items-center gap-3 text-xs font-semibold">
                       <span className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
-                        plan.popular ? "bg-primary text-white" : "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
+                        plan.popular ? "bg-[#0066FF] text-white" : "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
                       }`}>
                         <Check className="w-3 h-3" />
                       </span>
@@ -138,11 +138,7 @@ export function PricingSection() {
                 <button
                   onClick={handleGitHubAuth}
                   disabled={loading}
-                  className={`w-full py-3.5 rounded-full font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2 ${
-                    plan.popular
-                      ? "bg-primary hover:bg-primary/90 text-white shadow-primary/30"
-                      : "bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-100"
-                  }`}
+                  className="group w-full py-3.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-extrabold text-sm shadow-md shadow-blue-500/20 transition-all duration-200 flex items-center justify-center gap-2.5 active:scale-[0.98]"
                 >
                   {loading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -150,6 +146,7 @@ export function PricingSection() {
                     <>
                       <Github className="w-5 h-5 fill-current" />
                       <span>{plan.buttonText}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </button>

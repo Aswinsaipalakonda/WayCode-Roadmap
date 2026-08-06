@@ -39,56 +39,51 @@ export function LandingHeader({ user }: LandingHeaderProps) {
     <motion.header
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-8 py-3.5 ${
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 sm:px-12 py-4 ${
         scrolled
-          ? "bg-white/85 dark:bg-slate-950/85 backdrop-blur-2xl border-b border-slate-200/60 dark:border-slate-800/80 shadow-sm"
+          ? "bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-800/80 shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-2xl bg-black text-white flex items-center justify-center p-2 shadow-lg group-hover:scale-105 transition-transform shrink-0 border border-white/20">
-            <Image src="/images/logo.svg" alt="WayCode Logo" width={24} height={24} />
+        {/* Brand Logo with PNG asset */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center p-1.5 shadow-md group-hover:scale-105 transition-transform shrink-0 border border-white/20">
+            <Image src="/images/logo.png" alt="WayCode Logo" width={22} height={22} priority />
           </div>
-          <div className="flex flex-col">
-            <span className="font-extrabold text-xl tracking-tight text-slate-950 dark:text-white leading-none">
-              WayCode
-            </span>
-            <span className="text-[10px] font-mono text-primary font-bold tracking-widest uppercase mt-0.5">
-              Mobile Gateway
-            </span>
-          </div>
+          <span className="font-black text-2xl tracking-tight text-slate-900 dark:text-white">
+            WayCode
+          </span>
         </Link>
 
-        {/* Desktop Nav Pills */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-100/90 dark:bg-slate-900/90 backdrop-blur-xl p-1.5 rounded-full border border-slate-200/80 dark:border-slate-800/80 shadow-inner">
+        {/* Clean Plain Menu Links without highlighting (Matching Aivora Reference Image) */}
+        <nav className="hidden md:flex items-center gap-8">
           {[
             { label: "Home", href: "#hero" },
             { label: "Features", href: "#features" },
-            { label: "Architecture", href: "#architecture" },
-            { label: "Workflow", href: "#workflow" },
+            { label: "About us", href: "#architecture" },
             { label: "Pricing", href: "#pricing" },
-            { label: "FAQ", href: "#faq" },
+            { label: "Blog", href: "#workflow" },
+            { label: "Pages", href: "#faq" },
           ].map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="px-4 py-2 rounded-full text-xs font-extrabold text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-white dark:hover:bg-slate-800 transition-all duration-200"
+              className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-[#0066FF] transition-colors"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        {/* Right Action Button matching reference image button style */}
+        {/* Right Action Button (Royal Blue Pill Button with GitHub Icon + Arrow) */}
         <div className="hidden sm:flex items-center gap-3">
           {user ? (
             <Link
               href="/chat"
-              className="group px-6 py-3 rounded-full bg-primary hover:bg-primary/95 text-white font-extrabold text-xs shadow-md shadow-primary/25 transition-all duration-300 flex items-center gap-2 transform hover:scale-[1.02]"
+              className="group px-6 py-2.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-md shadow-blue-500/20 transition-all duration-200 flex items-center gap-2 transform hover:scale-[1.02]"
             >
               <span>Go to Workspace</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -97,7 +92,7 @@ export function LandingHeader({ user }: LandingHeaderProps) {
             <button
               onClick={handleGitHubAuth}
               disabled={loading}
-              className="group px-6 py-3 rounded-full bg-primary hover:bg-primary/95 text-white font-extrabold text-xs shadow-md shadow-primary/30 border border-white/20 transition-all duration-300 flex items-center gap-2 transform hover:scale-[1.03] active:scale-[0.98] disabled:opacity-50"
+              className="group px-6 py-2.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-extrabold text-sm shadow-md shadow-blue-500/25 border border-white/20 transition-all duration-200 flex items-center gap-2.5 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
             >
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -105,7 +100,7 @@ export function LandingHeader({ user }: LandingHeaderProps) {
                 <>
                   <Github className="w-4 h-4 fill-current" />
                   <span>Sign in with GitHub</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </>
               )}
             </button>
@@ -115,7 +110,7 @@ export function LandingHeader({ user }: LandingHeaderProps) {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2.5 rounded-2xl text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition"
+          className="md:hidden p-2 rounded-xl text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition"
           aria-label="Toggle Menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -129,14 +124,15 @@ export function LandingHeader({ user }: LandingHeaderProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-3 p-5 rounded-3xl bg-white/95 dark:bg-slate-950/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 shadow-2xl space-y-3"
+            className="md:hidden mt-3 p-5 rounded-3xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-3"
           >
             {[
+              { label: "Home", href: "#hero" },
               { label: "Features", href: "#features" },
-              { label: "Architecture", href: "#architecture" },
-              { label: "Workflow", href: "#workflow" },
+              { label: "About us", href: "#architecture" },
               { label: "Pricing", href: "#pricing" },
-              { label: "FAQ", href: "#faq" },
+              { label: "Blog", href: "#workflow" },
+              { label: "Pages", href: "#faq" },
             ].map((item) => (
               <a
                 key={item.label}
@@ -152,7 +148,7 @@ export function LandingHeader({ user }: LandingHeaderProps) {
               <button
                 onClick={handleGitHubAuth}
                 disabled={loading}
-                className="group w-full py-3.5 rounded-full bg-primary text-white font-extrabold text-sm shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
+                className="group w-full py-3.5 rounded-full bg-[#0066FF] text-white font-extrabold text-sm shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2.5"
               >
                 {loading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
